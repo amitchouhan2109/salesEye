@@ -1,0 +1,76 @@
+{
+  "login": {
+    "customer_portal": "CUSTOMER PORTAL",
+    "userName": "Username",
+    "password": "Password",
+    "customerId": "Customer ID",
+    "rememberMe": "Remember Me",
+    "signIn": "SIGN IN",
+    "forgotPassword": "Forgot password?",
+    "signUp": "SIGN UP"
+  },
+  "signIn": {
+    "first_name": "Firstname",
+    "last_name": "Lastname",
+    "company": "Company",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "city": "City"
+  },
+  "forgetPassword": {
+    "userName": "Username",
+    "send": "SEND",
+    "forget_password": "FORGET PASSWORD"
+  },
+  "changePassword": {
+    "current_password": "Current password",
+    "new_password": "New password",
+    "repeat_password": "Repeat password",
+    "send": "SEND",
+    "change_password": "CHANGE PASSWORD"
+  },
+  "tasks": {
+    "add_task": "ADD TASK",
+    "search": "Search",
+    "change_password": "Change Password",
+    "language": "Language",
+    "sign_out": "Sign Out",
+    "tasks": "TASKS",
+    "task_no": "Task No.",
+    "name": "Name",
+    "address": "Address",
+    "title": "Title",
+    "status": "Status",
+    "task_date": "Task date"
+  },
+  "task": {
+    "task": "Task",
+    "add_task": "ADD TASK",
+    "search": "Search",
+    "change_password": "Change Password",
+    "language": "Language",
+    "sign_out": "Sign Out",
+    "task_no": "Task No.",
+    "name": "Name",
+    "address": "Address",
+    "title": "Title",
+    "status": "Status",
+    "task_date": "Task date",
+    "description": "Description",
+    "documents": "DOCUMENTS",
+    "messages": "MESSAGES",
+    "add_message": "ADD MESSAGE",
+    "cancel": "CANCEL",
+    "save": "SAVE"
+  },
+  "newTask": {
+    "new_task": "NEW TASK",
+    "title": "Title",
+    "name": "Name",
+    "address": "Address",
+    "description": "Description",
+    "cancel": "CANCEL",
+    "save": "SAVE"
+  }
+}
