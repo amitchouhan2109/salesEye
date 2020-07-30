@@ -28,8 +28,8 @@ import moment from 'moment';
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '../../../Config/Libs/globals';
 import MainHoc from '../../Hoc/MainHoc';
 import _Button from '../../Custom/Button/_Button';
-
 import AsyncStorage from '@react-native-community/async-storage';
+import { login } from '../../../Redux/Actions/LoginAction'
 
 
 const Login = (props) => {
@@ -41,7 +41,7 @@ const Login = (props) => {
     const [checked, setchecked] = useState(false);
 
     // const loginData = useSelector(state => state.loginData);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     // let companyPostRef = {}
 
     useEffect(() => {
@@ -53,8 +53,9 @@ const Login = (props) => {
     }, [])
 
     const signinHandler = () => {
-        props.navigation.navigate('Tasks')
-        // getEndPoint();
+        getEndPoint();
+        // props.navigation.navigate('Tasks')
+
     }
 
     const checkApiBaseUrl = async () => {
@@ -70,15 +71,13 @@ const Login = (props) => {
     }
 
     const logInUser = () => {
+        console.log("login")
+
         let cb = {
             success: async (res) => {
-                console.log("success res:", res)
-                console.log("success res [0]", res[0])
-                console.log("success res [0] user_id", res[0].user_id)
-                console.log("success res [0] token", res[0].token)
-
                 await AsyncStorage.setItem("userAuthDetails", JSON.stringify(res[0]));
                 await AsyncStorage.setItem("token", res[0].token);
+                dispatch(login({ res }))
 
                 props.navigation.navigate('Tasks')
 
@@ -93,6 +92,7 @@ const Login = (props) => {
             password: password,
             api_key: globals.API_KEY
         };
+        console.log("data", data)
         API.loginUser(data, cb, header);
         // API.registerUser(data, cb, header);
     }
@@ -186,6 +186,8 @@ const Login = (props) => {
                     <TouchableOpacity
                         onPress={() => {
                             props.navigation.navigate('SignUp')
+                            // props.navigation.navigate('ChangePassord')
+
                             // checkApiBaseUrl()
                         }}
                         style={styles.signUp}>

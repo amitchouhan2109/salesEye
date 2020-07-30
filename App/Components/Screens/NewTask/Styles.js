@@ -14,14 +14,14 @@ export default styles = StyleSheet.create({
         marginHorizontal: 15
     },
     TextInput: {
-        marginTop: 45,
+        marginTop: 35,
     },
     TextInput1: {
         marginTop: 30,
     },
     signUpWrapper: {
         flex: 1,
-        paddingBottom: 30,
+        paddingBottom: 20,
         ...sty.jEnd,
         ...sty.aCenter
     },

@@ -16,7 +16,7 @@ import {
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import { Input, Item } from 'native-base';
-import { globals, helpers, validators, } from '../../../Config';
+import { globals, helpers, validators, API } from '../../../Config';
 // import { _ErrorModal, _GradiantView, _Lang, _ListBox, _Loading, _Spacer, _Icon, _Button, _B, _Layout, _ListView, _ContentType, _InlineLoader } from '../../../../../custom';
 // import { mainLayoutHoc } from '../../../../../hoc';
 import { mainStyle, images, sty } from '../../../Theme';
@@ -52,7 +52,6 @@ const NewTask = (props) => {
             success: (res) => {
                 console.log("res :", res)
                 dispatch(setCampaignProp({ prop: "favorite", arr: res.data }))
-
             },
             error: (err) => {
                 console.log(
@@ -125,7 +124,7 @@ const NewTask = (props) => {
                     <_PairButton
                         btnTxt1={helpers.getLocale(localize, "task", "cancel")}
                         btnTxt2={helpers.getLocale(localize, "task", "save")}
-                        txtStyle1={{ color: "red" }}
+                        txtStyle1={{ color: "red", }}
                         callback1={() => { cancleButtonHandler() }}
                         callback2={() => { saveButtonHandler() }}
                     />

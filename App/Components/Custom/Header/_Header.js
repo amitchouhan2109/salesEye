@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { Input, Item } from "native-base";
 import styles from "./Styles";
 import { colors, sty } from "../../../Theme"
@@ -25,62 +25,71 @@ const _Header = (props) => {
                 <View style={{ flex: 8, ...sty.aCenter, ...sty.jCenter, borderWidth: 0 }}>
                     <Text style={styles.headingText}> {props.header ? props.header : "Header"} </Text>
                 </View>
-                <View style={{ flex: 1, borderWidth: 1, ...sty.aEnd }}>
-                    <TouchableOpacity style={{}} onPress={() => { props.rightcb ? props.rightcb() : setmenu(!menu) }}>
-                        <View>
-                            <Menu >
-                                <MenuTrigger text='Select option' customStyles={{ color: 'white' }} />
-                                <MenuOptions customStyles={{}}>
-                                    <MenuOption text='Context Menu'
-                                        onSelect={() => this.setState({ renderer: ContextMenu })} />
-                                    <MenuOption text='Slide-in Menu'
-                                        onSelect={() => this.setState({ renderer: SlideInMenu })} />
-                                    <MenuOption text='Three (custom)' customStyles={{}}
-                                        onSelect={() => alert('Selected custom styled option')} />
-                                    <MenuOption disabled={true}>
-                                        <Text style={{ color: '#ccc' }}>Four (disabled)</Text>
-                                    </MenuOption>
-                                </MenuOptions>
-                            </Menu>
-                            {props.rightIcon ?
-                                <FastImage
-                                    style={{ height: 20, width: 20, paddingLeft: 0 }}
-                                    source={props.rightIcon}
-                                    resizeMode={"contain"}
-                                />
-                                : null
-                            }
-                        </View>
+                {props.rightIcon ?
+                    <View style={{ flex: 1, ...sty.aEnd }}>
+                        <TouchableOpacity style={{}}
+                        // onPress={() => t.props.navigation.navigate('ChangePassord')}
 
-                    </TouchableOpacity>
-                    {/* <CustomMenuIcon
-                        //Menu Text
-                        menutext="Menu"
-                        //Menu View Style
-                        menustyle={{
-                            marginRight: 16,
-                            flexDirection: 'row',
-                            justifyContent: 'flex-end',
-                        }}
-                        //Menu Text Style
-                        textStyle={{
-                            color: 'white',
-                        }}
-                        //Click functions for the menu items
-                        option1Click={() => {
-                            navigation.navigate('FirstPage');
-                        }}
-                        option2Click={() => { }}
-                        option3Click={() => { }}
-                        option4Click={() => {
-                            alert('Option 4');
-                        }}
-                    /> */}
-                </View>
+                        // onPress={() => { props.rightcb ? props.rightcb() : setmenu(!menu) }}
+                        >
+                            <View>
+                                <Menu >
+                                    <MenuTrigger customStyles={triggerStyles} >
+                                        <FastImage
+                                            style={{ height: 40, width: 40, paddingLeft: 0, color: 'black' }}
+                                            source={props.rightIcon}
+                                            resizeMode={"contain"}
+                                        />
+                                    </MenuTrigger>
+                                    <MenuOptions customStyles={{
+                                        optionText: { fontSize: 20 },
+                                        optionWrapper: { borderColor: '#1C7DED', borderWidth: 1, }
+                                    }} >
+                                        <MenuOption text='Change Password'
+                                            onSelect={props.onPress ? () => props.onPress() : null}
+                                        />
+                                        <MenuOption text='Language'
+                                            onSelect={() => this.setState({ renderer: SlideInMenu })
+                                                // props.navigation.navigate('ChangePassord')
+                                            } />
+                                        <MenuOption text='Sign Out' customStyles={{}}
+                                            onSelect={() => alert('Selected custom styled option')} />
+                                        {/* <MenuOption disabled={true}>
+                                            <Text style={{ color: '#ccc' }}>Four (disabled)</Text>
+                                        </MenuOption> */}
+                                    </MenuOptions>
+                                </Menu>
+                                {/* {props.rightIcon ?
+                                    <FastImage
+                                        style={{ height: 40, width: 40, paddingLeft: 0, color: 'black' }}
+                                        source={props.rightIcon}
+                                        resizeMode={"contain"}
+                                    />
+                                    : null
+                                } */}
+                            </View>
+
+                        </TouchableOpacity>
+
+                    </View> : null}
             </View >
         </View >
     )
 
 }
+const triggerStyles = {
+    triggerText: {
+        // color: 'pink',
+    },
+    triggerWrapper: {
+        padding: 5,
+        // backgroundColor: 'blue',
+    },
+    triggerTouchable: {
+        // underlayColor: 'darkblue',
+        // activeOpacity: 70,
+    },
+    TriggerTouchableComponent: TouchableHighlight,
+};
 
 export default _Header;

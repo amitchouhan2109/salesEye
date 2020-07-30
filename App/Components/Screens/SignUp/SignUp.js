@@ -66,8 +66,6 @@ const SignUp = (props) => {
         let cb = {
             success: async (res) => {
                 console.log("success res:", res)
-
-
             },
             error: (err) => { },
             complete: () => { },

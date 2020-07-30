@@ -14,6 +14,8 @@ import {
     StyleSheet
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import { bindActionCreators } from 'redux';
 // import { Input, Item } from 'native-base';
 import { globals, helpers, validators, API, } from '../../../Config';
@@ -50,12 +52,15 @@ const ForgetPassword = (props) => {
         // _getFavCampaign()
     }, [])
 
-    const forgetPawword = async () => {
-        console.log('data', userName)
+    const getEndPoint = () => {
         let cb = {
             success: async (res) => {
-                console.log("success res:", res)
-                // dispatch(setTasks({ res }))
+                if (res.error === null) {
+                    await AsyncStorage.setItem("baseUrl", res.result.ws_url);
+                    forgetPawword()
+                } else {
+                    Alert.alert('Error in fetch end Point', 'Authentication failed');
+                }
 
             },
             error: (err) => { },
@@ -63,20 +68,36 @@ const ForgetPassword = (props) => {
         };
 
         let header = helpers.buildHeader({});
-        let userAuthdetails = await helpers.userAuthdetails();
-
-        // let userId = await AsyncStorage.getItem("userAuthDetails",);
-        // let token = await AsyncStorage.getItem("token");
-        console.log({ userAuthdetails })
         let data = {
-            "user_id": userName,
-            "api_key": globals.API_KEY
+            company_code: "app"
         };
+        API.getEndPoint(data, cb, header);
+    };
 
-        API.forgetPassword(data, cb, header);
+
+    const forgetPassword = async () => {
+        const baseUrl = await AsyncStorage.getItem("baseUrl");
+        if (baseUrl && baseUrl !== undefined) {
+            let cb = {
+                success: async (res) => {
+                    console.log("success res:", res)
+
+                },
+                error: (err) => { },
+                complete: () => { },
+            };
+
+            let header = helpers.buildHeader();
+            let data = {
+                "username": userName,
+                "api_key": globals.API_KEY
+            };
+
+            API.forgetPassword(data, cb, header);
+        } else {
+            getEndPoint()
+        }
     }
-
-
 
     const signinHandler = () => {
         console.log("signInHandler")
@@ -97,7 +118,7 @@ const ForgetPassword = (props) => {
                 <View style={styles.signUpView}>
                     <_Button
                         btnTxt={helpers.getLocale(localize, "forgetPassword", "send")}
-                        callback={forgetPawword} />
+                        callback={forgetPassword} />
                 </View>
             </View>
         </View >

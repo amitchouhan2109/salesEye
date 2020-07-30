@@ -123,7 +123,9 @@ const Task = (props) => {
                     {true ? null : <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />}
 
                     <View style={{ marginTop: 20, borderWidth: 2, borderColor: "#969696" }}>
-                        <TouchableOpacity style={{ ...sty.fRow }} onPress={() => { }}>
+
+                        <TouchableOpacity style={{ ...sty.fRow }} onPress={() => {
+                        }}>
                             <View style={{ width: "85%", ...sty.jCenter, padding: 5, paddingLeft: 40 }}>
                                 <Text allowFontScaling={false} style={{ fontSize: 29, height: 26, borderWidth: 0 }}>{helpers.getLocale(localize, "task", "add_message")}</Text>
                             </View>

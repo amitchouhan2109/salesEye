@@ -56,7 +56,7 @@ const Tasks = (props) => {
 
     useEffect(() => {
         console.log("useEffect Tasks")
-        // getTasks();
+        getTasks();
     }, [])
 
 
@@ -121,7 +121,11 @@ const Tasks = (props) => {
 
     return (
         <View style={[mainStyle.rootView, styles.container]}>
-            <_Header header={helpers.getLocale(localize, "tasks", "tasks")} rightIcon={images.menu} rightcb={menuComponent} />
+            <_Header header={helpers.getLocale(localize, "tasks", "tasks")}
+                rightIcon={images.menu} rightcb={menuComponent}
+                onPress={() => props.navigation.navigate('ChangePassord')}
+            // onPress={() => props.navigation.navigate()}
+            />
             <View style={{ borderWidth: 0 }}>
                 <_InputText
                     style={styles.TextInput}
@@ -130,7 +134,7 @@ const Tasks = (props) => {
                     }
                 />
             </View>
-            <View style={{ paddingTop: 10 }}>
+            <View style={{ paddingTop: 10, height: '60%' }}>
                 <FlatList
                     data={["", "", ""]}
                     // extraData={this.state}

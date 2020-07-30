@@ -33,7 +33,7 @@ export default styles = StyleSheet.create({
         ...sty.aCenter
     },
     pairBtnTextStyle: {
-        fontSize: 29,
+        fontSize: 25,
         color: "#1C7DED",
         height: 29
     }
