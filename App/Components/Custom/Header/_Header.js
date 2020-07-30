@@ -27,7 +27,6 @@ const _Header = (props) => {
                 </View>
                 <View style={{ flex: 1, borderWidth: 1, ...sty.aEnd }}>
                     <TouchableOpacity style={{}} onPress={() => { props.rightcb ? props.rightcb() : setmenu(!menu) }}>
-
                         <View>
                             <Menu >
                                 <MenuTrigger text='Select option' customStyles={{ color: 'white' }} />

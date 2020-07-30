@@ -105,7 +105,7 @@ const Login = (props) => {
                     await AsyncStorage.setItem("baseUrl", res.result.ws_url);
                     logInUser()
                 } else {
-                    Alert.alert('Error in fetch end Point', 'Authentication failed',);
+                    Alert.alert('Error in fetch end Point', 'Authentication failed');
                 }
 
             },

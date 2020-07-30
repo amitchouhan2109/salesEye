@@ -51,6 +51,7 @@ const ForgetPassword = (props) => {
     }, [])
 
     const forgetPawword = async () => {
+        console.log('data', userName)
         let cb = {
             success: async (res) => {
                 console.log("success res:", res)

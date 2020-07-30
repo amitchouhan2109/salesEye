@@ -97,7 +97,7 @@ const SignUp = (props) => {
                     signupUser()
 
                 } else {
-                    Alert.alert('Error in fetch end Point', 'Authentication failed',);
+                    Alert.alert('Error in fetch end Point', 'Authentication failed');
                 }
 
             },
@@ -115,67 +115,71 @@ const SignUp = (props) => {
     return (
         <View style={[mainStyle.rootView, styles.container]}>
             <_Header header={helpers.getLocale(localize, "signIn", "signUp")} />
-            <View style={{}}>
-                <_InputText
-                    style={styles.TextInput}
-                    placeholder={helpers.getLocale(localize, "signIn", "first_name")}
-                    onChangeText={value => setuserName(value)}
-                    value={userName}
-                />
-                <_InputText
-                    style={styles.TextInput}
-                    placeholder={helpers.getLocale(localize, "signIn", "last_name")}
-                    onChangeText={value => setlastName(value)}
-                    value={lastName}
-                />
-                <_InputText
-                    style={styles.TextInput}
-                    placeholder={helpers.getLocale(localize, "signIn", "company")}
-                    onChangeText={value => setcompany(value)}
-                    value={company}
-                />
-                <_InputText
-                    style={styles.TextInput}
-                    placeholder={helpers.getLocale(localize, "signIn", "phone")}
-                    onChangeText={value => setphoneNo(value)}
-                    value={phoneNo}
-                />
-                <_InputText
-                    style={styles.TextInput}
-                    placeholder={helpers.getLocale(localize, "signIn", "email")}
-                    onChangeText={value => setemail(value)}
-                    value={email}
-                />
-                <_InputText
-                    style={styles.TextInput}
-                    placeholder={helpers.getLocale(localize, "signIn", "address")}
-                    onChangeText={value => setaddress(value)}
-                    value={address}
-                />
-                <_InputText
-                    style={styles.TextInput}
-                    placeholder={helpers.getLocale(localize, "signIn", "city")}
-                    onChangeText={value => setcity(value)}
-                    value={city}
-                />
-
-            </View>
-
-            <View style={{ paddingTop: 50 }}>
-                <_Button
-                    btnTxt={helpers.getLocale(localize, "signIn", "signUp")}
-                    callback={signinHandler} />
-            </View>
-
-            <View style={styles.signUpWrapper}>
-                <View style={styles.signUpView}>
-                    <TouchableOpacity
-                        onPress={() => { props.navigation.navigate('LogIn') }}
-                        style={styles.signUp}>
-                        <Text style={styles.signUpText}> {helpers.getLocale(localize, "signIn", "signIn")} </Text>
-                    </TouchableOpacity>
+            <ScrollView style={{}}>
+                <View style={{}}>
+                    <_InputText
+                        style={styles.TextInput}
+                        placeholder={helpers.getLocale(localize, "signIn", "first_name")}
+                        onChangeText={value => setuserName(value)}
+                        value={userName}
+                    />
+                    <_InputText
+                        style={styles.TextInput}
+                        placeholder={helpers.getLocale(localize, "signIn", "last_name")}
+                        onChangeText={value => setlastName(value)}
+                        value={lastName}
+                    />
+                    <_InputText
+                        style={styles.TextInput}
+                        placeholder={helpers.getLocale(localize, "signIn", "company")}
+                        onChangeText={value => setcompany(value)}
+                        value={company}
+                    />
+                    <_InputText
+                        style={styles.TextInput}
+                        placeholder={helpers.getLocale(localize, "signIn", "phone")}
+                        onChangeText={value => setphoneNo(value)}
+                        value={phoneNo}
+                    />
+                    <_InputText
+                        style={styles.TextInput}
+                        placeholder={helpers.getLocale(localize, "signIn", "email")}
+                        onChangeText={value => setemail(value)}
+                        value={email}
+                    />
+                    <_InputText
+                        style={styles.TextInput}
+                        placeholder={helpers.getLocale(localize, "signIn", "address")}
+                        onChangeText={value => setaddress(value)}
+                        value={address}
+                    />
+                    <_InputText
+                        style={styles.TextInput}
+                        placeholder={helpers.getLocale(localize, "signIn", "city")}
+                        onChangeText={value => setcity(value)}
+                        value={city}
+                    />
                 </View>
-            </View>
+                <View style={{ marginTop: 50 }}>
+                    <_Button
+                        btnTxt={helpers.getLocale(localize, "signIn", "signUp")}
+                        callback={signinHandler} />
+                </View>
+
+
+                <View style={styles.signUpWrapper}>
+                    <View style={styles.signUpView}>
+                        <TouchableOpacity
+                            onPress={() => { props.navigation.navigate('LogIn') }}
+                            style={styles.signUp}>
+                            <Text style={styles.signUpText}> {helpers.getLocale(localize, "signIn", "signIn")} </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+            </ScrollView>
+
+
         </View >
 
     );
