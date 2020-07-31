@@ -71,9 +71,6 @@ const Task = (props) => {
         API.campaignFavoriteGetApi({}, cb, header);
 
     }
-
-
-
     const signinHandler = () => {
         console.log("signInHandler")
     }

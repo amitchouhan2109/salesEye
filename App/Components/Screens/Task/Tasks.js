@@ -11,7 +11,7 @@ import {
     ActivityIndicator,
     FlatList,
     Linking,
-    StyleSheet,
+    StyleSheet, Alert
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -44,15 +44,58 @@ const Tasks = (props) => {
     const tasks = useSelector(state => state.tasks);
     const dispatch = useDispatch();
 
+    const signoutHandler = () => {
+        console.log("hi")
+        signout()
 
-    // const [userName, setuserName] = useState("");
-    // const [password, setpassword] = useState("");
-    // const [customerId, setcustomerId] = useState("");
-    // const [checked, setchecked] = useState(false);
+    }
 
-    // const loginData = useSelector(state => state.loginData);
-    // const dispatch = useDispatch();
-    // let companyPostRef = {}
+    const signout = async () => {
+        let token = await AsyncStorage.getItem('token');
+        let userAuthdetails = await helpers.userAuthdetails();
+        const baseUrl = await AsyncStorage.getItem("baseUrl");
+        console.log("token", token, { userAuthdetails })
+        if (baseUrl && baseUrl !== undefined) {
+            let cb = {
+                success: async (res) => {
+                    AsyncStorage.removeItem('userAuthDetails');
+                    // props.navigation.navigate('LogIn')
+                    setTimeout(() => {
+                        Alert.alert(
+                            'Success',
+                            'Logout  successfully',
+                            [
+                                {
+                                    text: 'OK', onPress: () => {
+                                        props.navigation.navigate('LogIn')
+                                    }
+                                },
+                            ]
+                        );
+                    }, 200);
+                },
+                error: (err) => {
+                    Alert.alert(err)
+                },
+                complete: () => { },
+            };
+            let header = helpers.buildHeader();
+            console.log('header', header)
+            let data = {
+                "user_id": userAuthdetails.user_id,
+                "token": userAuthdetails.token,
+                "portal_user": userAuthdetails.portal_user,
+                "api_key": globals.API_KEY
+            };
+            API.signOut(data, cb, header);
+
+        } else {
+            // getEndPoint()
+        }
+
+    }
+
+
 
     useEffect(() => {
         console.log("useEffect Tasks")
@@ -65,7 +108,6 @@ const Tasks = (props) => {
             success: async (res) => {
                 console.log("success res:", res)
                 // dispatch(setTasks({ res }))
-
             },
             error: (err) => { },
             complete: () => { },
@@ -73,9 +115,6 @@ const Tasks = (props) => {
 
         let header = helpers.buildHeader({});
         let userAuthdetails = await helpers.userAuthdetails();
-
-        // let userId = await AsyncStorage.getItem("userAuthDetails",);
-        // let token = await AsyncStorage.getItem("token");
         console.log({ userAuthdetails })
         let data = {
             "user_id": userAuthdetails.user_id,
@@ -98,33 +137,12 @@ const Tasks = (props) => {
     }
 
     const _keyExtractor = (item, index) => "tasks" + index.toString();
-
-    const menuComponent = () => {
-        console.log("menucomponent")
-        return (<View style={{ height: 10, width: 10 }}>
-            <Menu
-                renderer={true}
-            // opened={true}
-            >
-                <MenuTrigger text='Select action' />
-                <MenuOptions>
-                    <MenuOption onSelect={() => alert(`Save`)} text='Save' />
-                    <MenuOption onSelect={() => alert(`Delete`)} >
-                        <Text style={{ color: 'red' }}>Delete</Text>
-                    </MenuOption>
-                    <MenuOption onSelect={() => alert(`Not called`)} disabled={true} text='Disabled' />
-                </MenuOptions>
-            </Menu>
-        </View>)
-    };
-
-
     return (
         <View style={[mainStyle.rootView, styles.container]}>
             <_Header header={helpers.getLocale(localize, "tasks", "tasks")}
-                rightIcon={images.menu} rightcb={menuComponent}
+                rightIcon={images.menu} rightcb
                 onPress={() => props.navigation.navigate('ChangePassord')}
-            // onPress={() => props.navigation.navigate()}
+                onPress_signout={() => signoutHandler()}
             />
             <View style={{ borderWidth: 0 }}>
                 <_InputText
@@ -161,7 +179,6 @@ const Tasks = (props) => {
                     // ItemSeparatorComponent={() => < View style={{ borderBottomWidth: 1.5, borderColor: colors.border }} />}
                     removeClippedSubviews={Platform.OS == "android" ? true : false}
                 />
-
 
             </View>
             <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>

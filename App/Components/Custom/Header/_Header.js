@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, TouchableHighlight, Alert } from 'react-native';
 import { Input, Item } from "native-base";
 import styles from "./Styles";
 import { colors, sty } from "../../../Theme"
@@ -11,10 +11,16 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import { MenuContext } from 'react-native-popup-menu';
+import AsyncStorage from '@react-native-community/async-storage';
+import { globals, helpers, validators, API, } from '../../../Config';
+
+
+
 // import CustomMenu from '../CustomMenu/CustomMenu';
 
 const _Header = (props) => {
     const [menu, setmenu] = useState(false);
+
 
     const style = props.style || {};
     return (
@@ -28,9 +34,6 @@ const _Header = (props) => {
                 {props.rightIcon ?
                     <View style={{ flex: 1, ...sty.aEnd }}>
                         <TouchableOpacity style={{}}
-                        // onPress={() => t.props.navigation.navigate('ChangePassord')}
-
-                        // onPress={() => { props.rightcb ? props.rightcb() : setmenu(!menu) }}
                         >
                             <View>
                                 <Menu >
@@ -50,13 +53,12 @@ const _Header = (props) => {
                                         />
                                         <MenuOption text='Language'
                                             onSelect={() => this.setState({ renderer: SlideInMenu })
-                                                // props.navigation.navigate('ChangePassord')
+
                                             } />
                                         <MenuOption text='Sign Out' customStyles={{}}
-                                            onSelect={() => alert('Selected custom styled option')} />
-                                        {/* <MenuOption disabled={true}>
-                                            <Text style={{ color: '#ccc' }}>Four (disabled)</Text>
-                                        </MenuOption> */}
+                                            onSelect={props.onPress_signout ? () => props.onPress_signout() : null}
+
+                                        />
                                     </MenuOptions>
                                 </Menu>
                                 {/* {props.rightIcon ?

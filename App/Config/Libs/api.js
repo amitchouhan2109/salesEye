@@ -17,9 +17,10 @@ const LOGIN_USER = { type: "POST", url: URL + "login" };
 const GET_TASKS = { type: "POST", url: URL + "get_core_data" };
 const FORGET_PASSWORD = { type: "POST", url: URL + "recover_password" };
 const RESET_PASSWORD = { type: "POST", url: URL + "reset_password" };
+const SIGN_OUT = { type: "POST", url: URL + "logout" };
 
 // const REGISTER_USER = { type: "POST", url: getBaseUrl() }
-
+// https://app.taskerium.com/taman/v2/Default.asmx/logout
 
 
 export const API = {
@@ -30,6 +31,8 @@ export const API = {
   getAllTasks: async (data, cb) => request(data, cb, GET_TASKS),
   forgetPassword: async (data, cb, header) => request(data, cb, FORGET_PASSWORD, header),
   resetpassword: async (data, cb) => request(data, cb, RESET_PASSWORD),
+  signOut: async (data, cb) => request(data, cb, SIGN_OUT),
+
 
 
 

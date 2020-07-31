@@ -47,37 +47,40 @@ const NewTask = (props) => {
         // _getFavCampaign()
     }, [])
 
-    const _getFavCampaign = () => {
-        let cb = {
-            success: (res) => {
-                console.log("res :", res)
-                dispatch(setCampaignProp({ prop: "favorite", arr: res.data }))
-            },
-            error: (err) => {
-                console.log(
-                    "err :", err);
-            },
-            complete: () => { },
-        };
+    // const _getFavCampaign = () => {
+    //     let cb = {
+    //         success: (res) => {
+    //             console.log("res :", res)
+    //             dispatch(setCampaignProp({ prop: "favorite", arr: res.data }))
+    //         },
+    //         error: (err) => {
+    //             console.log(
+    //                 "err :", err);
+    //         },
+    //         complete: () => { },
+    //     };
 
-        // let token = await AsyncStorage.getItem('token');
-        let header = helpers.buildHeader({ authorization: loginData.token });
-        API.campaignFavoriteGetApi({}, cb, header);
+    //     // let token = await AsyncStorage.getItem('token');
+    //     let header = helpers.buildHeader({ authorization: loginData.token });
+    //     API.campaignFavoriteGetApi({}, cb, header);
+
+    // }
+    const addTask = () => {
+        console.log("save")
 
     }
 
 
 
-    const signinHandler = () => {
-        console.log("signInHandler")
-    }
+
 
     const cancleButtonHandler = () => {
         console.log("cancle")
     }
 
     const saveButtonHandler = () => {
-        console.log("save")
+        // console.log("save")
+        addTask()
     }
 
     return (
