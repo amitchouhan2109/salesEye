@@ -31,8 +31,34 @@ import _Header from '../../../Custom/Header/_Header';
 
 
 const InfoCart = (props) => {
+
+    const localize = useSelector(state => state.localize);
+    const [taskno, settaskno] = useState("");
+
+    const [userName, setuserName] = useState("");
+    const [address, setaddress] = useState("");
+    const [title, settitle] = useState("");
+    const [status, setstatus] = useState("");
+    const [taskDate, settaskDate] = useState("");
+    // const [tasko, settaskno] = useState("")
+
+
     useEffect(() => {
-        // console.log("Login useEffect")
+        // console.log("infocart useEffect")
+        const Tasks = props.tasks.item
+        // if (props.tasks !== undefined) {
+        //     console.log("infocart useEffect", props.tasks.res[0].tasks)
+        //     // const TaskData = props.tasks.res[0].tasks
+        const date = Tasks.start_date
+        const Date = date.split(' ')[0]
+        const name = Tasks.object.split(',')[0]
+        setstatus(Tasks.status)
+        settaskno(Tasks.id)
+        setuserName(name)
+        setaddress(Tasks.address)
+        settitle(Tasks.task_type)
+        settaskDate(Date)
+        // }
     }, [])
 
     const signinHandler = () => {
@@ -54,12 +80,12 @@ const InfoCart = (props) => {
 
     return (
         <View style={[styles.container, { paddingVertical: 5, borderWidth: 0 }]}>
-            {infoRow("task_no", "INC1234", { fontWeight: "bold", fontFamily: "MyriadPro-Semibold" })}
-            {infoRow("name", "John")}
-            {infoRow("address", "kalvarijos str. 12")}
-            {infoRow("title", "Trouble")}
-            {infoRow("status", "In Progress", { color: "blue" })}
-            {infoRow("task_date", "2020-06-27")}
+            {infoRow("task_no", taskno, { fontWeight: "bold", fontFamily: "MyriadPro-Semibold" })}
+            {infoRow("name", userName)}
+            {infoRow("address", address)}
+            {infoRow("title", title)}
+            {infoRow("status", status, { color: "blue" })}
+            {infoRow("task_date", taskDate)}
             {/* {infoRow("description", "Test")} */}
 
         </View >

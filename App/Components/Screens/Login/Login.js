@@ -30,6 +30,8 @@ import MainHoc from '../../Hoc/MainHoc';
 import _Button from '../../Custom/Button/_Button';
 import AsyncStorage from '@react-native-community/async-storage';
 import { login } from '../../../Redux/Actions/LoginAction'
+import Loader from '../../Custom/Loader/Loader'
+
 
 
 const Login = (props) => {
@@ -39,6 +41,8 @@ const Login = (props) => {
     const [password, setpassword] = useState(!globals.live ? "vtvxbjcg" : "");
     const [customerId, setcustomerId] = useState("");
     const [checked, setchecked] = useState(false);
+    const [loading, setloading] = useState(false);
+
 
     // const loginData = useSelector(state => state.loginData);
     const dispatch = useDispatch();
@@ -71,19 +75,29 @@ const Login = (props) => {
     }
 
     const logInUser = () => {
+        setloading(true)
         console.log("login")
 
         let cb = {
             success: async (res) => {
+                console.log('res', res)
                 await AsyncStorage.setItem("userAuthDetails", JSON.stringify(res[0]));
                 await AsyncStorage.setItem("token", res[0].token);
                 dispatch(login({ res }))
+                setloading(false)
 
                 props.navigation.navigate('Tasks')
 
             },
-            error: (err) => { },
-            complete: () => { },
+            error: (err) => {
+                setloading(false)
+                Alert.alert("Error", "Wrong Username/Password")
+
+            },
+            complete: () => {
+                setloading(false)
+
+            },
         };
 
         let header = helpers.buildHeader({});
@@ -121,7 +135,10 @@ const Login = (props) => {
     };
 
     return (
+
         <View style={[mainStyle.rootView, styles.container]}>
+            <Loader
+                loading={loading} />
             <View style={{}}>
                 <View style={styles.logoWrap}>
                     <FastImage

@@ -37,12 +37,20 @@ import {
     MenuOption,
     MenuTrigger,
 } from 'react-native-popup-menu';
+import { large } from '../../../Theme/FontSizes';
+import Loader from '../../Custom/Loader/Loader'
+
 
 const Tasks = (props) => {
     // const campaigns = useSelector(state => state.campaigns);
     const localize = useSelector(state => state.localize);
-    const tasks = useSelector(state => state.tasks);
     const dispatch = useDispatch();
+    const tasks = useSelector(state => state.tasks);
+    const [task, settask] = useState([]);
+    const [loading, setloading] = useState(true)
+
+
+
 
     const signoutHandler = () => {
         console.log("hi")
@@ -107,7 +115,13 @@ const Tasks = (props) => {
         let cb = {
             success: async (res) => {
                 console.log("success res:", res)
-                // dispatch(setTasks({ res }))
+                console.log("success res:", res[0].tasks)
+
+                dispatch(setTasks({ res }))
+                setloading(false)
+                settask(res[0].tasks)
+                // console.log(task, '123')
+                // console.log(tasks, 123)
             },
             error: (err) => { },
             complete: () => { },
@@ -129,66 +143,77 @@ const Tasks = (props) => {
     }
 
     const taskRender = (a) => {
+        console.log(a)
         return (
             <View style={{ borderBottomWidth: 1.5, borderColor: colors.border }}>
-                <InfoCart localize={localize} />
-            </View>
+                <TouchableOpacity onPress={() => props.navigation.navigate('Task', { task: a })}>
+                    <InfoCart localize={localize} tasks={a} />
+                </TouchableOpacity>
+            </View >
         )
     }
 
     const _keyExtractor = (item, index) => "tasks" + index.toString();
+    console.log(_keyExtractor, " key")
+    // console.log(task, " 45")
     return (
-        <View style={[mainStyle.rootView, styles.container]}>
-            <_Header header={helpers.getLocale(localize, "tasks", "tasks")}
-                rightIcon={images.menu} rightcb
-                onPress={() => props.navigation.navigate('ChangePassord')}
-                onPress_signout={() => signoutHandler()}
-            />
-            <View style={{ borderWidth: 0 }}>
-                <_InputText
-                    style={styles.TextInput}
-                    placeholder={helpers.getLocale(localize, "tasks", "search")}
-                    onChangeText={value => { setuserName(value) }
-                    }
-                />
-            </View>
-            <View style={{ paddingTop: 10, height: '60%' }}>
-                <FlatList
-                    data={["", "", ""]}
-                    // extraData={this.state}
-                    renderItem={taskRender}
-                    keyExtractor={_keyExtractor}
-                    // refreshControl={
-                    // <RefreshControl
-                    //     refreshing={refreshing}
-                    //     onRefresh={this._onRefresh}
-                    // />
-                    // }
-                    // onScroll={(e) => {
-                    //     console.log({ e })
-                    //     if (!this.listLoading && !this.listEnded) this._renderMore();
-                    // }}
-                    // onEndReachedThreshold={0.2}
-                    // onEndReached={(e) => {
-                    //     if (!this.listLoading && !this.listEnded) this._renderMore();
-                    // }}
-                    // ListFooterComponent={() => {
-                    //     return <View>{listLoading ? <_InlineLoader /> : null}</View>;
-                    // }}
-                    // ListEmptyComponent={}
-                    // ItemSeparatorComponent={() => < View style={{ borderBottomWidth: 1.5, borderColor: colors.border }} />}
-                    removeClippedSubviews={Platform.OS == "android" ? true : false}
-                />
+        <>
+            {task.length === 0 ?
+                <Loader name />
+                :
+                <View style={[mainStyle.rootView, styles.container]}>
+                    <_Header header={helpers.getLocale(localize, "tasks", "tasks")}
+                        rightIcon={images.menu} rightcb
+                        onPress={() => props.navigation.navigate('ChangePassord')}
+                        onPress_signout={() => signoutHandler()}
+                    />
+                    <View style={{ borderWidth: 0 }}>
+                        <_InputText
+                            style={styles.TextInput}
+                            placeholder={helpers.getLocale(localize, "tasks", "search")}
+                            onChangeText={value => { setuserName(value) }
+                            }
+                        />
+                    </View>
+                    <View style={{ paddingTop: 10, height: '60%' }}>
+                        <FlatList
+                            //  data={[""]}
+                            data={task}
+                            // extraData={this.state}
+                            renderItem={taskRender}
+                            keyExtractor={_keyExtractor}
+                            // refreshControl={
+                            // <RefreshControl
+                            //     refreshing={refreshing}
+                            //     onRefresh={this._onRefresh}
+                            // />
+                            // }
+                            // onScroll={(e) => {
+                            //     console.log({ e })
+                            //     if (!this.listLoading && !this.listEnded) this._renderMore();
+                            // }}
+                            // onEndReachedThreshold={0.2}
+                            // onEndReached={(e) => {
+                            //     if (!this.listLoading && !this.listEnded) this._renderMore();
+                            // }}
+                            // ListFooterComponent={() => {
+                            //     return <View>{listLoading ? <_InlineLoader /> : null}</View>;
+                            // }}
+                            // ListEmptyComponent={}
+                            // ItemSeparatorComponent={() => < View style={{ borderBottomWidth: 1.5, borderColor: colors.border }} />}
+                            removeClippedSubviews={Platform.OS == "android" ? true : false}
+                        />
 
-            </View>
-            <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>
-                <View style={styles.signUpView}>
-                    <_Button
-                        btnTxt={helpers.getLocale(localize, "tasks", "add_task")}
-                        callback={() => props.navigation.navigate('NewTask')} />
-                </View>
-            </View>
-        </View >
+                    </View>
+                    <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>
+                        <View style={styles.signUpView}>
+                            <_Button
+                                btnTxt={helpers.getLocale(localize, "tasks", "add_task")}
+                                callback={() => props.navigation.navigate('NewTask')} />
+                        </View>
+                    </View>
+                </View >}
+        </>
 
     );
 };

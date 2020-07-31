@@ -35,6 +35,13 @@ import InfoCart from '../ContentType/InfoCart/InfoCart';
 const Task = (props) => {
     // const campaigns = useSelector(state => state.campaigns);
     const localize = useSelector(state => state.localize);
+    // const tasks = useSelector(state => state.);
+    // const tasks = useSelector(state => state.tasks);
+    const { task } = props.route.params;
+    console.log({ task })
+
+
+
     const [userName, setuserName] = useState("");
     const [password, setpassword] = useState("");
     const [customerId, setcustomerId] = useState("");
@@ -88,7 +95,9 @@ const Task = (props) => {
             <_Header header={helpers.getLocale(localize, "task", "task")} />
             <View style={{ marginTop: 20, height: 1.5, backgroundColor: colors.primaryColor }} />
             {/* <View style={{ borderWidth: 1 }}> */}
-            <InfoCart localize={localize} />
+            <InfoCart localize={localize} tasks={task} />
+
+            {/* <InfoCart localize={localize} /> */}
             {/* </View> */}
             <View style={{ marginTop: 10, }}>
                 <View style={{}}>

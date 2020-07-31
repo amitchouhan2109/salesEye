@@ -11,7 +11,8 @@ import {
     ActivityIndicator,
     FlatList,
     Linking,
-    StyleSheet
+    StyleSheet,
+    Alert
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -28,6 +29,8 @@ import { WINDOW_HEIGHT, WINDOW_WIDTH } from '../../../Config/Libs/globals';
 import MainHoc from '../../Hoc/MainHoc';
 import _Button from '../../Custom/Button/_Button';
 import _Header from '../../Custom/Header/_Header';
+import Loader from '../../Custom/Loader/Loader'
+
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -42,6 +45,8 @@ const SignUp = (props) => {
     const [email, setemail] = useState("");
     const [address, setaddress] = useState("");
     const [city, setcity] = useState("");
+    const [loading, setloading] = useState(false);
+
 
 
     // const loginData = useSelector(state => state.loginData);
@@ -63,12 +68,21 @@ const SignUp = (props) => {
     }
 
     const signupUser = () => {
+        setloading(true)
         let cb = {
             success: async (res) => {
                 console.log("success res:", res)
+                setloading(false)
+                Alert.alert(" Success", "Registerd Successfully !")
             },
-            error: (err) => { },
-            complete: () => { },
+            error: (err) => {
+                setloading(false)
+                Alert.alert("Error", " Registration Failed")
+
+            },
+            complete: () => {
+                setloading(false)
+            },
         };
 
         let header = helpers.buildHeader({});
@@ -112,6 +126,8 @@ const SignUp = (props) => {
 
     return (
         <View style={[mainStyle.rootView, styles.container]}>
+            <Loader
+                loading={loading} />
             <_Header header={helpers.getLocale(localize, "signIn", "signUp")} />
             <ScrollView style={{}}>
                 <View style={{}}>
