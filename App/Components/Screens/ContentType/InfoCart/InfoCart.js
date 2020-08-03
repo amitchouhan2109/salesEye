@@ -31,21 +31,20 @@ import _Header from '../../../Custom/Header/_Header';
 
 
 const InfoCart = (props) => {
-
     const localize = useSelector(state => state.localize);
     const [taskno, settaskno] = useState("");
-
     const [userName, setuserName] = useState("");
     const [address, setaddress] = useState("");
     const [title, settitle] = useState("");
     const [status, setstatus] = useState("");
     const [taskDate, settaskDate] = useState("");
-    // const [tasko, settaskno] = useState("")
 
 
     useEffect(() => {
         // console.log("infocart useEffect")
         const Tasks = props.tasks.item
+
+        console.log(Tasks, "tasks55")
         // if (props.tasks !== undefined) {
         //     console.log("infocart useEffect", props.tasks.res[0].tasks)
         //     // const TaskData = props.tasks.res[0].tasks

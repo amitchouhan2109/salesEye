@@ -13,5 +13,7 @@ export const images = {
   document: require("../Assets/Images/Common/Document.png"),
   location: require("../Assets/Images/Common/Location.png"),
   menu: require("../Assets/Images/Common/Menu.png"),
+  clock: require("../Assets/Images/Common/clock.png"),
+
 
 };

@@ -69,8 +69,8 @@ const ChangePassword = (props) => {
             let header = helpers.buildHeader({ authorization: token });
             console.log('header', header)
             let data = {
-                "username": "ace1@yopmail.com",
-                "password": "1234567",
+                "username": userName,
+                "password": password,
                 "api_key": globals.API_KEY
             };
 

@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import {
     View,
-    Alert, Image
+    Alert, Image, Text
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -22,6 +22,7 @@ import _PairButton from '../../Custom/Button/_PairButton';
 import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../../Custom/Loader/Loader'
 import ImagePicker from 'react-native-image-picker';
+import DocumentPicker from 'react-native-document-picker';
 
 
 
@@ -35,12 +36,11 @@ const NewTask = (props) => {
     const [description, setdescription] = useState("");
     const [customer_id, setcustomer_id] = useState("");
     const [edit, setedit] = useState(false);
-    const [picture, setpicture] = useState(false);
+    const [picture, setpicture] = useState("");
+    const [document, setdocument] = useState("");
 
+    const [initialLoading, setinitialLoading] = useState(true);
     // const [editAddress, seteditAddress] = useState("");
-
-
-
     const [loading, setloading] = useState(false);
 
     // const loginData = useSelector(state => state.loginData);
@@ -70,6 +70,7 @@ const NewTask = (props) => {
                     setname(customer_data[0].name)
                     setaddress(customer_data[0].address)
                     setcustomer_id(customer_data[0].customer_id)
+                    setinitialLoading(false)
                 },
                 error: (err) => {
                     Alert.alert(err)
@@ -96,7 +97,7 @@ const NewTask = (props) => {
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
-                    setloading(false)
+                    setTimeout(() => { setloading(false) }, 300)
                     console.log(res)
                     Alert.alert(
                         'Success',
@@ -150,7 +151,6 @@ const NewTask = (props) => {
         }
     }
     const addPicture = () => {
-
         const options = {
             title: 'Select Avatar',
             // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
@@ -172,6 +172,7 @@ const NewTask = (props) => {
                 const source = { uri: response.uri };
                 setpicture(source)
                 console.log('picker resp', response)
+                uploadDoc()
                 // img_filename: file,
                 //     selectedImage: response
                 // this.setState({
@@ -179,6 +180,40 @@ const NewTask = (props) => {
                 // });
             }
         });
+    }
+    const uploadDoc = async () => {
+        let userAuthdetails = await helpers.userAuthdetails();
+        const baseUrl = await AsyncStorage.getItem("baseUrl");
+        if (baseUrl && baseUrl !== undefined) {
+            let cb = {
+                success: async (res) => {
+                    console.log({ res })
+                },
+                error: (err) => {
+                    Alert.alert("Failed")
+                },
+                complete: () => { },
+            };
+            let header = helpers.buildHeader();
+            let data = {
+                "user_id": userAuthdetails.user_id,
+                "token": userAuthdetails.token,
+                "task_id": 881613,
+                "filename": "2018-07-10 15:09:56.png",
+                "photo": "iVBORw0KGgoAAAANSUhEUgAAAwYAAAQICAIAAAA4CVt9AAAAA3NCSVQFBgUzC42AAAAgAElEQVR4\nnOy9X2wcV3ro+Yk+VL7SFD2n7G6nakJ6WI6YUSmSV92RNMOeyAP1QJ41fe3A8p0EsXaAzWrvw+7k",
+                "api_key": globals.API_KEY,
+                //     {
+                //     "user_id": 881235, "token": "D3A06CAAD6B92AC5E14EB19B0F688C61",
+                //         "task_id": 881241, "filename": "2018-07-10 15:09:56.png",
+                //             "photo": "iVBORw0KGgoAAAANSUhEUgAAAwYAAAQICAIAAAA4CVt9AAAAA3NCSVQFBgUzC42AAAAgAElEQVR4\nnOy9X2wcV3ro+Yk+VL7SFD2n7G6nakJ6WI6YUSmSV92RNMOeyAP1QJ41fe3A8p0EsXaAzWrvw+7k",
+                //         "api_key": "TqKGLk2e"
+                // }
+            };
+            console.log("data", data)
+            API.postDocument(data, cb, header);
+        } else {
+            // getEndPoint()
+        }
     }
 
     const onEdit = () => {
@@ -193,70 +228,100 @@ const NewTask = (props) => {
     const saveButtonHandler = () => {
         addTask()
     }
+    const addDocument = async () => {
+        try {
+            const res = await DocumentPicker.pick({
+                type: [DocumentPicker.types.images,
+                DocumentPicker.types.pdf
+                ],
+            });
+            setdocument(res.name)
+            console.log("res", res)
+            console.log(
+                res.uri,
+                res.type, // mime type
+                res.name,
+                res.size
+            );
+
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                console.log("cancled")
+                // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+                throw err;
+            }
+        }
+    }
 
     return (
         <View style={[mainStyle.rootView, styles.container]}>
             <Loader
                 loading={loading} />
-            <_Header header={helpers.getLocale(localize, "newTask", "new_task")} />
-            <View style={{}}>
+            {initialLoading ? < Loader
+                name /> :
+                <>
+                    <_Header header={helpers.getLocale(localize, "newTask", "new_task")} />
+                    <View style={{}}>
 
-                <_InputText
-                    style={styles.TextInput}
-                    placeholder={helpers.getLocale(localize, "newTask", "title")}
-                    onChangeText={value => { settitle(value) }
-                    }
-                />
-                <_InputText
-                    style={styles.TextInput1}
-                    placeholder={helpers.getLocale(localize, "newTask", "name")}
-                    value={name}
-                    onChangeText={value => {
-                        setname(value),
-                            onEdit()
-                    }
-                    }
-                />
-                <_InputText
-                    style={styles.TextInput1}
-                    placeholder={helpers.getLocale(localize, "newTask", "address")}
-                    value={address}
-                    leftIcon={images.location}
-                    onChangeText={value => {
-                        setaddress(value), onEdit()
-                        // emailValid: validation('email', value)
-                    }}
+                        <_InputText
+                            style={styles.TextInput}
+                            placeholder={helpers.getLocale(localize, "newTask", "title")}
+                            onChangeText={value => { settitle(value) }
+                            }
+                        />
+                        <_InputText
+                            style={styles.TextInput1}
+                            placeholder={helpers.getLocale(localize, "newTask", "name")}
+                            value={name}
+                            onChangeText={value => {
+                                setname(value),
+                                    onEdit()
+                            }
+                            }
+                        />
+                        <_InputText
+                            style={styles.TextInput1}
+                            placeholder={helpers.getLocale(localize, "newTask", "address")}
+                            value={address}
+                            leftIcon={images.location}
+                            onChangeText={value => {
+                                setaddress(value), onEdit()
+                                // emailValid: validation('email', value)
+                            }}
 
-                />
-                <_InputText
-                    style={styles.TextInput1}
-                    placeholder={helpers.getLocale(localize, "newTask", "description")}
-                    onChangeText={value => { setdescription(value) }
-                    }
-                />
-                <_PairButton
-                    icon1={images.camera}
-                    icon2={images.document}
-                    icon1Style={{ height: 35, width: 35 }}
-                    txtStyle1={{ color: "red" }}
-                    callback1={() => { addPicture() }}
-                    callback2={() => { saveButtonHandler() }}
-                    style={{ borderTopWidth: 0, paddingVertical: 2 }}
-                />
-                <Image source={picture} style={{ width: 50, height: 50, marginTop: 10 }} />
-            </View>
-            <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>
+                        />
+                        <_InputText
+                            style={styles.TextInput1}
+                            placeholder={helpers.getLocale(localize, "newTask", "description")}
+                            onChangeText={value => { setdescription(value) }
+                            }
+                        />
+                        <_PairButton
+                            icon1={images.camera}
+                            icon2={images.document}
+                            icon1Style={{ height: 35, width: 35 }}
+                            txtStyle1={{ color: "red" }}
+                            callback1={() => { addPicture() }}
+                            callback2={() => { addDocument() }}
+                            style={{ borderTopWidth: 0, paddingVertical: 2 }}
+                        />
+                        <Image source={picture} style={{ width: 50, height: 50, marginTop: 10 }} />
+                        <Text>{document}</Text>
+                    </View>
+                    <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>
 
-                <View style={styles.signUpView}>
-                    <_PairButton
-                        btnTxt1={helpers.getLocale(localize, "task", "cancel")}
-                        btnTxt2={helpers.getLocale(localize, "task", "save")}
-                        txtStyle1={{ color: "red", }}
-                        callback1={() => { cancleButtonHandler() }}
-                        callback2={() => { saveButtonHandler() }}
-                    />
-                </View>
-            </View>
+                        <View style={styles.signUpView}>
+                            <_PairButton
+                                btnTxt1={helpers.getLocale(localize, "task", "cancel")}
+                                btnTxt2={helpers.getLocale(localize, "task", "save")}
+                                txtStyle1={{ color: "red", }}
+                                callback1={() => { cancleButtonHandler() }}
+                                callback2={() => { saveButtonHandler() }}
+                            />
+                        </View>
+                    </View>
+                </>}
         </View >
 
     );
