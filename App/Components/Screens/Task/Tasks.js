@@ -48,30 +48,25 @@ const Tasks = (props) => {
     const tasks = useSelector(state => state.tasks);
     const [task, settask] = useState([]);
     const [loading, setloading] = useState(true)
-
-
+    const [search, setsearch] = useState(false)
 
 
     const signoutHandler = () => {
-        console.log("hi")
         signout()
-
     }
 
     const signout = async () => {
         let token = await AsyncStorage.getItem('token');
         let userAuthdetails = await helpers.userAuthdetails();
         const baseUrl = await AsyncStorage.getItem("baseUrl");
-        console.log("token", token, { userAuthdetails })
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
                     AsyncStorage.removeItem('userAuthDetails');
-                    // props.navigation.navigate('LogIn')
                     setTimeout(() => {
                         Alert.alert(
                             'Success',
-                            'Logout  successfully',
+                            'Logout  Successfully',
                             [
                                 {
                                     text: 'OK', onPress: () => {
@@ -88,7 +83,6 @@ const Tasks = (props) => {
                 complete: () => { },
             };
             let header = helpers.buildHeader();
-            console.log('header', header)
             let data = {
                 "user_id": userAuthdetails.user_id,
                 "token": userAuthdetails.token,
@@ -96,15 +90,11 @@ const Tasks = (props) => {
                 "api_key": globals.API_KEY
             };
             API.signOut(data, cb, header);
-
         } else {
             // getEndPoint()
         }
 
     }
-
-
-
     useEffect(() => {
         console.log("useEffect Tasks")
         getTasks();
@@ -116,12 +106,9 @@ const Tasks = (props) => {
             success: async (res) => {
                 console.log("success res:", res)
                 console.log("success res:", res[0].tasks)
-
                 dispatch(setTasks({ res }))
                 setloading(false)
                 settask(res[0].tasks)
-                // console.log(task, '123')
-                // console.log(tasks, 123)
             },
             error: (err) => { },
             complete: () => { },
@@ -154,8 +141,6 @@ const Tasks = (props) => {
     }
 
     const _keyExtractor = (item, index) => "tasks" + index.toString();
-    console.log(_keyExtractor, " key")
-    // console.log(task, " 45")
     return (
         <>
             {task.length === 0 ?
@@ -171,7 +156,7 @@ const Tasks = (props) => {
                         <_InputText
                             style={styles.TextInput}
                             placeholder={helpers.getLocale(localize, "tasks", "search")}
-                            onChangeText={value => { setuserName(value) }
+                            onChangeText={value => { setsearch(value) }
                             }
                         />
                     </View>

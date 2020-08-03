@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import {
     View,
-    Alert,
+    Alert, Image
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -21,6 +21,7 @@ import _Header from '../../Custom/Header/_Header';
 import _PairButton from '../../Custom/Button/_PairButton';
 import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../../Custom/Loader/Loader'
+import ImagePicker from 'react-native-image-picker';
 
 
 
@@ -34,6 +35,8 @@ const NewTask = (props) => {
     const [description, setdescription] = useState("");
     const [customer_id, setcustomer_id] = useState("");
     const [edit, setedit] = useState(false);
+    const [picture, setpicture] = useState(false);
+
     // const [editAddress, seteditAddress] = useState("");
 
 
@@ -146,7 +149,37 @@ const NewTask = (props) => {
             API.sync_data(data, cb, header);
         }
     }
+    const addPicture = () => {
 
+        const options = {
+            title: 'Select Avatar',
+            // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+            storageOptions: {
+                skipBackup: true,
+                path: 'images',
+            },
+        };
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            } else {
+                const file = response.fileName
+                const source = { uri: response.uri };
+                setpicture(source)
+                console.log('picker resp', response)
+                // img_filename: file,
+                //     selectedImage: response
+                // this.setState({
+                //     avatarSource: source,
+                // });
+            }
+        });
+    }
 
     const onEdit = () => {
         setedit(true)
@@ -167,6 +200,7 @@ const NewTask = (props) => {
                 loading={loading} />
             <_Header header={helpers.getLocale(localize, "newTask", "new_task")} />
             <View style={{}}>
+
                 <_InputText
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "newTask", "title")}
@@ -205,12 +239,14 @@ const NewTask = (props) => {
                     icon2={images.document}
                     icon1Style={{ height: 35, width: 35 }}
                     txtStyle1={{ color: "red" }}
-                    callback1={() => { cancleButtonHandler() }}
+                    callback1={() => { addPicture() }}
                     callback2={() => { saveButtonHandler() }}
                     style={{ borderTopWidth: 0, paddingVertical: 2 }}
                 />
+                <Image source={picture} style={{ width: 50, height: 50, marginTop: 10 }} />
             </View>
             <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>
+
                 <View style={styles.signUpView}>
                     <_PairButton
                         btnTxt1={helpers.getLocale(localize, "task", "cancel")}

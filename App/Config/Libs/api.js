@@ -20,11 +20,10 @@ const RESET_PASSWORD = { type: "POST", url: URL + "reset_password" };
 const SIGN_OUT = { type: "POST", url: URL + "logout" };
 const GET_CUSTOMER_DATA = { type: "POST", url: URL + "get_customers_data" };
 const SYNC_DATA = { type: "POST", url: URL + "sync_data" };
-// const SYNC_DATA = { type: "POST", url: URL + "sync_data" };
-
-
-
-
+const GET_COMMENT_DATA = { type: "POST", url: URL + "get_comments_data" };
+const SYNC_COMMENT_DATA = { type: "POST", url: URL + "sync_comments_data" };
+const SYNC_TASK_PICTURE = { type: "POST", url: URL + "sync_task_picture" };
+const SYNC_EVALUTION_DATA = { type: "POST", url: URL + "sync_evaluation_data" };
 
 // const REGISTER_USER = { type: "POST", url: getBaseUrl() }
 // https://app.taskerium.com/taman/v2/Default.asmx/logout
@@ -41,11 +40,13 @@ export const API = {
   signOut: async (data, cb) => request(data, cb, SIGN_OUT),
   get_customers_data: async (data, cb) => request(data, cb, GET_CUSTOMER_DATA),
   sync_data: async (data, cb) => request(data, cb, SYNC_DATA),
-
+  getCommentData: async (data, cb) => request(data, cb, GET_COMMENT_DATA),
+  addCommentData: async (data, cb) => request(data, cb, SYNC_COMMENT_DATA),
+  postDocument: async (data, cb) => request(data, cb, SYNC_TASK_PICTURE),
+  saveEvalutionData: async (data, cb) => request(data, cb, SYNC_EVALUTION_DATA),
 }
 
 async function request(requestData, cb, featureURL, secureRequest = buildHeader(), urlData = '', retriveBaseUrl = true) {
-
   let url = "";
   if (retriveBaseUrl) {
     let baseUrl = await getBaseUrl()
@@ -53,7 +54,6 @@ async function request(requestData, cb, featureURL, secureRequest = buildHeader(
     url = baseUrl + "v2/Default.asmx/" + endurl
   } else {
     url = featureURL.dynamic ? featureURL.url(urlData) : featureURL.url;
-
   }
 
   if (!live) {

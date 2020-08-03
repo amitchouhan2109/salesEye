@@ -46,7 +46,14 @@ export default styles = StyleSheet.create({
         height: 35,
         width: 35,
         marginHorizontal: 5
-    }
+    },
+    modalBackground: {
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        backgroundColor: '#00000040'
+    },
 
 
 });

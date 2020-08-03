@@ -92,7 +92,6 @@ const ForgetPassword = (props) => {
                 "username": userName,
                 "api_key": globals.API_KEY
             };
-
             API.forgetPassword(data, cb, header);
         } else {
             getEndPoint()

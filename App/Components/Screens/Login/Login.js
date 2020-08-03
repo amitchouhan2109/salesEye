@@ -85,14 +85,11 @@ const Login = (props) => {
                 await AsyncStorage.setItem("token", res[0].token);
                 dispatch(login({ res }))
                 setloading(false)
-
                 props.navigation.navigate('Tasks')
-
             },
             error: (err) => {
                 setloading(false)
-                Alert.alert("Error", "Wrong Username/Password")
-
+                Alert.alert("Error", "Wrong UserName/Password")
             },
             complete: () => {
                 setloading(false)
