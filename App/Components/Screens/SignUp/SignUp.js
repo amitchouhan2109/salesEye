@@ -46,6 +46,21 @@ const SignUp = (props) => {
     const [address, setaddress] = useState("");
     const [city, setcity] = useState("");
     const [loading, setloading] = useState(false);
+    const [fNameValid, setfNameValid] = useState("");
+    const [lNameValid, setlNameValid] = useState("");
+    const [phoneNoValid, setphoneNoValid] = useState("");
+    const [emailValid, setemailValid] = useState("");
+    const [addressValid, setaddressValid] = useState("");
+    const [cityValid, setcityValid] = useState("");
+    const [comapanyValid, setcompanyValid] = useState("");
+
+
+
+
+
+
+    // const [loading, setloading] = useState(false);
+
 
 
 
@@ -68,36 +83,56 @@ const SignUp = (props) => {
     }
 
     const signupUser = () => {
+        const fNameError = helpers.validation('Name', userName)
+        const lNameError = helpers.validation('lastName', lastName)
+        const phoneNoError = helpers.validation('phoneNo', phoneNo)
+        const addressError = helpers.validation('Address', address)
+        const emailError = helpers.validation('email', email)
+        const cityError = helpers.validation('City', city)
+        setfNameValid(fNameError)
+        setlNameValid(lNameError)
+        setemailValid(emailError)
+        setphoneNoValid(phoneNoError)
+        setaddressValid(addressError)
+        setcityValid(cityError)
         setloading(true)
-        let cb = {
-            success: async (res) => {
-                console.log("success res:", res)
-                setloading(false)
-                Alert.alert(" Success", "Registerd Successfully !")
-            },
-            error: (err) => {
-                setloading(false)
-                Alert.alert("Error", " Registration Failed")
+        if (fNameError == " " && lNameError == " " && phoneNoError == " " && addressError == " " && emailError == " "
+            && cityError == " " && phoneNoError == " ") {
 
-            },
-            complete: () => {
-                setloading(false)
-            },
-        };
+            let cb = {
+                success: async (res) => {
+                    console.log("success res:", res)
+                    setloading(false)
+                    Alert.alert(" Success", "Registerd Successfully !")
+                },
+                error: (err) => {
+                    setloading(false)
+                    Alert.alert("Error", " Registration Failed")
 
-        let header = helpers.buildHeader({});
-        console.log({ userName, lastName, company, phoneNo, email, address, city })
-        let data = {
-            firstname: userName,
-            lastname: lastName,
-            phone: phoneNo,
-            email: email,
-            street: address,
-            city: city,
-            // post_code: "LT-12345",
-            api_key: globals.API_KEY
-        };
-        API.registerUser(data, cb, header);
+                },
+                complete: () => {
+                    setloading(false)
+                },
+            };
+
+            let header = helpers.buildHeader({});
+            console.log({ userName, lastName, company, phoneNo, email, address, city })
+            let data = {
+                firstname: userName,
+                lastname: lastName,
+                phone: phoneNo,
+                email: email,
+                street: address,
+                city: city,
+                // post_code: "LT-12345",
+                api_key: globals.API_KEY
+            };
+            API.registerUser(data, cb, header);
+        }
+        else {
+            setloading(false)
+            Alert.alert("Fiil the Required Fields")
+        }
     }
 
     const getEndPoint = () => {
@@ -136,42 +171,79 @@ const SignUp = (props) => {
                         placeholder={helpers.getLocale(localize, "signIn", "first_name")}
                         onChangeText={value => setuserName(value)}
                         value={userName}
+                        onBlur={() => {
+                            setfNameValid(() =>
+                                helpers.validation('Name', userName),
+                            )
+                        }}
+                        errMsg={<Text>{fNameValid}</Text>}
                     />
                     <_InputText
                         style={styles.TextInput}
                         placeholder={helpers.getLocale(localize, "signIn", "last_name")}
                         onChangeText={value => setlastName(value)}
                         value={lastName}
+                        onBlur={() => {
+                            setlNameValid(() =>
+                                helpers.validation('lastName', lastName),
+                            )
+                        }}
+                        errMsg={<Text>{lNameValid}</Text>}
                     />
                     <_InputText
                         style={styles.TextInput}
                         placeholder={helpers.getLocale(localize, "signIn", "company")}
                         onChangeText={value => setcompany(value)}
                         value={company}
+
                     />
                     <_InputText
                         style={styles.TextInput}
                         placeholder={helpers.getLocale(localize, "signIn", "phone")}
                         onChangeText={value => setphoneNo(value)}
                         value={phoneNo}
+                        onBlur={() => {
+                            setphoneNoValid(() =>
+                                helpers.validation('phoneNo', phoneNo),
+                            )
+                        }}
+                        errMsg={<Text>{phoneNoValid}</Text>}
                     />
                     <_InputText
                         style={styles.TextInput}
                         placeholder={helpers.getLocale(localize, "signIn", "email")}
                         onChangeText={value => setemail(value)}
                         value={email}
+                        onBlur={() => {
+                            setemailValid(() =>
+                                helpers.validation('email', email),
+                            )
+                        }}
+                        errMsg={<Text>{emailValid}</Text>}
                     />
                     <_InputText
                         style={styles.TextInput}
                         placeholder={helpers.getLocale(localize, "signIn", "address")}
                         onChangeText={value => setaddress(value)}
                         value={address}
+                        onBlur={() => {
+                            setaddressValid(() =>
+                                helpers.validation('Address', address),
+                            )
+                        }}
+                        errMsg={<Text>{addressValid}</Text>}
                     />
                     <_InputText
                         style={styles.TextInput}
                         placeholder={helpers.getLocale(localize, "signIn", "city")}
                         onChangeText={value => setcity(value)}
                         value={city}
+                        onBlur={() => {
+                            setcityValid(() =>
+                                helpers.validation('City', city),
+                            )
+                        }}
+                        errMsg={<Text>{cityValid}</Text>}
                     />
                 </View>
                 <View style={{ marginTop: 50 }}>

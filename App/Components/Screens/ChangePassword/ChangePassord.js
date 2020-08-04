@@ -11,7 +11,7 @@ import {
     ActivityIndicator,
     FlatList,
     Linking,
-    StyleSheet
+    StyleSheet, Alert
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -29,17 +29,26 @@ import MainHoc from '../../Hoc/MainHoc';
 import _Button from '../../Custom/Button/_Button';
 import _Header from '../../Custom/Header/_Header';
 import AsyncStorage from '@react-native-community/async-storage';
+import Loader from '../../Custom/Loader/Loader';
+
+
 
 
 
 const ChangePassword = (props) => {
     // const campaigns = useSelector(state => state.campaigns);
     const localize = useSelector(state => state.localize);
-    const [userName, setuserName] = useState("");
+    const [currentPassword, setcurrentPassword] = useState("");
     const [password, setpassword] = useState("");
-    const [customerId, setcustomerId] = useState("");
-    const [checked, setchecked] = useState(false);
+    const [confirmPassword, setconfirmPassword] = useState("");
 
+    const [currentPassValid, setcurrentPassValid] = useState("");
+    const [passwordValid, setpasswordValid] = useState("");
+    const [confirmPassValid, setconfirmPassValid] = useState("");
+
+
+
+    const [loading, setloading] = useState(false);
     const loginData = useSelector(state => state.loginData);
     console.log("logindata", loginData)
     // const dispatch = useDispatch();
@@ -53,30 +62,67 @@ const ChangePassword = (props) => {
         // _getFavCampaign()
     }, [])
     const resetPassword = async () => {
-        let token = await AsyncStorage.getItem('token');
-        const baseUrl = await AsyncStorage.getItem("baseUrl");
-        console.log("token", token)
-        if (baseUrl && baseUrl !== undefined) {
-            let cb = {
-                success: async (res) => {
-                    console.log("success res:", res)
+        const currentPassError = helpers.validation('password', currentPassword)
+        const passwordError = helpers.validation('password', password)
+        const confirmPassError = helpers.validation('confirmpassword', confirmPassword, password)
+        setcurrentPassValid(currentPassError)
+        setpasswordValid(passwordError)
+        setconfirmPassValid(confirmPassError)
+        setloading(true)
+        if (currentPassError == " " && passwordError == " " && confirmPassError == " ") {
+            let token = await AsyncStorage.getItem('token');
+            let userAuthdetails = await helpers.userAuthdetails();
 
-                },
-                error: (err) => { },
-                complete: () => { },
-            };
+            const baseUrl = await AsyncStorage.getItem("baseUrl");
+            const userName = await AsyncStorage.getItem("userName");
 
-            let header = helpers.buildHeader({ authorization: token });
-            console.log('header', header)
-            let data = {
-                "username": userName,
-                "password": password,
-                "api_key": globals.API_KEY
-            };
+            console.log("userName", userName)
+            if (baseUrl && baseUrl !== undefined) {
+                let cb = {
+                    success: async (res) => {
+                        console.log("success res:", res)
+                        setloading(false)
+                        Alert.alert(
+                            'Success',
+                            ' Your Password Change Successfully ',
+                            [
+                                {
+                                    text: 'OK', onPress: () => {
+                                        props.navigation.navigate('LogIn')
+                                    }
+                                },
+                            ]
+                        );
 
-            API.resetpassword(data, cb, header);
-        } else {
-            // getEndPoint()
+
+                    },
+                    error: (err) => {
+                        setloading(false)
+                        Alert.alert("Failed")
+
+                    },
+                    complete: () => { },
+                };
+
+                let header = helpers.buildHeader({
+                    Authorization: token
+                });
+                console.log('header', header)
+                let data = {
+                    // "username": "Max ace",
+                    "username": userName,
+                    "password": password,
+                    "api_key": globals.API_KEY
+                };
+                console.log(data, "d")
+                API.resetpassword(data, cb, header);
+            } else {
+                // getEndPoint()
+            }
+        }
+        else {
+            setloading(false)
+            Alert.alert("Fill the Required Fields")
         }
 
     }
@@ -93,25 +139,44 @@ const ChangePassword = (props) => {
 
     return (
         <View style={[mainStyle.rootView, styles.container]}>
+            <Loader
+                loading={loading} />
             <_Header header={helpers.getLocale(localize, "changePassword", "change_password")} />
             <View style={{}}>
                 <_InputText
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "changePassword", "current_password")}
-                    onChangeText={value => { setuserName(value) }
-                    }
+                    onChangeText={value => { setcurrentPassword(value) }}
+                    onBlur={() => {
+                        setcurrentPassValid(() =>
+                            helpers.validation('password', currentPassword),
+                        )
+                    }}
+                    errMsg={<Text>{currentPassValid}</Text>}
                 />
                 <_InputText
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "changePassword", "new_password")}
                     onChangeText={value => { setpassword(value) }
                     }
+                    onBlur={() => {
+                        setpasswordValid(() =>
+                            helpers.validation('password', password),
+                        )
+                    }}
+                    errMsg={<Text>{passwordValid}</Text>}
                 />
                 <_InputText
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "changePassword", "repeat_password")}
-                    onChangeText={value => { setpassword(value) }
+                    onChangeText={value => { setconfirmPassword(value) }
                     }
+                    onBlur={() => {
+                        setconfirmPassValid(() =>
+                            helpers.validation('confirmpassword', confirmPassword, password),
+                        )
+                    }}
+                    errMsg={<Text>{confirmPassValid}</Text>}
                 />
             </View>
             <View style={styles.signUpWrapper}>

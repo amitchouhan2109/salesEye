@@ -43,12 +43,26 @@ const Task = (props) => {
     const localize = useSelector(state => state.localize);
     // const tasks = useSelector(state => state.);
     // const tasks = useSelector(state => state.tasks);
-    const { task } = props.route.params;
+    const { task } = props.route.params
+    const Document = task.item.documents
+    console.log(task, 123, Document)
+    const task_evaluation = task.item.evaluation
+    console.log('evaluation', task_evaluation)
     const [message, setmessage] = useState("");
     const [modalVisible, setmodalVisible] = useState(false);
     const [msgExpand, setmsgExapnd] = useState(false);
-    const [starCount, setstarCount] = useState(0);
+    const [starCount, setstarCount] = useState(task_evaluation);
+    const [getMessage, setgetMessage] = useState([]);
+
+
     const [loading, setloading] = useState(false);
+
+    // const newArray = Document.map(element => {
+    //     return {
+    //         ...element,
+    //     };
+    // });
+    // console.log('new', newArray[0]["881757-881753"])
 
 
 
@@ -59,7 +73,7 @@ const Task = (props) => {
     // let companyPostRef = {}
 
     useEffect(() => {
-        // getCommentData()
+        getCommentData()
     }, [])
 
     const getCommentData = async () => {
@@ -69,6 +83,12 @@ const Task = (props) => {
             let cb = {
                 success: async (res) => {
                     console.log({ res })
+                    if (res[0].task_comments !== undefined) {
+                        setgetMessage(res[0].task_comments)
+                    }
+                    console.log(getMessage, "124")
+
+
                 },
                 error: (err) => {
                     Alert.alert("Failed")
@@ -205,23 +225,27 @@ const Task = (props) => {
         //     starCount: rating
         // });
     }
-    const commentRender = () => {
+    const commentRender = (item) => {
+        console.log(item, "1234")
+        const date = moment(item.item.timestamp).format('YYYY-MM-DD')
+        const time = moment(item.item.timestamp).format("HH:mm")
+        console.log('date', time)
         return (
             <View style={{ paddingHorizontal: 10 }}>
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 10, }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}> name </Text >
+                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}> {item.item.author} </Text >
                     <View style={{ flexDirection: 'row', display: 'flex', }}>
-                        <Text style={{ fontSize: 20 }}> 2020-06-12</Text >
+                        <Text style={{ fontSize: 20 }}> {date}</Text >
                         <FastImage
                             style={{ height: 20, width: 20, paddingLeft: 1, marginTop: 5, marginLeft: 5 }}
                             source={images.clock}
                             resizeMode={"contain"}
                         />
-                        <Text style={{ fontSize: 20 }}> 04:30</Text >
+                        <Text style={{ fontSize: 20 }}> {time}</Text >
                     </View>
 
                 </View>
-                <Text style={{ fontSize: 20 }}> message </Text >
+                <Text style={{ fontSize: 20 }}> {item.item.task_comment}  </Text >
                 <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />
 
             </View>)
@@ -256,6 +280,15 @@ const Task = (props) => {
                         <View style={{ marginTop: 1, height: 1.5, backgroundColor: colors.primaryColor }} />
                         {true ? null : <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />}
                     </View>
+                    {Document ?
+                        <FlatList
+                            data={[Document]}
+                            // data={[""]}
+                            renderItem={({ item }) =>
+                                <Text>hi</Text>}
+                            removeClippedSubviews={Platform.OS == "android" ? true : false}
+
+                        /> : null}
                 </View>
 
                 <View style={{ marginTop: 20 }}>
@@ -278,15 +311,20 @@ const Task = (props) => {
                         <View style={{ marginTop: 1, height: 1.5, backgroundColor: colors.primaryColor }} />
                         {true ? null : <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />}
 
-                        {msgExpand && <FlatList
-                            data={[" ", " ", " "]}
-                            // data={task}
-                            // extraData={this.state}
-                            renderItem={commentRender}
-                            keyExtractor={_keyExtractor}
-                            removeClippedSubviews={Platform.OS == "android" ? true : false}
+                        {msgExpand &&
+                            <>
+                                {getMessage.length == 0 ?
 
-                        />}
+                                    <Text style={{ textAlign: 'center', fontSize: 20 }}> Message List is Empty</Text> :
+                                    <FlatList
+                                        // data={[" ", " ", " "]}
+                                        data={getMessage}
+                                        // extraData={this.state}
+                                        renderItem={commentRender}
+                                        keyExtractor={_keyExtractor}
+                                        removeClippedSubviews={Platform.OS == "android" ? true : false}
+
+                                    />}</>}
                         <View style={{ marginTop: 20, borderWidth: 2, borderColor: "#969696" }}>
                             <TouchableOpacity style={{ ...sty.fRow }} onPress={() => toggleModal(true)}>
                                 <View style={{ width: "85%", ...sty.jCenter, padding: 5, paddingLeft: 40 }}>

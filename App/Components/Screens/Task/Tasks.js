@@ -48,11 +48,8 @@ const Tasks = (props) => {
     const tasks = useSelector(state => state.tasks);
     const [task, settask] = useState([]);
     const [arrayholder, setarrayHolder] = useState([]);
-
     const [loading, setloading] = useState(true)
     const [search, setsearch] = useState(false)
-
-
 
     const signoutHandler = () => {
         signout()
@@ -100,8 +97,11 @@ const Tasks = (props) => {
     }
     useEffect(() => {
         console.log("useEffect Tasks")
-        getTasks();
-    }, [])
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            getTasks();
+        });
+        return unsubscribe;
+    }, [props.navigation])
 
 
     const getTasks = async () => {
@@ -167,6 +167,7 @@ const Tasks = (props) => {
 
 
     const _keyExtractor = (item, index) => "tasks" + index.toString();
+    console.log("@#@#$#", tasks)
     return (
         <>
 

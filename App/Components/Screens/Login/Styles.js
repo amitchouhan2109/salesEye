@@ -34,7 +34,7 @@ export default styles = StyleSheet.create({
     color: colors.heading1,
   },
   TextInput: {
-    marginTop: 20,
+    marginTop: 10,
   },
   checkboxWrapper: {
     borderWidth: 0,
@@ -86,7 +86,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     borderWidth: 0,
     paddingBottom: 50,
-    // paddingTop: 50,
+    paddingTop: 10,
     ...sty.jEnd,
     ...sty.aCenter
   },
@@ -102,7 +102,7 @@ export default styles = StyleSheet.create({
     borderWidth: 0,
     width: "60%",
     ...sty.aCenter,
-    borderWidth: 0
+    borderWidth: 0,
   },
   signUpText: {
     fontSize: 20,

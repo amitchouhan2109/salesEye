@@ -42,10 +42,15 @@ const Login = (props) => {
     const [customerId, setcustomerId] = useState("");
     const [checked, setchecked] = useState(false);
     const [loading, setloading] = useState(false);
+    const [emailValid, setemailValid] = useState("");
+    const [passwordValid, setpasswordValid] = useState("");
+
+
 
 
     // const loginData = useSelector(state => state.loginData);
     const dispatch = useDispatch();
+    console.log("log", emailValid)
     // let companyPostRef = {}
 
     useEffect(() => {
@@ -59,7 +64,6 @@ const Login = (props) => {
     const signinHandler = () => {
         getEndPoint();
         // props.navigation.navigate('Tasks')
-
     }
 
     const checkApiBaseUrl = async () => {
@@ -75,36 +79,59 @@ const Login = (props) => {
     }
 
     const logInUser = () => {
-        setloading(true)
-        console.log("login")
+        const emailError = helpers.validation('email', userName)
+        const passwordError = helpers.validation('password', password)
+        setemailValid(emailError)
+        setpasswordValid(passwordError)
 
-        let cb = {
-            success: async (res) => {
-                console.log('res', res)
-                await AsyncStorage.setItem("userAuthDetails", JSON.stringify(res[0]));
-                await AsyncStorage.setItem("token", res[0].token);
-                dispatch(login({ res }))
-                setloading(false)
-                props.navigation.navigate('Tasks')
-            },
-            error: (err) => {
-                setloading(false)
-                Alert.alert("Error", "Wrong UserName/Password")
-            },
-            complete: () => {
-                setloading(false)
+        console.log(emailError, "err", passwordError)
+        if (emailError == " " && passwordError == " ") {
+            setloading(true)
+            console.log("login")
 
-            },
-        };
+            let cb = {
+                success: async (res) => {
+                    console.log('res', res)
+                    await AsyncStorage.setItem("userAuthDetails", JSON.stringify(res[0]));
+                    await AsyncStorage.setItem("token", res[0].token);
+                    await AsyncStorage.setItem("userName", userName);
 
-        let header = helpers.buildHeader({});
-        let data = {
-            username: userName,
-            password: password,
-            api_key: globals.API_KEY
-        };
-        console.log("data", data)
-        API.loginUser(data, cb, header);
+                    dispatch(login({ res }))
+                    setloading(false)
+                    Alert.alert(
+                        'Success',
+                        'You are Login Successfully ',
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                    props.navigation.navigate('Tasks')
+                                }
+                            },
+                        ]
+                    );
+                },
+                error: (err) => {
+                    setloading(false)
+                    Alert.alert("Error", "Wrong UserName/Password")
+                },
+                complete: () => {
+                    setloading(false)
+                },
+            };
+
+            let header = helpers.buildHeader({});
+            let data = {
+                username: userName,
+                password: password,
+                api_key: globals.API_KEY
+            };
+            console.log("data", data)
+            API.loginUser(data, cb, header);
+
+        }
+        else {
+            Alert.alert("Fill the Required Detail")
+        }
         // API.registerUser(data, cb, header);
     }
 
@@ -154,12 +181,27 @@ const Login = (props) => {
                     placeholder={helpers.getLocale(localize, "login", "userName")}
                     onChangeText={value => { setuserName(value) }}
                     value={userName}
+                    // onBlur={()}
+                    onBlur={() => {
+                        setemailValid(() =>
+                            helpers.validation('email', userName),
+                        )
+                    }}
+                    errMsg={<Text>{emailValid}</Text>}
+
                 />
                 <_InputText
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "login", "password")}
                     onChangeText={value => { setpassword(value) }}
                     value={password}
+                    onBlur={() => {
+                        setpasswordValid(() =>
+                            helpers.validation('password', password),
+                        )
+                    }}
+                    errMsg={<Text>{passwordValid}</Text>}
+
                 />
                 <_InputText
                     style={styles.TextInput}
@@ -188,7 +230,10 @@ const Login = (props) => {
                     callback={signinHandler} />
                 <View style={styles.forgetPassView}>
                     <TouchableOpacity
-                        onPress={() => { props.navigation.navigate('ForgetPassword') }}
+                        onPress={() => {
+                            // props.navigation.navigate('SignUp')
+                            props.navigation.navigate('ForgetPassword')
+                        }}
                         style={styles.forgetPass}>
                         <Text style={styles.forgetPassText}> {helpers.getLocale(localize, "login", "forgotPassword")} </Text>
                     </TouchableOpacity>

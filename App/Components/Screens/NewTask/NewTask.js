@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import {
     View,
-    Alert, Image, Text
+    Alert, Image, Text, FlatList
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -23,8 +23,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../../Custom/Loader/Loader'
 import ImagePicker from 'react-native-image-picker';
 import DocumentPicker from 'react-native-document-picker';
-
-
+import RNFetchBlob from 'rn-fetch-blob';
 
 
 const NewTask = (props) => {
@@ -38,6 +37,14 @@ const NewTask = (props) => {
     const [edit, setedit] = useState(false);
     const [picture, setpicture] = useState("");
     const [document, setdocument] = useState("");
+    const [task_id, settask_id] = useState("");
+    const [uploadedDoc, setuploadedDoc] = useState([]);
+    const [base64, setbase64] = useState([]);
+    const Document = [];
+
+
+
+
 
     const [initialLoading, setinitialLoading] = useState(true);
     // const [editAddress, seteditAddress] = useState("");
@@ -46,6 +53,7 @@ const NewTask = (props) => {
     // const loginData = useSelector(state => state.loginData);
     // const dispatch = useDispatch();
     // let companyPostRef = {}
+    console.log("uplod Doc", uploadedDoc)
 
     useEffect(() => {
         get_customer_data()
@@ -97,18 +105,23 @@ const NewTask = (props) => {
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
-                    setTimeout(() => { setloading(false) }, 300)
-                    console.log(res)
+                    setTimeout(
+                        () => {
+                            setloading(false)
+                        }, 2000
+                    )
+                    console.log(res, "result")
+                    settask_id(res.record_id)
                     Alert.alert(
                         'Success',
                         ' Your Task Save Successfully ',
-                        [
-                            {
-                                text: 'OK', onPress: () => {
-                                    props.navigation.navigate('Tasks')
-                                }
-                            },
-                        ]
+                        // [
+                        //     {
+                        //         text: 'OK', onPress: () => {
+                        //             // props.navigation.navigate('Tasks')
+                        //         }
+                        //     },
+                        // ]
                     );
 
                 },
@@ -160,6 +173,9 @@ const NewTask = (props) => {
             },
         };
         ImagePicker.showImagePicker(options, (response) => {
+            const base64Value = response.data;
+            console.log(base64Value, "123")
+            setbase64(base64Value)
             console.log('Response = ', response);
             if (response.didCancel) {
                 console.log('User cancelled image picker');
@@ -169,11 +185,11 @@ const NewTask = (props) => {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
                 const file = response.fileName
-                const source = { uri: response.uri };
-                setpicture(source)
+                // const source = { uri: response.uri };
+                // setpicture(source)
                 console.log('picker resp', response)
-                uploadDoc()
-                // img_filename: file,
+                uploadDoc(response.fileName, response.uri, base64Value)
+                // img_filename: file
                 //     selectedImage: response
                 // this.setState({
                 //     avatarSource: source,
@@ -181,38 +197,71 @@ const NewTask = (props) => {
             }
         });
     }
-    const uploadDoc = async () => {
-        let userAuthdetails = await helpers.userAuthdetails();
-        const baseUrl = await AsyncStorage.getItem("baseUrl");
-        if (baseUrl && baseUrl !== undefined) {
-            let cb = {
-                success: async (res) => {
-                    console.log({ res })
-                },
-                error: (err) => {
-                    Alert.alert("Failed")
-                },
-                complete: () => { },
-            };
-            let header = helpers.buildHeader();
-            let data = {
-                "user_id": userAuthdetails.user_id,
-                "token": userAuthdetails.token,
-                "task_id": 881613,
-                "filename": "2018-07-10 15:09:56.png",
-                "photo": "iVBORw0KGgoAAAANSUhEUgAAAwYAAAQICAIAAAA4CVt9AAAAA3NCSVQFBgUzC42AAAAgAElEQVR4\nnOy9X2wcV3ro+Yk+VL7SFD2n7G6nakJ6WI6YUSmSV92RNMOeyAP1QJ41fe3A8p0EsXaAzWrvw+7k",
-                "api_key": globals.API_KEY,
-                //     {
-                //     "user_id": 881235, "token": "D3A06CAAD6B92AC5E14EB19B0F688C61",
-                //         "task_id": 881241, "filename": "2018-07-10 15:09:56.png",
-                //             "photo": "iVBORw0KGgoAAAANSUhEUgAAAwYAAAQICAIAAAA4CVt9AAAAA3NCSVQFBgUzC42AAAAgAElEQVR4\nnOy9X2wcV3ro+Yk+VL7SFD2n7G6nakJ6WI6YUSmSV92RNMOeyAP1QJ41fe3A8p0EsXaAzWrvw+7k",
-                //         "api_key": "TqKGLk2e"
-                // }
-            };
-            console.log("data", data)
-            API.postDocument(data, cb, header);
-        } else {
-            // getEndPoint()
+    const uploadDoc = async (fileName, uri, photo) => {
+        console.log("task_id")
+        console.log('da', fileName, uri)
+        if (!task_id) {
+
+            Alert.alert("Error", "Firstly Save the task then upload documents")
+        }
+        else {
+
+            let userAuthdetails = await helpers.userAuthdetails();
+            const baseUrl = await AsyncStorage.getItem("baseUrl");
+            if (baseUrl && baseUrl !== undefined) {
+                let cb = {
+                    success: async (res) => {
+                        console.log({ res })
+                        Alert.alert(
+                            'Success',
+                            ' Document Uploaded Successfully ',
+                            [
+                                {
+                                    text: 'OK', onPress: () => {
+                                        const source = { uri: uri };
+                                        setpicture(source)
+                                        setdocument(fileName)
+                                        const img = { source }
+                                        Document.push({ "filename": fileName });
+                                        console.log(Document, "Doc")
+                                        // return nietos;
+                                        // setuploadedDoc.push(source, fileName)
+                                        return true
+
+                                    }
+                                },
+                            ]
+                        );
+                    },
+                    error: (err) => {
+                        Alert.alert("Error", " Something Went Wrong While Uploading Document")
+                    },
+                    complete: () => { },
+                };
+                let header = helpers.buildHeader();
+                let data = {
+                    "user_id": userAuthdetails.user_id,
+                    "token": userAuthdetails.token,
+                    "task_id": task_id,
+                    "filename": fileName,
+                    "photo": photo,
+
+                    // "filename": "2018-07-10 15:09:56.png",
+
+                    // "photo": "iVBORw0KGgoAAAANSUhEUgAAAwYAAAQICAIAAAA4CVt9AAAAA3NCSVQFBgUzC42AAAAgAElEQVR4\nnOy9X2wcV3ro+Yk+VL7SFD2n7G6nakJ6WI6YUSmSV92RNMOeyAP1QJ41fe3A8p0EsXaAzWrvw+7k",
+                    "api_key": globals.API_KEY,
+                    //     {
+                    //     "user_id": 881235, "token": "D3A06CAAD6B92AC5E14EB19B0F688C61",
+                    //         "task_id": 881241, "filename": "2018-07-10 15:09:56.png",
+                    //             "photo": "iVBORw0KGgoAAAANSUhEUgAAAwYAAAQICAIAAAA4CVt9AAAAA3NCSVQFBgUzC42AAAAgAElEQVR4\nnOy9X2wcV3ro+Yk+VL7SFD2n7G6nakJ6WI6YUSmSV92RNMOeyAP1QJ41fe3A8p0EsXaAzWrvw+7k",
+                    //         "api_key": "TqKGLk2e"
+                    // }
+                };
+                console.log("data", data)
+                API.postDocument(data, cb, header);
+            } else {
+                // getEndPoint()
+            }
         }
     }
 
@@ -232,11 +281,26 @@ const NewTask = (props) => {
         try {
             const res = await DocumentPicker.pick({
                 type: [DocumentPicker.types.images,
-                DocumentPicker.types.pdf
+                DocumentPicker.types.pdf,
+
                 ],
             });
-            setdocument(res.name)
             console.log("res", res)
+
+            // const base64Value = res.data;
+            // DocumentPicker.pick({
+            //     type: [DocumentPicker.types.allFiles]
+            // })
+            //     .then(res => {
+            //         RNFS.readFile(decodeURIComponent(res.uri), "base64").then(result => {
+            //             console.log(result)
+            //         })
+            //     })
+            //     .catch(error => {
+            //         console.log(error)
+            //     })
+            // base64conv(res.uri)
+            uploadDoc(res.name, res.uri)
             console.log(
                 res.uri,
                 res.type, // mime type
@@ -253,6 +317,31 @@ const NewTask = (props) => {
             }
         }
     }
+    const base64conv = (uri) => {
+        console.log(uri, "1234")
+        const fs = RNFetchBlob.fs
+        let imagePath = null
+        RNFetchBlob.config({
+            fileCache: true
+
+        })
+            .fetch("GET", uri)
+        console.log(123)
+            // the image is now dowloaded to device's storage
+            .then(resp => {
+                console.log(resp, "12")
+                // the image path you can use it directly with Image component
+                imagePath = resp.path();
+                return resp.readFile("base64");
+            })
+            .then(base64Data => {
+                // here's base64 encoded image
+                console.log(base64Data);
+                // remove the file from storage
+                return fs.unlink(imagePath);
+            });
+    }
+
 
     return (
         <View style={[mainStyle.rootView, styles.container]}>
@@ -308,6 +397,18 @@ const NewTask = (props) => {
                         />
                         <Image source={picture} style={{ width: 50, height: 50, marginTop: 10 }} />
                         <Text>{document}</Text>
+                        {/* <FlatList
+
+                            data={[" ", " ", " "]}
+                            // data={[Document]}
+
+                            // extraData={this.state}
+                            renderItem={({ item }) =>
+                                <Text>hi</Text>}
+                            // keyExtractor={_keyExtractor}
+                            removeClippedSubviews={Platform.OS == "android" ? true : false}
+
+                        /> */}
                     </View>
                     <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>
 

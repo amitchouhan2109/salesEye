@@ -11,7 +11,8 @@ import {
     ActivityIndicator,
     FlatList,
     Linking,
-    StyleSheet
+    StyleSheet,
+    Alert
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -30,15 +31,19 @@ import { WINDOW_HEIGHT, WINDOW_WIDTH } from '../../../Config/Libs/globals';
 import MainHoc from '../../Hoc/MainHoc';
 import _Button from '../../Custom/Button/_Button';
 import _Header from '../../Custom/Header/_Header';
+import Loader from '../../Custom/Loader/Loader'
+
 
 
 const ForgetPassword = (props) => {
     // const campaigns = useSelector(state => state.campaigns);
     const localize = useSelector(state => state.localize);
     const [userName, setuserName] = useState("");
-    const [password, setpassword] = useState("");
-    const [customerId, setcustomerId] = useState("");
     const [checked, setchecked] = useState(false);
+    const [loading, setloading] = useState(false);
+    const [userNameValid, setuserNameValid] = useState("");
+
+
 
     // const loginData = useSelector(state => state.loginData);
     // const dispatch = useDispatch();
@@ -76,25 +81,49 @@ const ForgetPassword = (props) => {
 
 
     const forgetPassword = async () => {
-        const baseUrl = await AsyncStorage.getItem("baseUrl");
-        if (baseUrl && baseUrl !== undefined) {
-            let cb = {
-                success: async (res) => {
-                    console.log("success res:", res)
+        const emailError = helpers.validation('email', userName)
+        setuserNameValid(emailError)
+        setloading(true)
+        if (emailError == " ") {
+            const baseUrl = await AsyncStorage.getItem("baseUrl");
+            if (baseUrl && baseUrl !== undefined) {
+                let cb = {
+                    success: async (res) => {
+                        console.log("success res:", res)
+                        setloading(false)
+                        Alert.alert(
+                            'Success',
+                            'Check Email For Further Instruction',
+                            [
+                                {
+                                    text: 'OK', onPress: () => {
+                                        props.navigation.navigate('LogIn')
+                                    }
+                                },
+                            ]
+                        );
 
-                },
-                error: (err) => { },
-                complete: () => { },
-            };
+                    },
+                    error: (err) => {
+                        setloading(false)
+                        Alert.alert('Error', " Authentication Error")
+                    },
+                    complete: () => { },
+                };
 
-            let header = helpers.buildHeader();
-            let data = {
-                "username": userName,
-                "api_key": globals.API_KEY
-            };
-            API.forgetPassword(data, cb, header);
-        } else {
-            getEndPoint()
+                let header = helpers.buildHeader();
+                let data = {
+                    "username": userName,
+                    "api_key": globals.API_KEY
+                };
+                API.forgetPassword(data, cb, header);
+            } else {
+                getEndPoint()
+            }
+        }
+        else {
+            setloading(false)
+            Alert.alert(" Fill the Required  Fields")
         }
     }
 
@@ -104,6 +133,8 @@ const ForgetPassword = (props) => {
 
     return (
         <View style={[mainStyle.rootView, styles.container]}>
+            <Loader
+                loading={loading} />
             <_Header header={helpers.getLocale(localize, "forgetPassword", "forget_password")} />
             <View style={{}}>
                 <_InputText
@@ -111,6 +142,13 @@ const ForgetPassword = (props) => {
                     placeholder={helpers.getLocale(localize, "forgetPassword", "userName")}
                     onChangeText={value => { setuserName(value) }}
                     value={userName}
+                    onBlur={() => {
+                        setuserNameValid(() =>
+                            helpers.validation('email', userName),
+                        )
+                    }}
+                    errMsg={<Text>{userNameValid}</Text>}
+
                 />
             </View>
             <View style={styles.signUpWrapper}>

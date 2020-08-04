@@ -31,22 +31,22 @@ const SYNC_EVALUTION_DATA = { type: "POST", url: URL + "sync_evaluation_data" };
 
 export const API = {
 
-  getEndPoint: (data, cb) => request(data, cb, END_POINT, {}, "", false),
+  getEndPoint: (data, cb, ) => request(data, cb, END_POINT, {}, "", false),
   registerUser: async (data, cb) => request(data, cb, REGISTER_USER),
-  loginUser: async (data, cb) => request(data, cb, LOGIN_USER),
-  getAllTasks: async (data, cb) => request(data, cb, GET_TASKS),
+  loginUser: async (data, cb, header) => request(data, cb, LOGIN_USER, header),
+  getAllTasks: async (data, cb, header) => request(data, cb, GET_TASKS, header),
   forgetPassword: async (data, cb, header) => request(data, cb, FORGET_PASSWORD, header),
-  resetpassword: async (data, cb) => request(data, cb, RESET_PASSWORD),
-  signOut: async (data, cb) => request(data, cb, SIGN_OUT),
-  get_customers_data: async (data, cb) => request(data, cb, GET_CUSTOMER_DATA),
-  sync_data: async (data, cb) => request(data, cb, SYNC_DATA),
-  getCommentData: async (data, cb) => request(data, cb, GET_COMMENT_DATA),
-  addCommentData: async (data, cb) => request(data, cb, SYNC_COMMENT_DATA),
-  postDocument: async (data, cb) => request(data, cb, SYNC_TASK_PICTURE),
-  saveEvalutionData: async (data, cb) => request(data, cb, SYNC_EVALUTION_DATA),
+  resetpassword: async (data, cb, header) => request(data, cb, RESET_PASSWORD, header),
+  signOut: async (data, cb, header) => request(data, cb, SIGN_OUT, header),
+  get_customers_data: async (data, cb, header) => request(data, cb, GET_CUSTOMER_DATA, header),
+  sync_data: async (data, cb, header) => request(data, cb, SYNC_DATA, header),
+  getCommentData: async (data, cb, header) => request(data, cb, GET_COMMENT_DATA, header),
+  addCommentData: async (data, cb, header) => request(data, cb, SYNC_COMMENT_DATA, header),
+  postDocument: async (data, cb, header) => request(data, cb, SYNC_TASK_PICTURE, header),
+  saveEvalutionData: async (data, cb, header) => request(data, cb, SYNC_EVALUTION_DATA, header),
 }
 
-async function request(requestData, cb, featureURL, secureRequest = buildHeader(), urlData = '', retriveBaseUrl = true) {
+async function request(requestData, cb, featureURL, secureRequest, urlData = '', retriveBaseUrl = true) {
   let url = "";
   if (retriveBaseUrl) {
     let baseUrl = await getBaseUrl()
