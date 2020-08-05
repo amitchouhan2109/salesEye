@@ -51,11 +51,28 @@ const Task = (props) => {
     const [message, setmessage] = useState("");
     const [modalVisible, setmodalVisible] = useState(false);
     const [msgExpand, setmsgExapnd] = useState(false);
+    const [docExpand, setdocExapnd] = useState(false);
     const [starCount, setstarCount] = useState(task_evaluation);
     const [getMessage, setgetMessage] = useState([]);
 
 
     const [loading, setloading] = useState(false);
+    if (Document) {
+        for (const item in Document[0]) {
+            console.log(item, "docit")
+        }
+        for (const item of Object.entries(Document)) {
+            console.log(item, "12345678")
+            const items = item
+            console.log(Object.keys(items), "14")
+
+            console.log('items', items)
+            for (const item of Object.entries(items)) {
+                console.log(item, "do")
+            }
+
+        }
+    }
 
     // const newArray = Document.map(element => {
     //     return {
@@ -159,6 +176,46 @@ const Task = (props) => {
             // getEndPoint()
         }
     }
+    const signout = async () => {
+        let token = await AsyncStorage.getItem('token');
+        let userAuthdetails = await helpers.userAuthdetails();
+        const baseUrl = await AsyncStorage.getItem("baseUrl");
+        if (baseUrl && baseUrl !== undefined) {
+            let cb = {
+                success: async (res) => {
+                    AsyncStorage.removeItem('userAuthDetails');
+                    setTimeout(() => {
+                        Alert.alert(
+                            'Success',
+                            'Logout  Successfully',
+                            [
+                                {
+                                    text: 'OK', onPress: () => {
+                                        props.navigation.navigate('LogIn')
+                                    }
+                                },
+                            ]
+                        );
+                    }, 200);
+                },
+                error: (err) => {
+                    Alert.alert(err)
+                },
+                complete: () => { },
+            };
+            let header = helpers.buildHeader();
+            let data = {
+                "user_id": userAuthdetails.user_id,
+                "token": userAuthdetails.token,
+                "portal_user": userAuthdetails.portal_user,
+                "api_key": globals.API_KEY
+            };
+            API.signOut(data, cb, header);
+        } else {
+            // getEndPoint()
+        }
+
+    }
 
     const saveButtHandler = async () => {
         setloading(true)
@@ -260,7 +317,13 @@ const Task = (props) => {
             <Loader
                 loading={loading} />
             <ScrollView>
-                <_Header header={helpers.getLocale(localize, "task", "task")} />
+                <_Header header={helpers.getLocale(localize, "task", "task")}
+                    rightIcon={images.menu} rightcb
+                    onPress={() => props.navigation.navigate('ChangePassord')}
+                    onPress_signout={() => signout()}
+
+
+                />
                 <View style={{ marginTop: 20, height: 1.5, backgroundColor: colors.primaryColor }} />
                 <View style={{ paddingTop: 10 }}>
                     <InfoCart localize={localize} tasks={task} />
@@ -270,25 +333,30 @@ const Task = (props) => {
                 <View style={{ marginTop: 10, }}>
                     <View style={{}}>
                         <View style={{ ...sty.fRow, paddingLeft: 10, }}>
-                            <FastImage
-                                style={{ height: 20, width: 20, paddingLeft: 0, marginTop: 7 }}
-                                source={images.downArrow}
-                                resizeMode={"contain"}
-                            />
+                            <TouchableOpacity onPress={() => setdocExapnd(!docExpand)}>
+                                <FastImage
+                                    style={{ height: 20, width: 20, paddingLeft: 0, marginTop: 7 }}
+                                    source={images.downArrow}
+                                    resizeMode={"contain"}
+                                />
+                            </TouchableOpacity>
+
                             <Text allowFontScaling={false} style={[{ fontSize: 25, paddingLeft: 10, textAlign: "center", fontWeight: "500" }]}>{helpers.getLocale(localize, "task", "documents")}</Text>
                         </View>
                         <View style={{ marginTop: 1, height: 1.5, backgroundColor: colors.primaryColor }} />
                         {true ? null : <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />}
                     </View>
-                    {Document ?
-                        <FlatList
-                            data={[Document]}
-                            // data={[""]}
-                            renderItem={({ item }) =>
-                                <Text>hi</Text>}
-                            removeClippedSubviews={Platform.OS == "android" ? true : false}
+                    {docExpand &&
+                        <>
+                            {Document ?
+                                <FlatList
+                                    data={[Document]}
+                                    // data={[""]}
+                                    renderItem={({ item }) =>
+                                        <Text>hi</Text>}
+                                    removeClippedSubviews={Platform.OS == "android" ? true : false}
 
-                        /> : null}
+                                /> : null}</>}
                 </View>
 
                 <View style={{ marginTop: 20 }}>

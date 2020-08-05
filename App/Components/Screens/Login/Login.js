@@ -46,7 +46,7 @@ const Login = (props) => {
     const [passwordValid, setpasswordValid] = useState("");
 
 
-
+    console.log('checked1', checked)
 
     // const loginData = useSelector(state => state.loginData);
     const dispatch = useDispatch();
@@ -76,6 +76,18 @@ const Login = (props) => {
             console.log("baseUrl 2:")
             getEndPoint()
         }
+    }
+    const toggleRememberMe = async (checked) => {
+        setchecked(!checked)
+        console.log('checked', checked)
+        if (checked) {
+            await AsyncStorage.setItem('RemeberMe', JSON.stringify(checked));
+            const remeber = await AsyncStorage.getItem('RemeberMe');
+            console.log(remeber, '12')
+
+        }
+
+
     }
 
     const logInUser = () => {
@@ -211,7 +223,11 @@ const Login = (props) => {
                 />
                 <View style={styles.checkboxWrapper}>
                     <TouchableOpacity
-                        onPress={() => { setchecked(!checked) }}
+                        onPress={() =>
+                            // setchecked(!checked),
+                            toggleRememberMe(checked)
+                            //  { setchecked(!checked) }
+                        }
                         style={{ ...sty.fRow, paddingTop: 0, paddingLeft: 10, borderWidth: 0, width: "60%", ...sty.aCenter }}>
                         <FastImage
                             style={styles.checkBoxlogo}

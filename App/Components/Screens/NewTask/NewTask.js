@@ -198,6 +198,7 @@ const NewTask = (props) => {
         });
     }
     const uploadDoc = async (fileName, uri, photo) => {
+        setloading(true)
         console.log("task_id")
         console.log('da', fileName, uri)
         if (!task_id) {
@@ -232,8 +233,12 @@ const NewTask = (props) => {
                                 },
                             ]
                         );
+                        setTimeout(() => { setloading(false) }, 3000)
+
                     },
                     error: (err) => {
+                        setloading(false)
+
                         Alert.alert("Error", " Something Went Wrong While Uploading Document")
                     },
                     complete: () => { },
@@ -299,7 +304,7 @@ const NewTask = (props) => {
             //     .catch(error => {
             //         console.log(error)
             //     })
-            // base64conv(res.uri)
+            base64conv(res.uri)
             uploadDoc(res.name, res.uri)
             console.log(
                 res.uri,
@@ -318,28 +323,90 @@ const NewTask = (props) => {
         }
     }
     const base64conv = (uri) => {
+        const url = 'htttps://' + uri
         console.log(uri, "1234")
-        const fs = RNFetchBlob.fs
-        let imagePath = null
+
+        let imagePath = null;
         RNFetchBlob.config({
             fileCache: true
-
         })
             .fetch("GET", uri)
-        console.log(123)
             // the image is now dowloaded to device's storage
             .then(resp => {
-                console.log(resp, "12")
                 // the image path you can use it directly with Image component
                 imagePath = resp.path();
                 return resp.readFile("base64");
             })
-            .then(base64Data => {
+            .then(async base64Data => {
+                console.log("base64Data", 123)
+                var base64Data = `data:image/png;base64,` + base64Data;
                 // here's base64 encoded image
-                console.log(base64Data);
+                // await Share.open({ url: base64Data, message: title });
                 // remove the file from storage
                 return fs.unlink(imagePath);
             });
+        console.log(uri, "1234")
+        // const fs = RNFetchBlob.fs
+        // let imagePath = null
+        // RNFetchBlob.config({
+        //     fileCache: true
+
+        // })
+        //     .fetch("GET", uri)
+        // console.log(123)
+        //     // the image is now dowloaded to device's storage
+        //     .then(resp => {
+        //         console.log(resp, "12")
+        //         // the image path you can use it directly with Image component
+        //         imagePath = resp.path();
+        //         return resp.readFile("base64");
+        //     })
+        //     .then(base64Data => {
+        //         // here's base64 encoded image
+        //         console.log(base64Data);
+        //         // remove the file from storage
+        //         return fs.unlink(imagePath);
+        //     });
+    }
+    const signout = async () => {
+        let token = await AsyncStorage.getItem('token');
+        let userAuthdetails = await helpers.userAuthdetails();
+        const baseUrl = await AsyncStorage.getItem("baseUrl");
+        if (baseUrl && baseUrl !== undefined) {
+            let cb = {
+                success: async (res) => {
+                    AsyncStorage.removeItem('userAuthDetails');
+                    setTimeout(() => {
+                        Alert.alert(
+                            'Success',
+                            'Logout  Successfully',
+                            [
+                                {
+                                    text: 'OK', onPress: () => {
+                                        props.navigation.navigate('LogIn')
+                                    }
+                                },
+                            ]
+                        );
+                    }, 200);
+                },
+                error: (err) => {
+                    Alert.alert(err)
+                },
+                complete: () => { },
+            };
+            let header = helpers.buildHeader();
+            let data = {
+                "user_id": userAuthdetails.user_id,
+                "token": userAuthdetails.token,
+                "portal_user": userAuthdetails.portal_user,
+                "api_key": globals.API_KEY
+            };
+            API.signOut(data, cb, header);
+        } else {
+            // getEndPoint()
+        }
+
     }
 
 
@@ -350,7 +417,13 @@ const NewTask = (props) => {
             {initialLoading ? < Loader
                 name /> :
                 <>
-                    <_Header header={helpers.getLocale(localize, "newTask", "new_task")} />
+                    <_Header header={helpers.getLocale(localize, "newTask", "new_task")}
+                        rightIcon={images.menu} rightcb
+                        onPress_signout={() => signout()}
+                        onPress={() => props.navigation.navigate('ChangePassord')}
+
+
+                    />
                     <View style={{}}>
 
                         <_InputText

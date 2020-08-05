@@ -170,10 +170,8 @@ const Tasks = (props) => {
     console.log("@#@#$#", tasks)
     return (
         <>
-
             {
                 loading ? <Loader name />
-
                     :
                     <View style={[mainStyle.rootView, styles.container]}>
                         <_Header header={helpers.getLocale(localize, "tasks", "tasks")}
