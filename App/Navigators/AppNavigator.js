@@ -22,13 +22,13 @@ function AppNavigator() {
 
   const getRememberedUser = async () => {
     const remeber = await AsyncStorage.getItem('RemeberMe');
-    if (remeber != null) {
+    if (remeber != null && remeber != undefined) {
       console.log("rem", remeber)
       // setintialRout('Tasks')
       return 'Tasks'
     }
     else {
-      return 'Tasks'
+      return 'LogIn'
 
       // setintialRout('LogIn')
 

@@ -80,14 +80,11 @@ const Login = (props) => {
     const toggleRememberMe = async (checked) => {
         setchecked(!checked)
         console.log('checked', checked)
-        if (checked) {
+        if (checked === true) {
             await AsyncStorage.setItem('RemeberMe', JSON.stringify(checked));
             const remeber = await AsyncStorage.getItem('RemeberMe');
             console.log(remeber, '12')
-
         }
-
-
     }
 
     const logInUser = () => {
