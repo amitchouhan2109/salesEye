@@ -40,7 +40,6 @@ import {
 import { large } from '../../../Theme/FontSizes';
 import Loader from '../../Custom/Loader/Loader'
 
-
 const Tasks = (props) => {
     // const campaigns = useSelector(state => state.campaigns);
     const localize = useSelector(state => state.localize);
@@ -192,7 +191,7 @@ const Tasks = (props) => {
                                 }
                             />
                         </View>
-                        <View style={{ paddingTop: 10, height: '60%' }}>
+                        <View style={{ paddingTop: 2, height: '60%' }}>
                             {task.length === 0 &&
                                 <Text style={{ textAlign: 'center', paddingVertical: 30, fontSize: 20 }}>  Tasks List is Empty</Text>}
                             <FlatList

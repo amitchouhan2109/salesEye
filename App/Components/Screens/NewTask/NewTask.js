@@ -165,7 +165,7 @@ const NewTask = (props) => {
     }
     const addPicture = () => {
         const options = {
-            title: 'Select Avatar',
+            title: 'Select Photo',
             // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
             storageOptions: {
                 skipBackup: true,
@@ -186,9 +186,10 @@ const NewTask = (props) => {
             } else {
                 const file = response.fileName
                 // const source = { uri: response.uri };
-                // setpicture(source)
+                setpicture("photo1")
                 console.log('picker resp', response)
-                uploadDoc(response.fileName, response.uri, base64Value)
+                uploadDoc(response.fileName, response.uri, base64Value, " ", "Photo1")
+                // console.log(re, '15')
                 // img_filename: file
                 //     selectedImage: response
                 // this.setState({
@@ -197,16 +198,15 @@ const NewTask = (props) => {
             }
         });
     }
-    const uploadDoc = async (fileName, uri, photo) => {
+    const uploadDoc = async (fileName, uri, photo, doc, image) => {
         setloading(true)
         console.log("task_id")
         console.log('da', fileName, uri)
         if (!task_id) {
-
+            setloading(false)
             Alert.alert("Error", "Firstly Save the task then upload documents")
         }
         else {
-
             let userAuthdetails = await helpers.userAuthdetails();
             const baseUrl = await AsyncStorage.getItem("baseUrl");
             if (baseUrl && baseUrl !== undefined) {
@@ -220,10 +220,11 @@ const NewTask = (props) => {
                                 {
                                     text: 'OK', onPress: () => {
                                         const source = { uri: uri };
-                                        setpicture(source)
-                                        setdocument(fileName)
+                                        // setpicture(source)
+                                        // setpicture(image)
+                                        // setdocument(doc)
                                         const img = { source }
-                                        Document.push({ "filename": fileName });
+                                        // Document.push({ });
                                         console.log(Document, "Doc")
                                         // return nietos;
                                         // setuploadedDoc.push(source, fileName)
@@ -233,12 +234,11 @@ const NewTask = (props) => {
                                 },
                             ]
                         );
-                        setTimeout(() => { setloading(false) }, 3000)
+                        setTimeout(() => { setloading(false) }, 300)
 
                     },
                     error: (err) => {
                         setloading(false)
-
                         Alert.alert("Error", " Something Went Wrong While Uploading Document")
                     },
                     complete: () => { },
@@ -304,8 +304,9 @@ const NewTask = (props) => {
             //     .catch(error => {
             //         console.log(error)
             //     })
-            base64conv(res.uri)
-            uploadDoc(res.name, res.uri)
+            // base64conv(res.uri)
+            uploadDoc(res.name, res.uri, " ", "Document")
+            setdocument("Doc1")
             console.log(
                 res.uri,
                 res.type, // mime type
@@ -421,8 +422,6 @@ const NewTask = (props) => {
                         rightIcon={images.menu} rightcb
                         onPress_signout={() => signout()}
                         onPress={() => props.navigation.navigate('ChangePassord')}
-
-
                     />
                     <View style={{}}>
 
@@ -468,12 +467,15 @@ const NewTask = (props) => {
                             callback2={() => { addDocument() }}
                             style={{ borderTopWidth: 0, paddingVertical: 2 }}
                         />
-                        <Image source={picture} style={{ width: 50, height: 50, marginTop: 10 }} />
-                        <Text>{document}</Text>
+                        <View style={{ paddingVertical: 10, paddingHorizontal: 10 }}>
+                            {/* <Image source={picture} style={{ width: 50, height: 50, marginTop: 10 }} /> */}
+                            <Text style={{ fontSize: 20 }}>{picture}</Text>
+                            <Text style={{ fontSize: 20 }}>{document}</Text>
+                        </View>
                         {/* <FlatList
 
-                            data={[" ", " ", " "]}
-                            // data={[Document]}
+                            // data={[" ", " ", " "]}
+                            data={[Document]}
 
                             // extraData={this.state}
                             renderItem={({ item }) =>

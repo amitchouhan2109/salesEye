@@ -54,22 +54,45 @@ const Task = (props) => {
     const [docExpand, setdocExapnd] = useState(false);
     const [starCount, setstarCount] = useState(task_evaluation);
     const [getMessage, setgetMessage] = useState([]);
+    // const [docCount, setdocCount] = useState("");
+    var DocumentCount = []
+
+
 
 
     const [loading, setloading] = useState(false);
-    if (Document) {
+    if (Document && Document != undefined) {
         for (const item in Document[0]) {
             console.log(item, "docit")
         }
-        for (const item of Object.entries(Document)) {
-            console.log(item, "12345678")
-            const items = item
-            console.log(Object.keys(items), "14")
 
-            console.log('items', items)
-            for (const item of Object.entries(items)) {
-                console.log(item, "do")
+
+        for (const item of Object.entries(Document)) {
+            console.log(item, "12345678", item[1], "12")
+            console.log(item[1].length, '123')
+            console.log(Object.keys(item[1]).length);
+            var docCount = Object.keys(item[1]).length
+
+
+            console.log("12324", docCount)
+            // setdocCount(docCount)
+            for (var i = 0; i < docCount; i++) {
+                let doc = i
+                let obj = {}
+                DocumentCount.push(obj)
+                console.log("Doc", doc)
             }
+            console.log('Document', DocumentCount)
+
+            // setdoc(item[1])
+
+            // const items = item
+            // console.log(Object.keys(items), "14")
+
+            // console.log('items', items)
+            // for (const item of Object.entries(items)) {
+            //     console.log(item, "do")
+            // }
 
         }
     }
@@ -154,8 +177,6 @@ const Task = (props) => {
                     Alert.alert("Failed")
                     toggleModal(false)
                     setloading(false)
-
-
                 },
                 complete: () => { },
             };
@@ -241,7 +262,6 @@ const Task = (props) => {
                 error: (err) => {
                     Alert.alert("Failed")
                     setloading(false)
-
                 },
                 complete: () => { },
             };
@@ -316,7 +336,7 @@ const Task = (props) => {
         <View style={[mainStyle.rootView, styles.container]}>
             <Loader
                 loading={loading} />
-            <ScrollView>
+            <ScrollView style={{ flex: 1 }}>
                 <_Header header={helpers.getLocale(localize, "task", "task")}
                     rightIcon={images.menu} rightcb
                     onPress={() => props.navigation.navigate('ChangePassord')}
@@ -346,17 +366,23 @@ const Task = (props) => {
                         <View style={{ marginTop: 1, height: 1.5, backgroundColor: colors.primaryColor }} />
                         {true ? null : <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />}
                     </View>
-                    {docExpand &&
-                        <>
-                            {Document ?
+                    {/* {docExpand && */}
+                    <>
+                        {Document ?
+                            <View style={{ padding: 10 }}>
                                 <FlatList
-                                    data={[Document]}
-                                    // data={[""]}
-                                    renderItem={({ item }) =>
-                                        <Text>hi</Text>}
+                                    data={DocumentCount}
+                                    // data={[docCount]}
+                                    renderItem={({ item, index }) =>
+                                        <Text style={{ fontSize: 20 }}>Doc{index + 1}</Text>
+                                    }
+                                    keyExtractor={_keyExtractor}
                                     removeClippedSubviews={Platform.OS == "android" ? true : false}
 
-                                /> : null}</>}
+                                />
+                            </View> : <Text style={{ fontSize: 15, textAlign: 'center' }}> Document List is Empty
+                                </Text>}</>
+                    {/* } */}
                 </View>
 
                 <View style={{ marginTop: 20 }}>
@@ -379,20 +405,23 @@ const Task = (props) => {
                         <View style={{ marginTop: 1, height: 1.5, backgroundColor: colors.primaryColor }} />
                         {true ? null : <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />}
 
-                        {msgExpand &&
-                            <>
-                                {getMessage.length == 0 ?
+                        {/* {msgExpand && */}
+                        <>
+                            {getMessage.length == 0 ?
+                                <Text style={{ textAlign: 'center', fontSize: 20 }}> Message List is Empty</Text> :
+                                // <View style={{ height: 200, backgroundColor: 'red' }}>
+                                <FlatList
+                                    // data={[" ", " ", " "]}
+                                    data={getMessage}
+                                    // extraData={this.state}
+                                    renderItem={commentRender}
+                                    keyExtractor={_keyExtractor}
+                                    removeClippedSubviews={Platform.OS == "android" ? true : false}
 
-                                    <Text style={{ textAlign: 'center', fontSize: 20 }}> Message List is Empty</Text> :
-                                    <FlatList
-                                        // data={[" ", " ", " "]}
-                                        data={getMessage}
-                                        // extraData={this.state}
-                                        renderItem={commentRender}
-                                        keyExtractor={_keyExtractor}
-                                        removeClippedSubviews={Platform.OS == "android" ? true : false}
-
-                                    />}</>}
+                                />
+                                // </View>
+                            }</>
+                        {/* } */}
                         <View style={{ marginTop: 20, borderWidth: 2, borderColor: "#969696" }}>
                             <TouchableOpacity style={{ ...sty.fRow }} onPress={() => toggleModal(true)}>
                                 <View style={{ width: "85%", ...sty.jCenter, padding: 5, paddingLeft: 40 }}>
@@ -412,7 +441,7 @@ const Task = (props) => {
                 </View>
 
                 <View style={[styles.signUpWrapper]}>
-                    <View style={{ ...sty.fRow, ...sty.aCenter, ...sty.jCenter, paddingBottom: 10, paddingTop: 50 }}>
+                    <View style={{ ...sty.fRow, ...sty.aCenter, ...sty.jCenter, paddingBottom: 10, paddingTop: 10 }}>
                         {/* <FastImage style={styles.starImgStyle} source={images.filledStar} resizeMode={"contain"} />
                         <FastImage style={styles.starImgStyle} source={images.filledStar} resizeMode={"contain"} />
                         <FastImage style={styles.starImgStyle} source={images.filledStar} resizeMode={"contain"} />
