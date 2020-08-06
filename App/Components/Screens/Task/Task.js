@@ -239,7 +239,6 @@ const Task = (props) => {
     }
 
     const saveButtHandler = async () => {
-        setloading(true)
         let userAuthdetails = await helpers.userAuthdetails();
         const baseUrl = await AsyncStorage.getItem("baseUrl");
         if (baseUrl && baseUrl !== undefined) {
@@ -247,26 +246,29 @@ const Task = (props) => {
                 success: async (res) => {
                     console.log({ res })
                     setloading(false)
-                    Alert.alert(
-                        'Success',
-                        'Save Successfully ',
-                        [
-                            {
-                                text: 'OK', onPress: () => {
-                                    props.navigation.navigate('Tasks')
-                                }
-                            },
-                        ]
-                    );
+                    setTimeout(() => {
+                        Alert.alert('Success', 'Save Successfully ',
+                            [
+                                {
+                                    text: 'OK', onPress: () => {
+                                        // props.navigation.navigate('Tasks')
+                                    }
+                                },
+                            ]
+                        );
+                    }, 100);
                 },
                 error: (err) => {
-                    Alert.alert("Failed")
                     setloading(false)
+                    setTimeout(() => {
+                        Alert.alert("Error", err.message)
+                    }, 200);
                 },
                 complete: () => { },
             };
             let header = helpers.buildHeader();
             console.log("task_id", task.item.id, task.item.task_type)
+            setloading(true)
             let data = {
                 "user_id": userAuthdetails.user_id,
                 "token": userAuthdetails.token,

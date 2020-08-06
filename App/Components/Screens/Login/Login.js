@@ -35,31 +35,27 @@ import Loader from '../../Custom/Loader/Loader'
 
 
 const Login = (props) => {
-    // const campaigns = useSelector(state => state.campaigns);
     const localize = useSelector(state => state.localize);
-    const [userName, setuserName] = useState(!globals.live ? "ace1@yopmail.com" : "");
-    const [password, setpassword] = useState(!globals.live ? "vtvxbjcg" : "");
+    const [userName, setuserName] = useState(!globals.live ? "ace@yopmail.com" : "");
+    const [password, setpassword] = useState(!globals.live ? "123456" : "");
     const [customerId, setcustomerId] = useState("");
     const [checked, setchecked] = useState(false);
     const [loading, setloading] = useState(false);
     const [emailValid, setemailValid] = useState("");
     const [passwordValid, setpasswordValid] = useState("");
-
-
-    console.log('checked1', checked)
-
     // const loginData = useSelector(state => state.loginData);
+
     const dispatch = useDispatch();
-    console.log("log", emailValid)
-    // let companyPostRef = {}
 
     useEffect(() => {
-
-        console.log("Login useEffect")
-        // console.log("height , width ", globals.WINDOW_HEIGHT, globals.WINDOW_WIDTH)
-        // if (campaigns["favorite"] == null || campaigns["favorite"].length == 0)
-        // _getFavCampaign()
+        checkRemember()
     }, [])
+
+    const checkRemember = async () => {
+        const remeber = await AsyncStorage.getItem('RemeberMe');
+        const remebervalue = JSON.parse(remeber)
+        setchecked(remebervalue)
+    }
 
     const signinHandler = () => {
         getEndPoint();
@@ -68,26 +64,14 @@ const Login = (props) => {
 
     const checkApiBaseUrl = async () => {
         const baseUrl = await AsyncStorage.getItem("baseUrl");
-        console.log("baseUrl :", baseUrl)
-
         if (baseUrl) {
-            console.log("baseUrl 1:")
         } else {
-            console.log("baseUrl 2:")
             getEndPoint()
         }
     }
-    const toggleRememberMe = async (checked) => {
+    const toggleRememberMe = async () => {
+        await AsyncStorage.setItem('RemeberMe', JSON.stringify(!checked));
         setchecked(!checked)
-        console.log('checked', checked)
-        if (checked) {
-            await AsyncStorage.setItem('RemeberMe', JSON.stringify(checked));
-            const remeber = await AsyncStorage.getItem('RemeberMe');
-            console.log(remeber, '12')
-
-        }
-
-
     }
 
     const logInUser = () => {
@@ -96,35 +80,25 @@ const Login = (props) => {
         setemailValid(emailError)
         setpasswordValid(passwordError)
 
-        console.log(emailError, "err", passwordError)
         if (emailError == " " && passwordError == " ") {
             setloading(true)
-            console.log("login")
 
             let cb = {
                 success: async (res) => {
-                    console.log('res', res)
                     await AsyncStorage.setItem("userAuthDetails", JSON.stringify(res[0]));
                     await AsyncStorage.setItem("token", res[0].token);
                     await AsyncStorage.setItem("userName", userName);
 
                     dispatch(login({ res }))
                     setloading(false)
-                    Alert.alert(
-                        'Success',
-                        'You are Login Successfully ',
-                        [
-                            {
-                                text: 'OK', onPress: () => {
-                                    props.navigation.navigate('Tasks')
-                                }
-                            },
-                        ]
-                    );
+                    props.navigation.navigate('Tasks')
+
                 },
                 error: (err) => {
                     setloading(false)
-                    Alert.alert("Error", "Wrong UserName/Password")
+                    setTimeout(() => {
+                        Alert.alert("Error", err.message)
+                    }, 400);
                 },
                 complete: () => {
                     setloading(false)
@@ -137,20 +111,18 @@ const Login = (props) => {
                 password: password,
                 api_key: globals.API_KEY
             };
-            console.log("data", data)
             API.loginUser(data, cb, header);
 
         }
         else {
             Alert.alert("Fill the Required Detail")
         }
-        // API.registerUser(data, cb, header);
     }
 
     const getEndPoint = () => {
         let cb = {
             success: async (res) => {
-                console.log("success res:", res)
+                setloading(false)
                 if (res.error === null) {
                     await AsyncStorage.setItem("baseUrl", res.result.ws_url);
                     logInUser()
@@ -159,10 +131,15 @@ const Login = (props) => {
                 }
 
             },
-            error: (err) => { },
-            complete: () => { },
+            error: (err) => {
+                setloading(false)
+                setTimeout(() => {
+                    Alert.alert("Error", err.message)
+                }, 200);
+            },
+            complete: () => { setloading(false) },
         };
-
+        setloading(true)
         let header = helpers.buildHeader({});
         let data = {
             company_code: "app"
@@ -223,11 +200,7 @@ const Login = (props) => {
                 />
                 <View style={styles.checkboxWrapper}>
                     <TouchableOpacity
-                        onPress={() =>
-                            // setchecked(!checked),
-                            toggleRememberMe(checked)
-                            //  { setchecked(!checked) }
-                        }
+                        onPress={() => toggleRememberMe()}
                         style={{ ...sty.fRow, paddingTop: 0, paddingLeft: 10, borderWidth: 0, width: "60%", ...sty.aCenter }}>
                         <FastImage
                             style={styles.checkBoxlogo}

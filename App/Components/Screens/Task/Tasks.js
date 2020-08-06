@@ -61,26 +61,22 @@ const Tasks = (props) => {
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
+                    setloading(false)
                     AsyncStorage.removeItem('userAuthDetails');
-                    setTimeout(() => {
-                        Alert.alert(
-                            'Success',
-                            'Logout  Successfully',
-                            [
-                                {
-                                    text: 'OK', onPress: () => {
-                                        props.navigation.navigate('LogIn')
-                                    }
-                                },
-                            ]
-                        );
-                    }, 200);
+                    props.navigation.navigate('LogIn')
+
                 },
                 error: (err) => {
-                    Alert.alert(err)
+                    setloading(false)
+                    setTimeout(() => {
+                        Alert.alert("Error", err.message)
+                    }, 200);
                 },
-                complete: () => { },
+                complete: () => {
+                    setloading(false)
+                },
             };
+            setloading(true)
             let header = helpers.buildHeader();
             let data = {
                 "user_id": userAuthdetails.user_id,
@@ -90,12 +86,11 @@ const Tasks = (props) => {
             };
             API.signOut(data, cb, header);
         } else {
-            // getEndPoint()
+            props.navigation.navigate('LogIn')
         }
 
     }
     useEffect(() => {
-        console.log("useEffect Tasks")
         const unsubscribe = props.navigation.addListener('focus', () => {
             getTasks();
         });
@@ -106,8 +101,6 @@ const Tasks = (props) => {
     const getTasks = async () => {
         let cb = {
             success: async (res) => {
-                console.log("success res:", res)
-                console.log("success res:", res[0].tasks)
                 dispatch(setTasks({ res }))
                 setloading(false)
                 settask(res[0].tasks)
@@ -119,7 +112,6 @@ const Tasks = (props) => {
 
         let header = helpers.buildHeader({});
         let userAuthdetails = await helpers.userAuthdetails();
-        console.log({ userAuthdetails })
         let data = {
             "user_id": userAuthdetails.user_id,
             "token": userAuthdetails.token,
@@ -133,7 +125,6 @@ const Tasks = (props) => {
     }
 
     const taskRender = (a) => {
-        console.log(a, "T")
         return (
             <View style={{ borderBottomWidth: 1.5, borderColor: colors.border }}>
                 <TouchableOpacity onPress={() => props.navigation.navigate('Task', { task: a })}>
@@ -144,93 +135,69 @@ const Tasks = (props) => {
     }
     const searchFilterFunction = text => {
         const newData = arrayholder.filter(function (item) {
-            console.log(text, "+", item)
             //applying filter for the inserted text in search bar
             const itemData = item.object ? item.object.toUpperCase() : ''.toUpperCase();
             const textData = text.toUpperCase();
-            // console.log(textData, "data1234", itemData)
             return itemData.indexOf(textData) > -1;
 
         });
-        console.log('myorder1', newData)
         if (newData.length == 0) {
             Alert.alert('search not found')
             // this.setState({ msg: ' serach result not found' })
         }
         else {
             settask(newData)
-            console.log(newData, "newdata", task)
             // this.setState({ myOder: newData });
         }
     }
 
 
     const _keyExtractor = (item, index) => "tasks" + index.toString();
-    console.log("@#@#$#", tasks)
     return (
         <>
             {
-                loading ? <Loader name />
-                    :
-                    <View style={[mainStyle.rootView, styles.container]}>
-                        <_Header header={helpers.getLocale(localize, "tasks", "tasks")}
-                            rightIcon={images.menu} rightcb
-                            onPress={() => props.navigation.navigate('ChangePassord')}
-                            onPress_signout={() => signoutHandler()}
+                // loading ? <Loader name />
+                // :
+                <View style={[mainStyle.rootView, styles.container]}>
+                    <Loader
+                        loading={loading} />
+                    <_Header header={helpers.getLocale(localize, "tasks", "tasks")}
+                        rightIcon={images.menu} rightcb
+                        onPress={() => props.navigation.navigate('ChangePassord')}
+                        onPress_signout={() => signoutHandler()}
+                    />
+
+
+                    <View style={{ borderWidth: 0 }}>
+                        <_InputText
+                            style={styles.TextInput}
+                            placeholder={helpers.getLocale(localize, "tasks", "search")}
+                            onChangeText={value => {
+                                // setsearch(value)
+                                searchFilterFunction(value)
+                            }
+                            }
+                        />
+                    </View>
+                    <View style={{ paddingTop: 2, height: '60%' }}>
+                        {task.length === 0 &&
+                            <Text style={{ textAlign: 'center', paddingVertical: 30, fontSize: 20 }}>  Tasks List is Empty</Text>}
+                        <FlatList
+                            data={task}
+                            renderItem={taskRender}
+                            keyExtractor={_keyExtractor}
+                            removeClippedSubviews={Platform.OS == "android" ? true : false}
                         />
 
-
-                        <View style={{ borderWidth: 0 }}>
-                            <_InputText
-                                style={styles.TextInput}
-                                placeholder={helpers.getLocale(localize, "tasks", "search")}
-                                onChangeText={value => {
-                                    // setsearch(value)
-                                    searchFilterFunction(value)
-                                }
-                                }
-                            />
+                    </View>
+                    <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>
+                        <View style={styles.signUpView}>
+                            <_Button
+                                btnTxt={helpers.getLocale(localize, "tasks", "add_task")}
+                                callback={() => props.navigation.navigate('NewTask')} />
                         </View>
-                        <View style={{ paddingTop: 2, height: '60%' }}>
-                            {task.length === 0 &&
-                                <Text style={{ textAlign: 'center', paddingVertical: 30, fontSize: 20 }}>  Tasks List is Empty</Text>}
-                            <FlatList
-                                //  data={[""]}
-                                data={task}
-                                // extraData={this.state}
-                                renderItem={taskRender}
-                                keyExtractor={_keyExtractor}
-                                // refreshControl={
-                                // <RefreshControl
-                                //     refreshing={refreshing}
-                                //     onRefresh={this._onRefresh}
-                                // />
-                                // }
-                                // onScroll={(e) => {
-                                //     console.log({ e })
-                                //     if (!this.listLoading && !this.listEnded) this._renderMore();
-                                // }}
-                                // onEndReachedThreshold={0.2}
-                                // onEndReached={(e) => {
-                                //     if (!this.listLoading && !this.listEnded) this._renderMore();
-                                // }}
-                                // ListFooterComponent={() => {
-                                //     return <View>{listLoading ? <_InlineLoader /> : null}</View>;
-                                // }}
-                                // ListEmptyComponent={}
-                                // ItemSeparatorComponent={() => < View style={{ borderBottomWidth: 1.5, borderColor: colors.border }} />}
-                                removeClippedSubviews={Platform.OS == "android" ? true : false}
-                            />
-
-                        </View>
-                        <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>
-                            <View style={styles.signUpView}>
-                                <_Button
-                                    btnTxt={helpers.getLocale(localize, "tasks", "add_task")}
-                                    callback={() => props.navigation.navigate('NewTask')} />
-                            </View>
-                        </View>
-                    </View >}
+                    </View>
+                </View >}
         </>
 
     );

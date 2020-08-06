@@ -12,33 +12,38 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 function AppNavigator() {
   // console.log("props", props)
-  const intialRout = getRememberedUser
+  // const intialRout = getRememberedUser
 
-  // const [intialRout, setintialRout] = useState('LogIn');
+  const [intialRout, setintialRout] = useState('LogIn');
 
-  // useEffect(() => {
-  //   getRememberedUser()
-  // }, [])
+  useEffect(() => {
+    // console.log("AppNavigator useEffect")
+    // getRememberedUser()
+  }, [])
 
   const getRememberedUser = async () => {
+    console.log("AppNavigator useEffect")
     const remeber = await AsyncStorage.getItem('RemeberMe');
+
     if (remeber != null) {
-      console.log("rem", remeber)
-      // setintialRout('Tasks')
-      return 'Tasks'
+      const remebervalue = JSON.parse(remeber)
+      console.log("AppNavigator remebervalue", remebervalue)
+      if (remebervalue)
+        setintialRout('Tasks')
+      else
+        setintialRout('LogIn')
+      // return 'Tasks'
     }
     else {
-      return 'Tasks'
-
-      // setintialRout('LogIn')
-
+      // return 'LogIn'
     }
 
   };
   const StackNavigator = createStackNavigator()
   return (
     <NavigationContainer>
-      <StackNavigator.Navigator initialRouteName={intialRout} screenOptions={{ headerShown: false }}>
+      {/* <StackNavigator.Navigator initialRouteName={intialRout} screenOptions={{ headerShown: false }}> */}
+      <StackNavigator.Navigator initialRouteName={'LogIn'} screenOptions={{ headerShown: false }}>
         <StackNavigator.Screen name="Tasks" component={Tasks} />
         <StackNavigator.Screen name="SignUp" component={SignUp} />
         <StackNavigator.Screen name="LogIn" component={LoginIn} />

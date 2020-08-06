@@ -1,28 +1,79 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
     SafeAreaView,
     StyleSheet,
     ScrollView,
     View,
     Text,
-    StatusBar,
+    StatusBar
 } from 'react-native';
 import AppNavigator from "../../Navigators/AppNavigator";
+import MainNavigator from "../../Navigators/MainNavigator";
+import AsyncStorage from '@react-native-community/async-storage';
 
-const Main = () => {
+class Main extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true,
+            autoLogin: false,
+        };
+    }
 
-    return (
-        // <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <AppNavigator
-            // Initialize the NavigationService (see https://reactnavigation.org/docs/en/navigating-without-navigation-prop.html)
-            ref={(navigatorRef) => {
-                NavigationService.setTopLevelNavigator(navigatorRef)
-            }}
-        />
-        // <Text style={{ fontSize: 20 }}>Amit</Text>
-        // </View>
-    );
-};
+    async componentDidMount() {
+        await this.getRememberedUser()
+    }
+
+    getRememberedUser = async () => {
+        let autoLogin = false;
+        const remeber = await AsyncStorage.getItem('RemeberMe');
+
+        if (remeber != null) {
+            const remebervalue = JSON.parse(remeber)
+            if (remebervalue) {
+                const token = await AsyncStorage.getItem("token");
+                autoLogin = token === null ? false : true;
+            }
+        }
+
+        this.setState({
+            loading: false,
+            autoLogin,
+        });
+
+    };
+
+    componentWillUnmount() {
+
+    }
+
+    render() {
+        const { loading, autoLogin } = this.state;
+        return (
+
+            loading ?
+                (<View />)
+                :
+                autoLogin ?
+                    (<MainNavigator
+                        ref={(navigatorRef) => {
+                            NavigationService.setTopLevelNavigator(navigatorRef)
+                        }}
+                    />) :
+                    (<AppNavigator
+                        ref={(navigatorRef) => {
+                            NavigationService.setTopLevelNavigator(navigatorRef)
+                        }}
+                    />)
+            // <Text style={{ fontSize: 20 }}>Amit</Text>
+        );
+    }
+}
+
+
+
+
+
 
 
 export default Main;

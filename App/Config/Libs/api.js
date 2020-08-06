@@ -31,7 +31,7 @@ const SYNC_EVALUTION_DATA = { type: "POST", url: URL + "sync_evaluation_data" };
 
 export const API = {
 
-  getEndPoint: (data, cb, ) => request(data, cb, END_POINT, {}, "", false),
+  getEndPoint: (data, cb,) => request(data, cb, END_POINT, {}, "", false),
   registerUser: async (data, cb) => request(data, cb, REGISTER_USER),
   loginUser: async (data, cb, header) => request(data, cb, LOGIN_USER, header),
   getAllTasks: async (data, cb, header) => request(data, cb, GET_TASKS, header),
@@ -92,12 +92,14 @@ async function request(requestData, cb, featureURL, secureRequest, urlData = '',
     if (response.status == 200) {
       cb.success(response.data);
     } else {
+      console.log("a")
       if (response.data.message === 'Invalid credentials' || response.data.error === 'Error: Invalid credentials') {
         logout();
       }
       cb.error(response.data);
     }
   } catch (error) {
+    console.log("b")
     !live ? console.log({ error }) : null;
     if (cb.complete) cb.complete();
     if (error.response) {
@@ -107,6 +109,7 @@ async function request(requestData, cb, featureURL, secureRequest, urlData = '',
       cb.error(error.response.data);
     }
     else {
+      console.log("c")
       if (error.data.message === 'Invalid credentials' || error.data.error === 'Error: Invalid credentials') {
         logout();
       }
