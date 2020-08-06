@@ -47,7 +47,7 @@ const Tasks = (props) => {
     const tasks = useSelector(state => state.tasks);
     const [task, settask] = useState([]);
     const [arrayholder, setarrayHolder] = useState([]);
-    const [loading, setloading] = useState(true)
+    const [loading, setloading] = useState(false)
     const [search, setsearch] = useState(false)
 
     const signoutHandler = () => {
@@ -55,6 +55,7 @@ const Tasks = (props) => {
     }
 
     const signout = async () => {
+        // props.navigation.navigate('LogIn')
         let token = await AsyncStorage.getItem('token');
         let userAuthdetails = await helpers.userAuthdetails();
         const baseUrl = await AsyncStorage.getItem("baseUrl");
@@ -63,6 +64,9 @@ const Tasks = (props) => {
                 success: async (res) => {
                     setloading(false)
                     AsyncStorage.removeItem('userAuthDetails');
+                    AsyncStorage.removeItem('token');
+                    AsyncStorage.removeItem('userName');
+
                     props.navigation.navigate('LogIn')
 
                 },

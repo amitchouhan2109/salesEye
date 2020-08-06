@@ -85,6 +85,7 @@ const Login = (props) => {
 
             let cb = {
                 success: async (res) => {
+                    console.log("res :", res)
                     await AsyncStorage.setItem("userAuthDetails", JSON.stringify(res[0]));
                     await AsyncStorage.setItem("token", res[0].token);
                     await AsyncStorage.setItem("userName", userName);
@@ -161,7 +162,7 @@ const Login = (props) => {
                     />
                 </View>
                 <View style={styles.headingWarp}>
-                    <Text style={styles.headingText}> {helpers.getLocale(localize, "login", "customer_portal")} </Text>
+                    <Text allowFontScaling={false} style={styles.headingText}> {helpers.getLocale(localize, "login", "customer_portal")} </Text>
                 </View>
             </View>
             <View style={{}}>
@@ -189,7 +190,7 @@ const Login = (props) => {
                             helpers.validation('password', password),
                         )
                     }}
-                    errMsg={<Text>{passwordValid}</Text>}
+                    errMsg={<Text allowFontScaling={false}>{passwordValid}</Text>}
 
                 />
                 <_InputText
@@ -207,7 +208,7 @@ const Login = (props) => {
                             source={checked ? images.checked : images.unchecked}
                             resizeMode={"contain"}
                         />
-                        <Text style={styles.rememberMeText}> {helpers.getLocale(localize, "login", "rememberMe")} </Text>
+                        <Text allowFontScaling={false} style={styles.rememberMeText}> {helpers.getLocale(localize, "login", "rememberMe")} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -224,7 +225,7 @@ const Login = (props) => {
                             props.navigation.navigate('ForgetPassword')
                         }}
                         style={styles.forgetPass}>
-                        <Text style={styles.forgetPassText}> {helpers.getLocale(localize, "login", "forgotPassword")} </Text>
+                        <Text allowFontScaling={false} style={styles.forgetPassText}> {helpers.getLocale(localize, "login", "forgotPassword")} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -239,7 +240,7 @@ const Login = (props) => {
                             // checkApiBaseUrl()
                         }}
                         style={styles.signUp}>
-                        <Text style={styles.signUpText}> {helpers.getLocale(localize, "login", "signUp")} </Text>
+                        <Text allowFontScaling={false} style={styles.signUpText}> {helpers.getLocale(localize, "login", "signUp")} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
