@@ -54,7 +54,7 @@ const Task = (props) => {
     const [docExpand, setdocExapnd] = useState(false);
     const [starCount, setstarCount] = useState(task_evaluation);
     const [getMessage, setgetMessage] = useState([]);
-    const [gMLoader, setgMLoader] = useState(false);
+    const [MsgLoader, setMsgLoader] = useState(false);
 
     // const [docCount, setdocCount] = useState("");
     var DocumentCount = []
@@ -114,14 +114,14 @@ const Task = (props) => {
 
 
     const getCommentData = async () => {
-        setgMLoader(true)
+        setMsgLoader(true)
         let userAuthdetails = await helpers.userAuthdetails();
         const baseUrl = await AsyncStorage.getItem("baseUrl");
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
                     console.log({ res })
-                    setgMLoader(false)
+                    setMsgLoader(false)
                     if (res[0].task_comments !== undefined) {
                         setgetMessage(res[0].task_comments)
                     }
@@ -129,7 +129,7 @@ const Task = (props) => {
                 },
                 error: (err) => {
                     Alert.alert("Failed")
-                    setgMLoader(false)
+                    setMsgLoader(false)
 
                 },
                 complete: () => { },
@@ -159,12 +159,11 @@ const Task = (props) => {
                     console.log({ res })
                     toggleModal(false)
                     setloading(false)
-
                     Alert.alert(
                         'Success',
                         'Message Added Successfully ',
-
                     );
+                    getCommentData()
                 },
                 error: (err) => {
                     Alert.alert("Error", err.message)
@@ -280,9 +279,11 @@ const Task = (props) => {
 
     const cancleButtonHandler = () => {
         console.log("cancle")
+        props.navigation.goBack()
     }
 
     const saveButtonHandler = () => {
+
         console.log("save")
         saveButtHandler()
 
@@ -399,10 +400,14 @@ const Task = (props) => {
                         {true ? null : <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />}
 
                         {/* {msgExpand && */}
-                        {gMLoader ? <ActivityIndicator /> :
+                        {MsgLoader ?
+                            <View>
+                                <ActivityIndicator />
+                            </View> :
                             <>
                                 {getMessage.length == 0 ?
-                                    null
+                                    <Text> </Text>
+
                                     // <Text style={{ textAlign: 'center', fontSize: 20 }}> Message List is Empty</Text>
                                     :
                                     <View style={{}}>
@@ -440,7 +445,7 @@ const Task = (props) => {
                 </View>
 
                 <View style={[styles.signUpWrapper]}>
-                    <View style={{ ...sty.fRow, ...sty.aCenter, ...sty.jCenter, paddingBottom: 10, paddingTop: 10 }}>
+                    <View style={{ ...sty.fRow, ...sty.aCenter, ...sty.jCenter, paddingBottom: 10, paddingTop: 40 }}>
                         {/* <FastImage style={styles.starImgStyle} source={images.filledStar} resizeMode={"contain"} />
                         <FastImage style={styles.starImgStyle} source={images.filledStar} resizeMode={"contain"} />
                         <FastImage style={styles.starImgStyle} source={images.filledStar} resizeMode={"contain"} />

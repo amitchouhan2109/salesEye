@@ -241,14 +241,11 @@ const NewTask = (props) => {
         }
 
     }
-    console.log("Dik", Document)
     const onEdit = () => {
         setedit(true)
     }
-
-
     const cancleButtonHandler = () => {
-        console.log("cancle")
+        props.navigation.goBack()
     }
 
     const saveButtonHandler = () => {
@@ -256,7 +253,7 @@ const NewTask = (props) => {
     }
     const addDocument = async () => {
         if (!task_id) {
-            Alert.alert("Error", "Firstly Save the task then upload documents")
+            Alert.alert("Error", "Firstly Save the Task then upload documents")
         }
         else {
             DocumentPicker.pick({

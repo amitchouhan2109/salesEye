@@ -32,33 +32,45 @@ import _Header from '../../../Custom/Header/_Header';
 
 const InfoCart = (props) => {
     const localize = useSelector(state => state.localize);
-    const [taskno, settaskno] = useState("");
-    const [userName, setuserName] = useState("");
-    const [address, setaddress] = useState("");
-    const [title, settitle] = useState("");
-    const [status, setstatus] = useState("");
-    const [taskDate, settaskDate] = useState("");
+    // const [taskno, settaskno] = useState("");
+    // const [userName, setuserName] = useState("");
+    // const [address, setaddress] = useState("");
+    // const [title, settitle] = useState("");
+    // const [status, setstatus] = useState("");
+    // const [taskDate, settaskDate] = useState("");
+
+    const Tasks = props.tasks.item
+    const date = Tasks.start_date
+    const Date = date.split(' ')[0]
+    const name = Tasks.object.split(',')[0]
+    const taskno = Tasks.id
+    const status = Tasks.status
+    const userName = name
+    const address = Tasks.address
+    const title = Tasks.title
+    const taskDate = Date
 
 
-    useEffect(() => {
-        // console.log("infocart useEffect")
-        const Tasks = props.tasks.item
+
+    // useEffect(() => {
+    //     // console.log("infocart useEffect")
+    //     const Tasks = props.tasks.item
 
 
-        // if (props.tasks !== undefined) {
-        //     console.log("infocart useEffect", props.tasks.res[0].tasks)
-        //     // const TaskData = props.tasks.res[0].tasks
-        const date = Tasks.start_date
-        const Date = date.split(' ')[0]
-        const name = Tasks.object.split(',')[0]
-        setstatus(Tasks.status)
-        settaskno(Tasks.id)
-        setuserName(name)
-        setaddress(Tasks.address)
-        settitle(Tasks.task_type)
-        settaskDate(Date)
-        // }
-    }, [])
+    //     // if (props.tasks !== undefined) {
+    //     //     console.log("infocart useEffect", props.tasks.res[0].tasks)
+    //     //     // const TaskData = props.tasks.res[0].tasks
+    //     const date = Tasks.start_date
+    //     const Date = date.split(' ')[0]
+    //     const name = Tasks.object.split(',')[0]
+    //     setstatus(Tasks.status)
+    //     settaskno(Tasks.id)
+    //     setuserName(name)
+    //     setaddress(Tasks.address)
+    //     settitle(Tasks.task_type)
+    //     settaskDate(Date)
+    //     // }
+    // }, [])
 
     const signinHandler = () => {
         console.log("signInHandler")
