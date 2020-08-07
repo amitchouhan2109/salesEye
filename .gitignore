@@ -53,7 +53,8 @@ buck-out/
 */fastlane/screenshots
 
 # Bundle artifact
-*.jsbundle
+*.jsbundle 
+android/java_pid1930.hprof
 
 # CocoaPods
 /ios/Pods/
