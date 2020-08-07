@@ -48,9 +48,6 @@ const Tasks = (props) => {
     const [task, settask] = useState([]);
     const [arrayholder, setarrayHolder] = useState([]);
     const [loading, setloading] = useState(false)
-    const [TaskLoader, setTaskLoader] = useState(true)
-
-
     const [search, setsearch] = useState(false)
 
     const signoutHandler = () => {
@@ -75,7 +72,6 @@ const Tasks = (props) => {
                 error: (err) => {
                     setloading(false)
                     setTimeout(() => {
-                        props.navigation.navigate('LogIn')
                         Alert.alert("Error", err.message)
                     }, 200);
 
@@ -192,16 +188,14 @@ const Tasks = (props) => {
                         />
                     </View>
                     <View style={{ paddingTop: 2, height: '60%' }}>
-                        {TaskLoader ? <ActivityIndicator size={large} /> :
-                            <>
-                                {task.length === 0 &&
-                                    <Text style={{ textAlign: 'center', paddingVertical: 30, fontSize: 20 }}>  Tasks List is Empty</Text>}
-                                <FlatList
-                                    data={task}
-                                    renderItem={taskRender}
-                                    keyExtractor={_keyExtractor}
-                                    removeClippedSubviews={Platform.OS == "android" ? true : false}
-                                /></>}
+                        {task.length === 0 &&
+                            <Text style={{ textAlign: 'center', paddingVertical: 30, fontSize: 20 }}>  Tasks List is Empty</Text>}
+                        <FlatList
+                            data={task}
+                            renderItem={taskRender}
+                            keyExtractor={_keyExtractor}
+                            removeClippedSubviews={Platform.OS == "android" ? true : false}
+                        />
 
                     </View>
                     <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>
