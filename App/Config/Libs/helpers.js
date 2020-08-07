@@ -443,6 +443,18 @@ export const validation = (type, text, pass) => {
       return 'UserName is Invalid'
     }
   }
+  else if (type == 'emailId') {
+    if (text == " " || !text) {
+      return 'Email-id is Required '
+    }
+
+    else if (emailPattern.test(text)) {
+      return " "
+    }
+    else {
+      return 'Email-id is Invalid'
+    }
+  }
   else if (type == 'phoneNo') {
     if (text == " " || !text) {
       return 'Mob no is Required '
@@ -454,19 +466,7 @@ export const validation = (type, text, pass) => {
       return 'Mobile no is Invalid'
     }
   }
-  else if (type == 'otp') {
-    const otp_regx = /^\d{4}$/
 
-    if (!text) {
-      return 'otp is Required '
-    }
-    else if (otp_regx.test(text)) {
-      return ' '
-    }
-    else {
-      return 'otp is Invalid'
-    }
-  }
   else if (type == 'Address') {
     if (!text) {
       return 'Address is Required'
@@ -478,20 +478,6 @@ export const validation = (type, text, pass) => {
       return ' '
 
 
-    }
-  }
-  else if (type == 'Landmark') {
-    console.log(text, '123')
-    if (text == " " || !text) {
-      console.log(text, '1')
-      // Alert.alert('landMark is required')
-      return 'Landmark is Required '
-    }
-    else if (!regex.test(text)) {
-      return ' LandMark is invalid'
-    }
-    else {
-      return ' '
     }
   }
 
@@ -507,43 +493,8 @@ export const validation = (type, text, pass) => {
     }
 
   }
-  else if (type == 'pinCode') {
-    console.log(text, '12')
-    var pincode_regx = /^\d{6}$/
-    if (text == " ") {
-      // Alert.alert()
-      return 'Zip code is Required'
-    }
-    else if (!pincode_regx.test(text)) {
-      // Alert.alert()
-      return 'zip  code  must be 6 digit number '
 
-    }
-    else {
-      return '  '
 
-    }
-  }
-  else if (type == 'State') {
-    console.log(text, '1')
-    if (text == " ") {
-      console.log(text, '2')
-      return 'state is Required '
-    }
-    else {
-      return '  '
-    }
-  }
-
-  else if (type == 'country') {
-    if (text == " ") {
-      // Alert.alert('country is required')
-      return ' country is Required '
-    }
-    else {
-      return ' '
-    }
-  }
 
 
 

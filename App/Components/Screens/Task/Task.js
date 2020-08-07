@@ -54,12 +54,10 @@ const Task = (props) => {
     const [docExpand, setdocExapnd] = useState(false);
     const [starCount, setstarCount] = useState(task_evaluation);
     const [getMessage, setgetMessage] = useState([]);
+    const [gMLoader, setgMLoader] = useState(false);
+
     // const [docCount, setdocCount] = useState("");
     var DocumentCount = []
-
-
-
-
     const [loading, setloading] = useState(false);
     if (Document && Document != undefined) {
         for (const item in Document[0]) {
@@ -68,21 +66,15 @@ const Task = (props) => {
 
 
         for (const item of Object.entries(Document)) {
-            console.log(item, "12345678", item[1], "12")
-            console.log(item[1].length, '123')
-            console.log(Object.keys(item[1]).length);
             var docCount = Object.keys(item[1]).length
 
 
-            console.log("12324", docCount)
             // setdocCount(docCount)
             for (var i = 0; i < docCount; i++) {
                 let doc = i
                 let obj = {}
                 DocumentCount.push(obj)
-                console.log("Doc", doc)
             }
-            console.log('Document', DocumentCount)
 
             // setdoc(item[1])
 
@@ -113,25 +105,32 @@ const Task = (props) => {
     // let companyPostRef = {}
 
     useEffect(() => {
-        getCommentData()
-    }, [])
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            getCommentData()
+        });
+        return unsubscribe;
+    }, [props.navigation])
+
+
 
     const getCommentData = async () => {
+        setgMLoader(true)
         let userAuthdetails = await helpers.userAuthdetails();
         const baseUrl = await AsyncStorage.getItem("baseUrl");
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
                     console.log({ res })
+                    setgMLoader(false)
                     if (res[0].task_comments !== undefined) {
                         setgetMessage(res[0].task_comments)
                     }
-                    console.log(getMessage, "124")
-
 
                 },
                 error: (err) => {
                     Alert.alert("Failed")
+                    setgMLoader(false)
+
                 },
                 complete: () => { },
             };
@@ -164,17 +163,11 @@ const Task = (props) => {
                     Alert.alert(
                         'Success',
                         'Message Added Successfully ',
-                        [
-                            {
-                                text: 'OK', onPress: () => {
-                                    props.navigation.navigate('Task')
-                                }
-                            },
-                        ]
+
                     );
                 },
                 error: (err) => {
-                    Alert.alert("Failed")
+                    Alert.alert("Error", err.message)
                     toggleModal(false)
                     setloading(false)
                 },
@@ -204,23 +197,20 @@ const Task = (props) => {
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
+                    setloading(false)
                     AsyncStorage.removeItem('userAuthDetails');
-                    setTimeout(() => {
-                        Alert.alert(
-                            'Success',
-                            'Logout  Successfully',
-                            [
-                                {
-                                    text: 'OK', onPress: () => {
-                                        props.navigation.navigate('LogIn')
-                                    }
-                                },
-                            ]
-                        );
-                    }, 200);
+                    AsyncStorage.removeItem('token');
+                    AsyncStorage.removeItem('userName');
+                    props.navigation.navigate('LogIn')
+
                 },
                 error: (err) => {
-                    Alert.alert(err)
+                    setloading(false)
+                    setTimeout(() => {
+                        props.navigation.navigate('LogIn')
+                        Alert.alert("Error", err.message)
+                    }, 200);
+
                 },
                 complete: () => { },
             };
@@ -239,7 +229,6 @@ const Task = (props) => {
     }
 
     const saveButtHandler = async () => {
-        setloading(true)
         let userAuthdetails = await helpers.userAuthdetails();
         const baseUrl = await AsyncStorage.getItem("baseUrl");
         if (baseUrl && baseUrl !== undefined) {
@@ -247,26 +236,29 @@ const Task = (props) => {
                 success: async (res) => {
                     console.log({ res })
                     setloading(false)
-                    Alert.alert(
-                        'Success',
-                        'Save Successfully ',
-                        [
-                            {
-                                text: 'OK', onPress: () => {
-                                    props.navigation.navigate('Tasks')
-                                }
-                            },
-                        ]
-                    );
+                    setTimeout(() => {
+                        Alert.alert('Success', 'Save Successfully ',
+                            [
+                                {
+                                    text: 'OK', onPress: () => {
+                                        // props.navigation.navigate('Tasks')
+                                    }
+                                },
+                            ]
+                        );
+                    }, 100);
                 },
                 error: (err) => {
-                    Alert.alert("Failed")
                     setloading(false)
+                    setTimeout(() => {
+                        Alert.alert("Error", err.message)
+                    }, 200);
                 },
                 complete: () => { },
             };
             let header = helpers.buildHeader();
             console.log("task_id", task.item.id, task.item.task_type)
+            setloading(true)
             let data = {
                 "user_id": userAuthdetails.user_id,
                 "token": userAuthdetails.token,
@@ -360,28 +352,29 @@ const Task = (props) => {
                                     resizeMode={"contain"}
                                 />
                             </TouchableOpacity>
-
                             <Text allowFontScaling={false} style={[{ fontSize: 25, paddingLeft: 10, textAlign: "center", fontWeight: "500" }]}>{helpers.getLocale(localize, "task", "documents")}</Text>
                         </View>
                         <View style={{ marginTop: 1, height: 1.5, backgroundColor: colors.primaryColor }} />
                         {true ? null : <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />}
                     </View>
                     {/* {docExpand && */}
-                    <>
-                        {Document ?
-                            <View style={{ padding: 10 }}>
-                                <FlatList
-                                    data={DocumentCount}
-                                    // data={[docCount]}
-                                    renderItem={({ item, index }) =>
-                                        <Text style={{ fontSize: 20 }}>Doc{index + 1}</Text>
-                                    }
-                                    keyExtractor={_keyExtractor}
-                                    removeClippedSubviews={Platform.OS == "android" ? true : false}
 
-                                />
-                            </View> : <Text style={{ fontSize: 15, textAlign: 'center' }}> Document List is Empty
-                                </Text>}</>
+                    {Document ?
+                        <View style={{ paddingLeft: 10 }}>
+                            <FlatList
+                                data={DocumentCount}
+                                // data={[docCount]}
+                                renderItem={({ item, index }) =>
+                                    <Text style={{ fontSize: 20 }}>Doc{index + 1}</Text>
+                                }
+                                keyExtractor={_keyExtractor}
+                                removeClippedSubviews={Platform.OS == "android" ? true : false}
+
+                            />
+                        </View> : null
+                        //     <Text style={{ fontSize: 20, textAlign: 'center' }}> Document List is Empty
+                        //         </Text>
+                    }
                     {/* } */}
                 </View>
 
@@ -406,22 +399,28 @@ const Task = (props) => {
                         {true ? null : <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />}
 
                         {/* {msgExpand && */}
-                        <>
-                            {getMessage.length == 0 ?
-                                <Text style={{ textAlign: 'center', fontSize: 20 }}> Message List is Empty</Text> :
-                                // <View style={{ height: 200, backgroundColor: 'red' }}>
-                                <FlatList
-                                    // data={[" ", " ", " "]}
-                                    data={getMessage}
-                                    // extraData={this.state}
-                                    renderItem={commentRender}
-                                    keyExtractor={_keyExtractor}
-                                    removeClippedSubviews={Platform.OS == "android" ? true : false}
+                        {gMLoader ? <ActivityIndicator /> :
+                            <>
+                                {getMessage.length == 0 ?
+                                    null
+                                    // <Text style={{ textAlign: 'center', fontSize: 20 }}> Message List is Empty</Text>
+                                    :
+                                    <View style={{}}>
+                                        <FlatList
+                                            // data={[" ", " ", " "]}
+                                            data={getMessage}
+                                            maxToRenderPerBatch={2}
 
-                                />
-                                // </View>
-                            }</>
-                        {/* } */}
+                                            // extraData={this.state}
+                                            renderItem={commentRender}
+                                            keyExtractor={_keyExtractor}
+                                            removeClippedSubviews={Platform.OS == "android" ? true : false}
+                                        // maxToRenderPerBatch={3}
+
+                                        />
+                                    </View>
+                                }</>
+                        }
                         <View style={{ marginTop: 20, borderWidth: 2, borderColor: "#969696" }}>
                             <TouchableOpacity style={{ ...sty.fRow }} onPress={() => toggleModal(true)}>
                                 <View style={{ width: "85%", ...sty.jCenter, padding: 5, paddingLeft: 40 }}>

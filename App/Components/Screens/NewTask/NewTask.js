@@ -24,6 +24,7 @@ import Loader from '../../Custom/Loader/Loader'
 import ImagePicker from 'react-native-image-picker';
 import DocumentPicker from 'react-native-document-picker';
 import RNFetchBlob from 'rn-fetch-blob';
+import RNFS from 'react-native-fs'
 
 
 const NewTask = (props) => {
@@ -36,38 +37,25 @@ const NewTask = (props) => {
     const [customer_id, setcustomer_id] = useState("");
     const [edit, setedit] = useState(false);
     const [picture, setpicture] = useState("");
-    const [document, setdocument] = useState("");
+    const [document, setdocument] = useState(" ");
     const [task_id, settask_id] = useState("");
     const [uploadedDoc, setuploadedDoc] = useState([]);
-    const [base64, setbase64] = useState([]);
+    const [uploadedImg, setuploadedImg] = useState([]);
+
     const Document = [];
-
-
-
 
 
     const [initialLoading, setinitialLoading] = useState(true);
     // const [editAddress, seteditAddress] = useState("");
     const [loading, setloading] = useState(false);
 
-    // const loginData = useSelector(state => state.loginData);
-    // const dispatch = useDispatch();
-    // let companyPostRef = {}
-    console.log("uplod Doc", uploadedDoc)
-
     useEffect(() => {
         get_customer_data()
-
-        // console.log("Login useEffect")
-        // console.log("height , width ", globals.WINDOW_HEIGHT, globals.WINDOW_WIDTH)
-        // if (campaigns["favorite"] == null || campaigns["favorite"].length == 0)
-        // _getFavCampaign()
     }, [])
 
     const get_customer_data = async () => {
         let userAuthdetails = await helpers.userAuthdetails();
         const baseUrl = await AsyncStorage.getItem("baseUrl");
-        console.log("token", { userAuthdetails })
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
@@ -101,7 +89,6 @@ const NewTask = (props) => {
         setloading(true)
         let userAuthdetails = await helpers.userAuthdetails();
         const baseUrl = await AsyncStorage.getItem("baseUrl");
-        console.log("token", { userAuthdetails })
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
@@ -110,24 +97,14 @@ const NewTask = (props) => {
                             setloading(false)
                         }, 2000
                     )
-                    console.log(res, "result")
                     settask_id(res.record_id)
-                    Alert.alert(
-                        'Success',
-                        ' Your Task Save Successfully ',
-                        // [
-                        //     {
-                        //         text: 'OK', onPress: () => {
-                        //             // props.navigation.navigate('Tasks')
-                        //         }
-                        //     },
-                        // ]
+                    Alert.alert('Success', ' Your Task Save Successfully ',
                     );
 
                 },
                 error: (err) => {
                     setloading(false)
-                    Alert.alert("error")
+                    Alert.alert("error", err.message)
                 },
                 complete: () => { },
             };
@@ -136,7 +113,6 @@ const NewTask = (props) => {
             let newdata = [
                 edit ?
                     {
-                        // "object": "Customer",
                         "object": name,
                         "address": address,
                         "description": description,
@@ -144,7 +120,6 @@ const NewTask = (props) => {
                     } :
                     {
                         "customer_id": customer_id,
-                        // "object": "Customer",
                         "object": name,
                         "address": address,
                         "description": description,
@@ -164,112 +139,109 @@ const NewTask = (props) => {
         }
     }
     const addPicture = () => {
-        const options = {
-            title: 'Select Photo',
-            // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
-            storageOptions: {
-                skipBackup: true,
-                path: 'images',
-            },
-        };
-        ImagePicker.showImagePicker(options, (response) => {
-            const base64Value = response.data;
-            console.log(base64Value, "123")
-            setbase64(base64Value)
-            console.log('Response = ', response);
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-            } else {
-                const file = response.fileName
-                // const source = { uri: response.uri };
-                setpicture("photo1")
-                console.log('picker resp', response)
-                uploadDoc(response.fileName, response.uri, base64Value, " ", "Photo1")
-                // console.log(re, '15')
-                // img_filename: file
-                //     selectedImage: response
-                // this.setState({
-                //     avatarSource: source,
-                // });
-            }
-        });
-    }
-    const uploadDoc = async (fileName, uri, photo, doc, image) => {
-        setloading(true)
-        console.log("task_id")
-        console.log('da', fileName, uri)
         if (!task_id) {
-            setloading(false)
             Alert.alert("Error", "Firstly Save the task then upload documents")
         }
         else {
-            let userAuthdetails = await helpers.userAuthdetails();
-            const baseUrl = await AsyncStorage.getItem("baseUrl");
-            if (baseUrl && baseUrl !== undefined) {
-                let cb = {
-                    success: async (res) => {
-                        console.log({ res })
-                        Alert.alert(
-                            'Success',
-                            ' Document Uploaded Successfully ',
-                            [
-                                {
-                                    text: 'OK', onPress: () => {
-                                        const source = { uri: uri };
-                                        // setpicture(source)
-                                        // setpicture(image)
-                                        // setdocument(doc)
-                                        const img = { source }
-                                        // Document.push({ });
-                                        console.log(Document, "Doc")
-                                        // return nietos;
-                                        // setuploadedDoc.push(source, fileName)
-                                        return true
-
-                                    }
-                                },
-                            ]
-                        );
-                        setTimeout(() => { setloading(false) }, 300)
-
-                    },
-                    error: (err) => {
-                        setloading(false)
-                        Alert.alert("Error", " Something Went Wrong While Uploading Document")
-                    },
-                    complete: () => { },
-                };
-                let header = helpers.buildHeader();
-                let data = {
-                    "user_id": userAuthdetails.user_id,
-                    "token": userAuthdetails.token,
-                    "task_id": task_id,
-                    "filename": fileName,
-                    "photo": photo,
-
-                    // "filename": "2018-07-10 15:09:56.png",
-
-                    // "photo": "iVBORw0KGgoAAAANSUhEUgAAAwYAAAQICAIAAAA4CVt9AAAAA3NCSVQFBgUzC42AAAAgAElEQVR4\nnOy9X2wcV3ro+Yk+VL7SFD2n7G6nakJ6WI6YUSmSV92RNMOeyAP1QJ41fe3A8p0EsXaAzWrvw+7k",
-                    "api_key": globals.API_KEY,
-                    //     {
-                    //     "user_id": 881235, "token": "D3A06CAAD6B92AC5E14EB19B0F688C61",
-                    //         "task_id": 881241, "filename": "2018-07-10 15:09:56.png",
-                    //             "photo": "iVBORw0KGgoAAAANSUhEUgAAAwYAAAQICAIAAAA4CVt9AAAAA3NCSVQFBgUzC42AAAAgAElEQVR4\nnOy9X2wcV3ro+Yk+VL7SFD2n7G6nakJ6WI6YUSmSV92RNMOeyAP1QJ41fe3A8p0EsXaAzWrvw+7k",
-                    //         "api_key": "TqKGLk2e"
-                    // }
-                };
-                console.log("data", data)
-                API.postDocument(data, cb, header);
-            } else {
-                // getEndPoint()
-            }
+            const options = {
+                title: 'Select Photo',
+                // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+                storageOptions: {
+                    skipBackup: true,
+                    path: 'images',
+                },
+            };
+            ImagePicker.showImagePicker(options, (response) => {
+                const base64Value = response.data;
+                console.log(base64Value, "123")
+                if (response.didCancel) {
+                    console.log('User cancelled image picker');
+                } else if (response.error) {
+                    console.log('ImagePicker Error: ', response.error);
+                } else if (response.customButton) {
+                    console.log('User tapped custom button: ', response.customButton);
+                } else {
+                    // const file = response.fileName
+                    // const source = { uri: response.uri };
+                    setTimeout(() => { setpicture("Photo1") }, 3000)
+                    console.log('picker resp', response)
+                    uploadDoc(response.fileName, response.uri, base64Value, " ", "Photo1")
+                }
+            });
         }
     }
+    const uploadDoc = async (fileName, uri, photo, doc, image) => {
+        setloading(true)
+        let userAuthdetails = await helpers.userAuthdetails();
+        const baseUrl = await AsyncStorage.getItem("baseUrl");
+        if (baseUrl && baseUrl !== undefined) {
+            let cb = {
+                success: async (res) => {
+                    console.log({ res })
+                    Alert.alert(
+                        'Success',
+                        ' Document Uploaded Successfully ',
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                    const source = { uri: uri };
 
+                                    // setpicture(source)
+                                    console.log("image", image)
+                                    if (image != " ") {
+                                        const item = new Object();
+                                        const arr = [...uploadedImg]
+                                        arr.push(item)
+                                        const da = [...Document, item]
+
+                                        const img = { source }
+                                        Document.push(item);
+                                        setuploadedImg(arr)
+
+                                        // setdocument(Document)
+                                        console.log(Document, "Doc", da, uploadedImg, arr)
+                                        // console.log(document, "Doc", da)
+                                    }
+                                    else {
+                                        const item = new Object();
+                                        const array = [...uploadedDoc]
+                                        array.push(item)
+                                        setuploadedDoc(array)
+                                        console.log("Doc2", uploadedDoc, array)
+
+                                    }
+
+                                    return true
+                                }
+                            },
+                        ]
+                    );
+                    setTimeout(() => { setloading(false) }, 300)
+                },
+                error: (err) => {
+                    setloading(false)
+                    Alert.alert("Error", " Something Went Wrong While Uploading Document")
+                },
+                complete: () => { },
+            };
+            let header = helpers.buildHeader();
+            let data = {
+                "user_id": userAuthdetails.user_id,
+                "token": userAuthdetails.token,
+                "task_id": task_id,
+                "filename": fileName,
+                "photo": photo,
+                "api_key": globals.API_KEY,
+
+            };
+            console.log("data", data)
+            API.postDocument(data, cb, header);
+        } else {
+            // getEndPoint()
+        }
+
+    }
+    console.log("Dik", Document)
     const onEdit = () => {
         setedit(true)
     }
@@ -283,91 +255,27 @@ const NewTask = (props) => {
         addTask()
     }
     const addDocument = async () => {
-        try {
-            const res = await DocumentPicker.pick({
-                type: [DocumentPicker.types.images,
-                DocumentPicker.types.pdf,
-
-                ],
-            });
-            console.log("res", res)
-
-            // const base64Value = res.data;
-            // DocumentPicker.pick({
-            //     type: [DocumentPicker.types.allFiles]
-            // })
-            //     .then(res => {
-            //         RNFS.readFile(decodeURIComponent(res.uri), "base64").then(result => {
-            //             console.log(result)
-            //         })
-            //     })
-            //     .catch(error => {
-            //         console.log(error)
-            //     })
-            // base64conv(res.uri)
-            uploadDoc(res.name, res.uri, " ", "Document")
-            setdocument("Doc1")
-            console.log(
-                res.uri,
-                res.type, // mime type
-                res.name,
-                res.size
-            );
-
-        } catch (err) {
-            if (DocumentPicker.isCancel(err)) {
-                console.log("cancled")
-                // User cancelled the picker, exit any dialogs or menus and move on
-            } else {
-                throw err;
-            }
+        if (!task_id) {
+            Alert.alert("Error", "Firstly Save the task then upload documents")
         }
-    }
-    const base64conv = (uri) => {
-        const url = 'htttps://' + uri
-        console.log(uri, "1234")
-
-        let imagePath = null;
-        RNFetchBlob.config({
-            fileCache: true
-        })
-            .fetch("GET", uri)
-            // the image is now dowloaded to device's storage
-            .then(resp => {
-                // the image path you can use it directly with Image component
-                imagePath = resp.path();
-                return resp.readFile("base64");
+        else {
+            DocumentPicker.pick({
+                type: [DocumentPicker.types.allFiles]
             })
-            .then(async base64Data => {
-                console.log("base64Data", 123)
-                var base64Data = `data:image/png;base64,` + base64Data;
-                // here's base64 encoded image
-                // await Share.open({ url: base64Data, message: title });
-                // remove the file from storage
-                return fs.unlink(imagePath);
-            });
-        console.log(uri, "1234")
-        // const fs = RNFetchBlob.fs
-        // let imagePath = null
-        // RNFetchBlob.config({
-        //     fileCache: true
+                .then(res => {
+                    console.log('res', res, res.uri)
+                    RNFS.readFile(res.uri, "base64").then(result => {
+                        console.log(result, '123')
+                        uploadDoc(res.name, res.uri, result, "Doc1 ", " ")
+                        setTimeout(() => { setdocument("Doc1") }, 3000)
+                    })
 
-        // })
-        //     .fetch("GET", uri)
-        // console.log(123)
-        //     // the image is now dowloaded to device's storage
-        //     .then(resp => {
-        //         console.log(resp, "12")
-        //         // the image path you can use it directly with Image component
-        //         imagePath = resp.path();
-        //         return resp.readFile("base64");
-        //     })
-        //     .then(base64Data => {
-        //         // here's base64 encoded image
-        //         console.log(base64Data);
-        //         // remove the file from storage
-        //         return fs.unlink(imagePath);
-        //     });
+                    console.log("b", b)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
     }
     const signout = async () => {
         let token = await AsyncStorage.getItem('token');
@@ -376,23 +284,20 @@ const NewTask = (props) => {
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
+                    setloading(false)
                     AsyncStorage.removeItem('userAuthDetails');
-                    setTimeout(() => {
-                        Alert.alert(
-                            'Success',
-                            'Logout  Successfully',
-                            [
-                                {
-                                    text: 'OK', onPress: () => {
-                                        props.navigation.navigate('LogIn')
-                                    }
-                                },
-                            ]
-                        );
-                    }, 200);
+                    AsyncStorage.removeItem('token');
+                    AsyncStorage.removeItem('userName');
+                    props.navigation.navigate('LogIn')
+
                 },
                 error: (err) => {
-                    Alert.alert(err)
+                    setloading(false)
+                    setTimeout(() => {
+                        props.navigation.navigate('LogIn')
+                        Alert.alert("Error", err.message)
+                    }, 200);
+
                 },
                 complete: () => { },
             };
@@ -450,7 +355,6 @@ const NewTask = (props) => {
                                 setaddress(value), onEdit()
                                 // emailValid: validation('email', value)
                             }}
-
                         />
                         <_InputText
                             style={styles.TextInput1}
@@ -467,23 +371,28 @@ const NewTask = (props) => {
                             callback2={() => { addDocument() }}
                             style={{ borderTopWidth: 0, paddingVertical: 2 }}
                         />
-                        <View style={{ paddingVertical: 10, paddingHorizontal: 10 }}>
+                        <View style={{ paddingVertical: 3, paddingHorizontal: 15 }}>
                             {/* <Image source={picture} style={{ width: 50, height: 50, marginTop: 10 }} /> */}
-                            <Text style={{ fontSize: 20 }}>{picture}</Text>
-                            <Text style={{ fontSize: 20 }}>{document}</Text>
+                            {/* {picture ? <Text style={{ fontSize: 15 }}>{picture}</Text> : null}
+                            {document ? <Text style={{ fontSize: 15 }}>{document}</Text> : null} */}
+                            <FlatList
+                                data={uploadedImg}
+                                renderItem={({ item, index }) =>
+                                    <Text style={styles.textColor}>Photo{index + 1}</Text>}
+                                // keyExtractor={_keyExtractor}
+                                keyExtractor={(item, index) => index.toString()}
+                                removeClippedSubviews={Platform.OS == "android" ? true : false}
+
+                            />
+                            <FlatList
+                                data={uploadedDoc}
+                                renderItem={({ item, index }) =>
+                                    <Text style={styles.textColor}>Doc{index + 1}</Text>}
+                                keyExtractor={(item, index) => index.toString()}
+                                removeClippedSubviews={Platform.OS == "android" ? true : false}
+                            />
                         </View>
-                        {/* <FlatList
 
-                            // data={[" ", " ", " "]}
-                            data={[Document]}
-
-                            // extraData={this.state}
-                            renderItem={({ item }) =>
-                                <Text>hi</Text>}
-                            // keyExtractor={_keyExtractor}
-                            removeClippedSubviews={Platform.OS == "android" ? true : false}
-
-                        /> */}
                     </View>
                     <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>
 

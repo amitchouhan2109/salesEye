@@ -44,6 +44,11 @@ export default styles = StyleSheet.create({
         color: colors.text,
         fontWeight: "bold"
     },
+    textColor: {
+        color: colors.text,
+        fontSize: 15,
+        fontWeight: 'bold',
+    },
 
 
 });

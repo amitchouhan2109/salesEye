@@ -87,7 +87,7 @@ const SignUp = (props) => {
         const lNameError = helpers.validation('lastName', lastName)
         const phoneNoError = helpers.validation('phoneNo', phoneNo)
         const addressError = helpers.validation('Address', address)
-        const emailError = helpers.validation('email', email)
+        const emailError = helpers.validation('emailId', email)
         const cityError = helpers.validation('City', city)
         setfNameValid(fNameError)
         setlNameValid(lNameError)
@@ -216,7 +216,7 @@ const SignUp = (props) => {
                         value={email}
                         onBlur={() => {
                             setemailValid(() =>
-                                helpers.validation('email', email),
+                                helpers.validation('emailId', email),
                             )
                         }}
                         errMsg={<Text>{emailValid}</Text>}

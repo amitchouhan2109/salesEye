@@ -44,7 +44,7 @@ const InfoCart = (props) => {
         // console.log("infocart useEffect")
         const Tasks = props.tasks.item
 
-        console.log(Tasks, "tasks55")
+
         // if (props.tasks !== undefined) {
         //     console.log("infocart useEffect", props.tasks.res[0].tasks)
         //     // const TaskData = props.tasks.res[0].tasks

@@ -98,7 +98,7 @@ const ChangePassword = (props) => {
                     },
                     error: (err) => {
                         setloading(false)
-                        Alert.alert("Failed")
+                        Alert.alert("Error", err.message)
 
                     },
                     complete: () => { },
