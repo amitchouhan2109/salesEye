@@ -28,6 +28,8 @@ const _InputText = (props) => {
                         defaultValue={props.defaultValue}
                         editable={props.editable}
                         autoCapitalize='none'
+                        secureTextEntry={props.secureTextEntry ? props.secureTextEntry : null}
+
                     // errMsg={props.errMsg ? props.errMsg : " "}
                     // style={{ backgroundColor: 'yellow' }}
                     >
@@ -52,9 +54,10 @@ const _InputText = (props) => {
                 }
             </View>
 
-            <View>
-                <Text style={{ color: 'red', paddingLeft: 10 }}>{props.errMsg ? props.errMsg : null}</Text>
-            </View>
+            {/* <View>
+
+                <Text style={{ color: 'red', paddingLeft: 10, fontFamily: "MyriadPro-Regular" }}>{props.errMsg ? props.errMsg : null}</Text>
+            </View> */}
         </>
     )
 }

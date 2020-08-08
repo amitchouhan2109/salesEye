@@ -185,30 +185,19 @@ const NewTask = (props) => {
                             {
                                 text: 'OK', onPress: () => {
                                     const source = { uri: uri };
-
-                                    // setpicture(source)
-                                    console.log("image", image)
                                     if (image != " ") {
                                         const item = new Object();
                                         const arr = [...uploadedImg]
                                         arr.push(item)
-                                        const da = [...Document, item]
-
                                         const img = { source }
                                         Document.push(item);
                                         setuploadedImg(arr)
-
-                                        // setdocument(Document)
-                                        console.log(Document, "Doc", da, uploadedImg, arr)
-                                        // console.log(document, "Doc", da)
                                     }
                                     else {
                                         const item = new Object();
                                         const array = [...uploadedDoc]
                                         array.push(item)
                                         setuploadedDoc(array)
-                                        console.log("Doc2", uploadedDoc, array)
-
                                     }
 
                                     return true
@@ -375,7 +364,7 @@ const NewTask = (props) => {
                             <FlatList
                                 data={uploadedImg}
                                 renderItem={({ item, index }) =>
-                                    <Text style={styles.textColor}>Photo{index + 1}</Text>}
+                                    <Text style={styles.text}>{helpers.getLocale(localize, "newTask", "image_name")}{index + 1}</Text>}
                                 // keyExtractor={_keyExtractor}
                                 keyExtractor={(item, index) => index.toString()}
                                 removeClippedSubviews={Platform.OS == "android" ? true : false}
@@ -384,7 +373,7 @@ const NewTask = (props) => {
                             <FlatList
                                 data={uploadedDoc}
                                 renderItem={({ item, index }) =>
-                                    <Text style={styles.textColor}>Doc{index + 1}</Text>}
+                                    <Text style={styles.text}>{helpers.getLocale(localize, "newTask", "document_name")}{index + 1}</Text>}
                                 keyExtractor={(item, index) => index.toString()}
                                 removeClippedSubviews={Platform.OS == "android" ? true : false}
                             />

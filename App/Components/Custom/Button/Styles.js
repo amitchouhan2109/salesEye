@@ -18,6 +18,8 @@ export default styles = StyleSheet.create({
     },
     inputText: {
         fontSize: 20,
+        fontFamily: fonts.fontFamily.Regular
+
     },
     line: {
         width: 2,
@@ -26,7 +28,9 @@ export default styles = StyleSheet.create({
     },
     btnTextStyle: {
         fontSize: 29,
-        color: "#1C7DED"
+        color: "#1C7DED",
+        fontFamily: fonts.fontFamily.Regular
+
     },
     pairButtonStyle: {
         width: "50%",
@@ -35,7 +39,9 @@ export default styles = StyleSheet.create({
     pairBtnTextStyle: {
         fontSize: 25,
         color: "#1C7DED",
-        height: 29
+        height: 29,
+        fontFamily: fonts.fontFamily.Regular
+
     }
 
 

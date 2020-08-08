@@ -39,14 +39,14 @@ const _Header = (props) => {
                                 <Menu >
                                     <MenuTrigger customStyles={triggerStyles} >
                                         <FastImage
-                                            style={{ height: 40, width: 40, paddingLeft: 0, color: 'black' }}
+                                            style={{ height: 45, width: 40, paddingLeft: 0, color: 'black' }}
                                             source={props.rightIcon}
                                             resizeMode={"contain"}
                                         />
                                     </MenuTrigger>
                                     <MenuOptions customStyles={{
-                                        optionText: { fontSize: 20 },
-                                        optionWrapper: { borderColor: '#1C7DED', borderWidth: 1, }
+                                        optionText: { fontSize: 20, fontFamily: 'MyriadPro-Regular' },
+                                        optionWrapper: { borderColor: '#1C7DED', borderWidth: 1 }
                                     }} >
                                         <MenuOption text='Change Password'
                                             onSelect={props.onPress ? () => props.onPress() : null}

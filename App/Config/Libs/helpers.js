@@ -1,4 +1,5 @@
 import moment from "moment";
+import { connect, useSelector, useDispatch } from 'react-redux';
 import * as validators from "./Validators";
 import { globals } from "..";
 import AsyncStorage from '@react-native-community/async-storage';
@@ -366,6 +367,7 @@ export const userAuthdetails = async () => {
 export const validation = (type, text, pass) => {
 
 
+
   console.log(text, 0, pass)
 
   const regex = /^[A-Za-z]+$/;
@@ -377,7 +379,8 @@ export const validation = (type, text, pass) => {
 
   if (type == 'Name') {
     if (!text) {
-      return 'First Name is Required '
+      return "user name is Required"
+      // getLocale(localize, "validation", "username_Required ") 
     }
 
     else if (regex.test(text)) {
@@ -434,6 +437,7 @@ export const validation = (type, text, pass) => {
   else if (type == 'email') {
     if (text == " " || !text) {
       return 'UserName is Required '
+
     }
 
     else if (emailPattern.test(text)) {

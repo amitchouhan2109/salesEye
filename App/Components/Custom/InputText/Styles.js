@@ -12,6 +12,8 @@ export default styles = StyleSheet.create({
   },
   inputText: {
     fontSize: 20,
+    fontFamily: fonts.fontFamily.Regular
+
   }
 
 

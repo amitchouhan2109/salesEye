@@ -32,9 +32,12 @@ export default styles = StyleSheet.create({
   headingText: {
     fontSize: fonts.heading,
     color: colors.heading1,
+    fontFamily: fonts.fontFamily.Regular
   },
   TextInput: {
     marginTop: 10,
+    fontFamily: fonts.fontFamily.Regular,
+
   },
   checkboxWrapper: {
     borderWidth: 0,
@@ -57,7 +60,9 @@ export default styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     paddingLeft: 10,
-    borderWidth: 0
+    borderWidth: 0,
+    fontFamily: fonts.fontFamily.Regular
+
   },
   buttonView: {
 
@@ -80,7 +85,9 @@ export default styles = StyleSheet.create({
   forgetPassText: {
     fontSize: 20,
     paddingLeft: 0,
-    color: colors.text
+    color: colors.text,
+    fontFamily: fonts.fontFamily.Regular
+
   },
   signUpWrapper: {
     flex: 1,
@@ -107,7 +114,10 @@ export default styles = StyleSheet.create({
   signUpText: {
     fontSize: 20,
     color: colors.text,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: fonts.fontFamily.Regular,
+    paddingTop: 10
+
   },
 
 });

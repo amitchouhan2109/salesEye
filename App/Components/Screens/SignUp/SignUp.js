@@ -83,56 +83,45 @@ const SignUp = (props) => {
     }
 
     const signupUser = () => {
-        const fNameError = helpers.validation('Name', userName)
-        const lNameError = helpers.validation('lastName', lastName)
-        const phoneNoError = helpers.validation('phoneNo', phoneNo)
-        const addressError = helpers.validation('Address', address)
-        const emailError = helpers.validation('emailId', email)
-        const cityError = helpers.validation('City', city)
-        setfNameValid(fNameError)
-        setlNameValid(lNameError)
-        setemailValid(emailError)
-        setphoneNoValid(phoneNoError)
-        setaddressValid(addressError)
-        setcityValid(cityError)
         setloading(true)
-        if (fNameError == " " && lNameError == " " && phoneNoError == " " && addressError == " " && emailError == " "
-            && cityError == " " && phoneNoError == " ") {
 
-            let cb = {
-                success: async (res) => {
-                    console.log("success res:", res)
-                    setloading(false)
-                    Alert.alert(" Success", "Registerd Successfully !")
-                },
-                error: (err) => {
-                    setloading(false)
-                    Alert.alert("Error", " Registration Failed")
 
-                },
-                complete: () => {
-                    setloading(false)
-                },
-            };
+        let cb = {
+            success: async (res) => {
+                console.log("success res:", res)
+                setloading(false)
+                Alert.alert(" Success", "Registerd Successfully!",
+                    [
+                        {
+                            text: 'OK', onPress: () => {
+                                props.navigation.navigate('LogIn')
+                            }
+                        },
+                    ])
+            },
+            error: (err) => {
+                setloading(false)
+                Alert.alert("Error", err.message)
+            },
+            complete: () => {
+                setloading(false)
+            },
+        };
 
-            let header = helpers.buildHeader({});
-            console.log({ userName, lastName, company, phoneNo, email, address, city })
-            let data = {
-                firstname: userName,
-                lastname: lastName,
-                phone: phoneNo,
-                email: email,
-                street: address,
-                city: city,
-                // post_code: "LT-12345",
-                api_key: globals.API_KEY
-            };
-            API.registerUser(data, cb, header);
-        }
-        else {
-            setloading(false)
-            Alert.alert("Fiil the Required Fields")
-        }
+        let header = helpers.buildHeader({});
+        console.log({ userName, lastName, company, phoneNo, email, address, city })
+        let data = {
+            firstname: userName,
+            lastname: lastName,
+            phone: phoneNo,
+            email: email,
+            street: address,
+            city: city,
+            // post_code: "LT-12345",
+            api_key: globals.API_KEY
+        };
+        API.registerUser(data, cb, header);
+
     }
 
     const getEndPoint = () => {
@@ -165,30 +154,18 @@ const SignUp = (props) => {
                 loading={loading} />
             <_Header header={helpers.getLocale(localize, "signIn", "signUp")} />
             <ScrollView style={{}}>
-                <View style={{}}>
+                <View style={{ paddingTop: 20 }}>
                     <_InputText
                         style={styles.TextInput}
                         placeholder={helpers.getLocale(localize, "signIn", "first_name")}
                         onChangeText={value => setuserName(value)}
                         value={userName}
-                        onBlur={() => {
-                            setfNameValid(() =>
-                                helpers.validation('Name', userName),
-                            )
-                        }}
-                        errMsg={<Text>{fNameValid}</Text>}
                     />
                     <_InputText
                         style={styles.TextInput}
                         placeholder={helpers.getLocale(localize, "signIn", "last_name")}
                         onChangeText={value => setlastName(value)}
                         value={lastName}
-                        onBlur={() => {
-                            setlNameValid(() =>
-                                helpers.validation('lastName', lastName),
-                            )
-                        }}
-                        errMsg={<Text>{lNameValid}</Text>}
                     />
                     <_InputText
                         style={styles.TextInput}
@@ -202,48 +179,25 @@ const SignUp = (props) => {
                         placeholder={helpers.getLocale(localize, "signIn", "phone")}
                         onChangeText={value => setphoneNo(value)}
                         value={phoneNo}
-                        onBlur={() => {
-                            setphoneNoValid(() =>
-                                helpers.validation('phoneNo', phoneNo),
-                            )
-                        }}
-                        errMsg={<Text>{phoneNoValid}</Text>}
+
                     />
                     <_InputText
                         style={styles.TextInput}
                         placeholder={helpers.getLocale(localize, "signIn", "email")}
                         onChangeText={value => setemail(value)}
                         value={email}
-                        onBlur={() => {
-                            setemailValid(() =>
-                                helpers.validation('emailId', email),
-                            )
-                        }}
-                        errMsg={<Text>{emailValid}</Text>}
                     />
                     <_InputText
                         style={styles.TextInput}
                         placeholder={helpers.getLocale(localize, "signIn", "address")}
                         onChangeText={value => setaddress(value)}
                         value={address}
-                        onBlur={() => {
-                            setaddressValid(() =>
-                                helpers.validation('Address', address),
-                            )
-                        }}
-                        errMsg={<Text>{addressValid}</Text>}
                     />
                     <_InputText
                         style={styles.TextInput}
                         placeholder={helpers.getLocale(localize, "signIn", "city")}
                         onChangeText={value => setcity(value)}
                         value={city}
-                        onBlur={() => {
-                            setcityValid(() =>
-                                helpers.validation('City', city),
-                            )
-                        }}
-                        errMsg={<Text>{cityValid}</Text>}
                     />
                 </View>
                 <View style={{ marginTop: 50 }}>

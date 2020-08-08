@@ -14,19 +14,20 @@ export default styles = StyleSheet.create({
         marginHorizontal: 15
     },
     TextInput: {
-        marginTop: 25,
+        marginTop: 10,
+        fontFamily: fonts.fontFamily.Regular
     },
     signUpWrapper: {
         flex: 1,
         borderWidth: 0,
-        paddingBottom: 50,
+        paddingBottom: 20,
         ...sty.jEnd,
         ...sty.aCenter,
-        marginTop: 30
+        marginTop: 15
     },
     signUpView: {
         borderWidth: 0,
-        marginTop: 20
+        marginTop: 5
     },
     signUp: {
         ...sty.fRow,
@@ -40,7 +41,9 @@ export default styles = StyleSheet.create({
     signUpText: {
         fontSize: 20,
         color: colors.text,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontFamily: fonts.fontFamily.Regular
+
     },
 
 

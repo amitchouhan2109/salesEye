@@ -15,9 +15,12 @@ export default styles = StyleSheet.create({
     },
     TextInput: {
         marginTop: 20,
+        fontFamily: fonts.fontFamily.Regular
     },
     TextInput1: {
         marginTop: 20,
+        fontFamily: fonts.fontFamily.Regular
+
     },
     signUpWrapper: {
         flex: 1,
@@ -42,12 +45,15 @@ export default styles = StyleSheet.create({
     signUpText: {
         fontSize: 20,
         color: colors.text,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontFamily: fonts.fontFamily.Regular
     },
-    textColor: {
+    text: {
         color: colors.text,
         fontSize: 15,
         fontWeight: 'bold',
+        fontFamily: fonts.fontFamily.Regular
+
     },
 
 

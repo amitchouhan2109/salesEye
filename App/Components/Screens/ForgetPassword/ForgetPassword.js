@@ -81,50 +81,45 @@ const ForgetPassword = (props) => {
 
 
     const forgetPassword = async () => {
-        const emailError = helpers.validation('email', userName)
-        setuserNameValid(emailError)
+
         setloading(true)
-        if (emailError == " ") {
-            const baseUrl = await AsyncStorage.getItem("baseUrl");
-            if (baseUrl && baseUrl !== undefined) {
-                let cb = {
-                    success: async (res) => {
-                        console.log("success res:", res)
-                        setloading(false)
-                        Alert.alert(
-                            'Success',
-                            'Check Email For Further Instruction',
-                            [
-                                {
-                                    text: 'OK', onPress: () => {
-                                        props.navigation.navigate('LogIn')
-                                    }
-                                },
-                            ]
-                        );
 
-                    },
-                    error: (err) => {
-                        setloading(false)
-                        Alert.alert('Error', " Authentication Error")
-                    },
-                    complete: () => { },
-                };
+        const baseUrl = await AsyncStorage.getItem("baseUrl");
+        if (baseUrl && baseUrl !== undefined) {
+            let cb = {
+                success: async (res) => {
+                    console.log("success res:", res)
+                    setloading(false)
+                    Alert.alert(
+                        'Success',
+                        'Check Email For Further Instruction',
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                    props.navigation.navigate('LogIn')
+                                }
+                            },
+                        ]
+                    );
 
-                let header = helpers.buildHeader();
-                let data = {
-                    "username": userName,
-                    "api_key": globals.API_KEY
-                };
-                API.forgetPassword(data, cb, header);
-            } else {
-                getEndPoint()
-            }
+                },
+                error: (err) => {
+                    setloading(false)
+                    Alert.alert('Error', " Authentication Error")
+                },
+                complete: () => { },
+            };
+
+            let header = helpers.buildHeader();
+            let data = {
+                "username": userName,
+                "api_key": globals.API_KEY
+            };
+            API.forgetPassword(data, cb, header);
+        } else {
+            getEndPoint()
         }
-        else {
-            setloading(false)
-            Alert.alert(" Fill the Required  Fields")
-        }
+
     }
 
     const signinHandler = () => {
@@ -142,12 +137,6 @@ const ForgetPassword = (props) => {
                     placeholder={helpers.getLocale(localize, "forgetPassword", "userName")}
                     onChangeText={value => { setuserName(value) }}
                     value={userName}
-                    onBlur={() => {
-                        setuserNameValid(() =>
-                            helpers.validation('email', userName),
-                        )
-                    }}
-                    errMsg={<Text>{userNameValid}</Text>}
 
                 />
             </View>

@@ -303,19 +303,19 @@ const Task = (props) => {
         return (
             <View style={{ paddingHorizontal: 10 }}>
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 10, }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}> {item.item.author} </Text >
+                    <Text style={{ fontWeight: 'bold', fontSize: 20, fontFamily: "MyriadPro-Regular" }}> {item.item.author} </Text >
                     <View style={{ flexDirection: 'row', display: 'flex', }}>
-                        <Text style={{ fontSize: 20 }}> {date}</Text >
+                        <Text style={{ fontSize: 20, fontFamily: "MyriadPro-Regular", }}> {date}</Text >
                         <FastImage
                             style={{ height: 20, width: 20, paddingLeft: 1, marginTop: 5, marginLeft: 5 }}
                             source={images.clock}
                             resizeMode={"contain"}
                         />
-                        <Text style={{ fontSize: 20 }}> {time}</Text >
+                        <Text style={{ fontSize: 20, fontFamily: "MyriadPro-Regular" }}> {time}</Text >
                     </View>
 
                 </View>
-                <Text style={{ fontSize: 20 }}> {item.item.task_comment}  </Text >
+                <Text style={{ fontSize: 20, fontFamily: "MyriadPro-Regular" }}> {item.item.task_comment}  </Text >
                 <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />
 
             </View>)
@@ -353,7 +353,8 @@ const Task = (props) => {
                                     resizeMode={"contain"}
                                 />
                             </TouchableOpacity>
-                            <Text allowFontScaling={false} style={[{ fontSize: 25, paddingLeft: 10, textAlign: "center", fontWeight: "500" }]}>{helpers.getLocale(localize, "task", "documents")}</Text>
+                            <Text allowFontScaling={false} style={[{ fontSize: 25, fontFamily: "MyriadPro-Regular", paddingLeft: 10, textAlign: "center", }]}>
+                                {helpers.getLocale(localize, "task", "documents")}</Text>
                         </View>
                         <View style={{ marginTop: 1, height: 1.5, backgroundColor: colors.primaryColor }} />
                         {true ? null : <View style={{ marginTop: 10, height: 1.5, backgroundColor: colors.primaryColor }} />}
@@ -366,15 +367,14 @@ const Task = (props) => {
                                 data={DocumentCount}
                                 // data={[docCount]}
                                 renderItem={({ item, index }) =>
-                                    <Text style={{ fontSize: 20 }}>Doc{index + 1}</Text>
+                                    <Text style={{ fontSize: 18, fontFamily: "MyriadPro-Regular" }}>{helpers.getLocale(localize, "task", "document_name")}{index + 1}</Text>
                                 }
                                 keyExtractor={_keyExtractor}
                                 removeClippedSubviews={Platform.OS == "android" ? true : false}
-
                             />
-                        </View> : null
-                        //     <Text style={{ fontSize: 20, textAlign: 'center' }}> Document List is Empty
-                        //         </Text>
+                        </View> :
+                        <Text style={{ fontSize: 20, textAlign: 'center', fontFamily: "MyriadPro-Regular" }}> {helpers.getLocale(localize, "task", "empty_document")}
+                        </Text>
                     }
                     {/* } */}
                 </View>
@@ -393,7 +393,7 @@ const Task = (props) => {
                                     resizeMode={"contain"}
                                 />
                             </TouchableOpacity>
-                            <Text allowFontScaling={false} style={[{ fontSize: 25, paddingLeft: 10, textAlign: "center", fontWeight: "500", }]}>{helpers.getLocale(localize, "task", "messages")}</Text>
+                            <Text allowFontScaling={false} style={[{ fontSize: 25, fontFamily: "MyriadPro-Regular", paddingLeft: 10, textAlign: "center", fontWeight: '100' }]}>{helpers.getLocale(localize, "task", "messages")}</Text>
 
                         </View>
                         <View style={{ marginTop: 1, height: 1.5, backgroundColor: colors.primaryColor }} />
@@ -406,9 +406,8 @@ const Task = (props) => {
                             </View> :
                             <>
                                 {getMessage.length == 0 ?
-                                    <Text> </Text>
-
-                                    // <Text style={{ textAlign: 'center', fontSize: 20 }}> Message List is Empty</Text>
+                                    <Text style={{ fontSize: 20, textAlign: 'center', fontFamily: "MyriadPro-Regular" }}> {helpers.getLocale(localize, "task", "empty_message")}
+                                    </Text>
                                     :
                                     <View style={{}}>
                                         <FlatList
@@ -429,7 +428,7 @@ const Task = (props) => {
                         <View style={{ marginTop: 20, borderWidth: 2, borderColor: "#969696" }}>
                             <TouchableOpacity style={{ ...sty.fRow }} onPress={() => toggleModal(true)}>
                                 <View style={{ width: "85%", ...sty.jCenter, padding: 5, paddingLeft: 40 }}>
-                                    <Text allowFontScaling={false} style={{ fontSize: 29, borderWidth: 0 }}>{helpers.getLocale(localize, "task", "add_message")}</Text>
+                                    <Text allowFontScaling={false} style={{ fontSize: 29, fontFamily: "MyriadPro-Regular", borderWidth: 0 }}>{helpers.getLocale(localize, "task", "add_message")}</Text>
                                 </View>
                                 <View style={{ width: "15%", ...sty.jCenter, ...sty.aCenter }}>
                                     <FastImage
@@ -498,7 +497,7 @@ const Task = (props) => {
                                 <TouchableOpacity style={{ ...sty.fRow }} onPress={() => addCommentData()}
                                 >
                                     <View style={{ width: "85%", ...sty.jCenter, padding: 5, paddingLeft: 40 }}>
-                                        <Text allowFontScaling={false} style={{ fontSize: 20, borderWidth: 0 }}>{helpers.getLocale(localize, "task", "add_message")}</Text>
+                                        <Text allowFontScaling={false} style={{ fontSize: 20, borderWidth: 0, fontFamily: "MyriadPro-Regular" }}>{helpers.getLocale(localize, "task", "add_message")}</Text>
                                     </View>
                                     <View style={{ width: "15%", ...sty.jCenter, ...sty.aCenter }}>
                                         <FastImage

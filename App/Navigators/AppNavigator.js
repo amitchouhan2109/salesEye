@@ -44,8 +44,8 @@ function AppNavigator() {
     <NavigationContainer>
       {/* <StackNavigator.Navigator initialRouteName={intialRout} screenOptions={{ headerShown: false }}> */}
       <StackNavigator.Navigator initialRouteName={'LogIn'} screenOptions={{ headerShown: false }}>
-        <StackNavigator.Screen name="LogIn" component={LoginIn} />
         <StackNavigator.Screen name="Tasks" component={Tasks} />
+        <StackNavigator.Screen name="LogIn" component={LoginIn} />
         <StackNavigator.Screen name="SignUp" component={SignUp} />
         <StackNavigator.Screen name="ChangePassord" component={ChangePassord} />
         <StackNavigator.Screen name="ForgetPassword" component={ForgetPassword} />

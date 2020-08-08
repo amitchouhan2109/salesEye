@@ -62,68 +62,57 @@ const ChangePassword = (props) => {
         // _getFavCampaign()
     }, [])
     const resetPassword = async () => {
-        const currentPassError = helpers.validation('password', currentPassword)
-        const passwordError = helpers.validation('password', password)
-        const confirmPassError = helpers.validation('confirmpassword', confirmPassword, password)
-        setcurrentPassValid(currentPassError)
-        setpasswordValid(passwordError)
-        setconfirmPassValid(confirmPassError)
-        setloading(true)
-        if (currentPassError == " " && passwordError == " " && confirmPassError == " ") {
-            let token = await AsyncStorage.getItem('token');
-            let userAuthdetails = await helpers.userAuthdetails();
+        let token = await AsyncStorage.getItem('token');
+        let userAuthdetails = await helpers.userAuthdetails();
 
-            const baseUrl = await AsyncStorage.getItem("baseUrl");
-            const userName = await AsyncStorage.getItem("userName");
+        const baseUrl = await AsyncStorage.getItem("baseUrl");
+        const userName = await AsyncStorage.getItem("userName");
 
-            console.log("userName", userName)
-            if (baseUrl && baseUrl !== undefined) {
-                let cb = {
-                    success: async (res) => {
-                        console.log("success res:", res)
-                        setloading(false)
-                        Alert.alert(
-                            'Success',
-                            ' Your Password Change Successfully ',
-                            [
-                                {
-                                    text: 'OK', onPress: () => {
-                                        props.navigation.navigate('LogIn')
-                                    }
-                                },
-                            ]
-                        );
+        console.log("userName", userName)
+        if (baseUrl && baseUrl !== undefined) {
+            let cb = {
+                success: async (res) => {
+                    console.log("success res:", res)
+                    setloading(false)
+                    Alert.alert(
+                        'Success',
+                        ' Your Password Change Successfully ',
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                    props.navigation.navigate('LogIn')
+                                }
+                            },
+                        ]
+                    );
 
 
-                    },
-                    error: (err) => {
-                        setloading(false)
-                        Alert.alert("Error", err.message)
+                },
+                error: (err) => {
+                    setloading(false)
+                    Alert.alert("Error", err.message)
 
-                    },
-                    complete: () => { },
-                };
+                },
+                complete: () => { },
+            };
 
-                let header = helpers.buildHeader({
-                    Authorization: token
-                });
-                console.log('header', header)
-                let data = {
-                    // "username": "Max ace",
-                    "username": userName,
-                    "password": password,
-                    "api_key": globals.API_KEY
-                };
-                console.log(data, "d")
-                API.resetpassword(data, cb, header);
-            } else {
-                // getEndPoint()
-            }
+            let header = helpers.buildHeader({
+                Authorization: token
+            });
+            console.log('header', header)
+            let data = {
+                // "username": "Max ace",
+                "username": userName,
+                "password": password,
+                "api_key": globals.API_KEY
+            };
+            console.log(data, "d")
+            API.resetpassword(data, cb, header);
+        } else {
+            // getEndPoint()
         }
-        else {
-            setloading(false)
-            Alert.alert("Fill the Required Fields")
-        }
+
+
 
     }
 
@@ -147,36 +136,18 @@ const ChangePassword = (props) => {
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "changePassword", "current_password")}
                     onChangeText={value => { setcurrentPassword(value) }}
-                    onBlur={() => {
-                        setcurrentPassValid(() =>
-                            helpers.validation('password', currentPassword),
-                        )
-                    }}
-                    errMsg={<Text>{currentPassValid}</Text>}
                 />
                 <_InputText
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "changePassword", "new_password")}
                     onChangeText={value => { setpassword(value) }
                     }
-                    onBlur={() => {
-                        setpasswordValid(() =>
-                            helpers.validation('password', password),
-                        )
-                    }}
-                    errMsg={<Text>{passwordValid}</Text>}
                 />
                 <_InputText
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "changePassword", "repeat_password")}
                     onChangeText={value => { setconfirmPassword(value) }
                     }
-                    onBlur={() => {
-                        setconfirmPassValid(() =>
-                            helpers.validation('confirmpassword', confirmPassword, password),
-                        )
-                    }}
-                    errMsg={<Text>{confirmPassValid}</Text>}
                 />
             </View>
             <View style={styles.signUpWrapper}>

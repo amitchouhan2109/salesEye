@@ -75,49 +75,41 @@ const Login = (props) => {
     }
 
     const logInUser = () => {
-        const emailError = helpers.validation('email', userName)
-        const passwordError = helpers.validation('password', password)
-        setemailValid(emailError)
-        setpasswordValid(passwordError)
 
-        if (emailError == " " && passwordError == " ") {
-            setloading(true)
+        setloading(true)
 
-            let cb = {
-                success: async (res) => {
-                    console.log("res :", res)
-                    await AsyncStorage.setItem("userAuthDetails", JSON.stringify(res[0]));
-                    await AsyncStorage.setItem("token", res[0].token);
-                    await AsyncStorage.setItem("userName", userName);
+        let cb = {
+            success: async (res) => {
+                console.log("res :", res)
+                await AsyncStorage.setItem("userAuthDetails", JSON.stringify(res[0]));
+                await AsyncStorage.setItem("token", res[0].token);
+                await AsyncStorage.setItem("userName", userName);
 
-                    dispatch(login({ res }))
-                    setloading(false)
-                    props.navigation.navigate('Tasks')
+                dispatch(login({ res }))
+                setloading(false)
+                props.navigation.navigate('Tasks')
 
-                },
-                error: (err) => {
-                    setloading(false)
-                    setTimeout(() => {
-                        Alert.alert("Error", err.message)
-                    }, 400);
-                },
-                complete: () => {
-                    setloading(false)
-                },
-            };
+            },
+            error: (err) => {
+                setloading(false)
+                setTimeout(() => {
+                    Alert.alert("Error", err.message)
+                }, 400);
+            },
+            complete: () => {
+                setloading(false)
+            },
+        };
 
-            let header = helpers.buildHeader({});
-            let data = {
-                username: userName,
-                password: password,
-                api_key: globals.API_KEY
-            };
-            API.loginUser(data, cb, header);
+        let header = helpers.buildHeader({});
+        let data = {
+            username: userName,
+            password: password,
+            api_key: globals.API_KEY
+        };
+        API.loginUser(data, cb, header);
 
-        }
-        else {
-            Alert.alert("Fill the Required Detail")
-        }
+
     }
 
     const getEndPoint = () => {
@@ -171,26 +163,13 @@ const Login = (props) => {
                     placeholder={helpers.getLocale(localize, "login", "userName")}
                     onChangeText={value => { setuserName(value) }}
                     value={userName}
-                    // onBlur={()}
-                    onBlur={() => {
-                        setemailValid(() =>
-                            helpers.validation('email', userName),
-                        )
-                    }}
-                    errMsg={<Text>{emailValid}</Text>}
-
                 />
                 <_InputText
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "login", "password")}
                     onChangeText={value => { setpassword(value) }}
                     value={password}
-                    onBlur={() => {
-                        setpasswordValid(() =>
-                            helpers.validation('password', password),
-                        )
-                    }}
-                    errMsg={<Text allowFontScaling={false}>{passwordValid}</Text>}
+                    secureTextEntry
 
                 />
                 <_InputText

@@ -18,7 +18,7 @@
     "address": "Address",
     "city": "City",
     "signUp": "SIGN UP",
-    "signIn": "SIGN IN",
+    "signIn": "SIGN IN"
   },
   "forgetPassword": {
     "userName": "Username",
@@ -44,7 +44,9 @@
     "address": "Address",
     "title": "Title",
     "status": "Status",
-    "task_date": "Task date"
+    "task_date": "Task date",
+    "empty_task": " Task are  not available"
+
   },
   "task": {
     "task": "TASK",
@@ -64,7 +66,11 @@
     "messages": "MESSAGES",
     "add_message": "ADD MESSAGE",
     "cancel": "CANCEL",
-    "save": "SAVE"
+    "save": "SAVE",
+    "empty_message": " Messages are  not available",
+    "empty_document": "Documents are  not available",
+    "document_name": "Doc"
+
   },
   "newTask": {
     "new_task": "NEW TASK",
@@ -73,6 +79,12 @@
     "address": "Address",
     "description": "Description",
     "cancel": "CANCEL",
-    "save": "SAVE"
+    "save": "SAVE",
+    "document_name": "Doc",
+    "image_name": "Photo"
+  },
+  "validation": {
+    "username_Required ": " User Name is Required"
   }
+
 }

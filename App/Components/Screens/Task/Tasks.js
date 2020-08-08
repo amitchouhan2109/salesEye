@@ -108,6 +108,7 @@ const Tasks = (props) => {
     const getTasks = async () => {
         let cb = {
             success: async (res) => {
+                console.log({ res })
                 dispatch(setTasks({ res }))
                 setTaskLoader(false)
                 settask(res[0].tasks)
@@ -183,10 +184,10 @@ const Tasks = (props) => {
                         <_InputText
                             style={styles.TextInput}
                             placeholder={helpers.getLocale(localize, "tasks", "search")}
-                            onChangeText={value => {
-                                // setsearch(value)
-                                searchFilterFunction(value)
-                            }
+                            onChangeText={value =>
+                                setsearch(value)
+                                // searchFilterFunction(value)
+
                             }
                         />
                     </View>
@@ -194,7 +195,7 @@ const Tasks = (props) => {
                         {TaskLoader ? <ActivityIndicator size={large} /> :
                             <>
                                 {task.length === 0 &&
-                                    <Text style={{ textAlign: 'center', paddingVertical: 30, fontSize: 20 }}>  Tasks List is Empty</Text>}
+                                    <Text style={{ textAlign: 'center', paddingVertical: 30, fontSize: 20 }}> {helpers.getLocale(localize, "tasks", "empty_task")}</Text>}
                                 <FlatList
                                     data={task}
                                     renderItem={taskRender}

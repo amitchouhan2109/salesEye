@@ -14,12 +14,16 @@ export default styles = StyleSheet.create({
     },
     inputText: {
         fontSize: 20,
+        fontFamily: fonts.fontFamily.Regular
+
     },
     headingText: {
         fontSize: 30,
         color: colors.text,
         fontWeight: "400",
-        fontFamily: 'MyriadPro-Light'
+        // fontFamily: 'MyriadPro-Bold'
+        fontFamily: fonts.fontFamily.Regular
+
     }
 
 
