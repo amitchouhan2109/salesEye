@@ -16,7 +16,7 @@ const _InputText = (props) => {
                         style={[styles.inputText, style]}
                         placeholder={props.placeholder ? props.placeholder : "Text Input"}
                         placeholderTextColor={props.placeholderColor ? props.placeholderColor : colors.placeHolder}
-                        secureTextEntry={props.secureTextEntry ? props.secureTextEntry : null}
+                        // secureTextEntry={props.secureTextEntry ? props.secureTextEntry : null}
                         //onBlur={() => { this.props.onBlur() }}
                         value={props.value}
                         // adjustsFontSizeToFit

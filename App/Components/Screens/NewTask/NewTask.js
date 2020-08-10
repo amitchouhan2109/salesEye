@@ -4,16 +4,10 @@ import {
     Alert, Image, Text, FlatList
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-// import { Input, Item } from 'native-base';
 import { globals, helpers, validators, API } from '../../../Config';
-// import { _ErrorModal, _GradiantView, _Lang, _ListBox, _Loading, _Spacer, _Icon, _Button, _B, _Layout, _ListView, _ContentType, _InlineLoader } from '../../../../../custom';
-// import { mainLayoutHoc } from '../../../../../hoc';
 import { mainStyle, images, sty } from '../../../Theme';
-import FastImage from 'react-native-fast-image'
 import _InputText from '../../Custom/InputText/_InputText'
 import styles from "./Styles";
-import moment from 'moment';
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from '../../../Config/Libs/globals';
 import MainHoc from '../../Hoc/MainHoc';
 import _Button from '../../Custom/Button/_Button';
@@ -23,12 +17,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../../Custom/Loader/Loader'
 import ImagePicker from 'react-native-image-picker';
 import DocumentPicker from 'react-native-document-picker';
-import RNFetchBlob from 'rn-fetch-blob';
 import RNFS from 'react-native-fs'
 
 
 const NewTask = (props) => {
-    // const campaigns = useSelector(state => state.campaigns);
     const localize = useSelector(state => state.localize);
     const [name, setname] = useState("");
     const [address, setaddress] = useState("");
@@ -41,13 +33,9 @@ const NewTask = (props) => {
     const [task_id, settask_id] = useState("");
     const [uploadedDoc, setuploadedDoc] = useState([]);
     const [uploadedImg, setuploadedImg] = useState([]);
-
-    const Document = [];
-
-
     const [initialLoading, setinitialLoading] = useState(true);
-    // const [editAddress, seteditAddress] = useState("");
     const [loading, setloading] = useState(false);
+    const Document = [];
 
     useEffect(() => {
         get_customer_data()
@@ -60,16 +48,15 @@ const NewTask = (props) => {
             let cb = {
                 success: async (res) => {
                     console.log({ res })
-                    // console.log(res[0])
                     let customer_data = res[0].objects
-                    // console.log(customer_data[0], "cus")
                     setname(customer_data[0].name)
                     setaddress(customer_data[0].address)
                     setcustomer_id(customer_data[0].customer_id)
                     setinitialLoading(false)
                 },
                 error: (err) => {
-                    Alert.alert(err)
+                    Alert.alert(err.message)
+                    setinitialLoading(false)
                 },
                 complete: () => { },
             };
@@ -92,14 +79,16 @@ const NewTask = (props) => {
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
+                    console.log({ res })
                     setTimeout(
                         () => {
-                            setloading(false)
+                            setloading(false),
+                                Alert.alert('Success', ' Your Task Save Successfully ');
+
                         }, 2000
                     )
                     settask_id(res.record_id)
-                    Alert.alert('Success', ' Your Task Save Successfully ',
-                    );
+
 
                 },
                 error: (err) => {
@@ -134,18 +123,17 @@ const NewTask = (props) => {
                 "portal_user": userAuthdetails.portal_user,
                 "api_key": globals.API_KEY
             };
-            setloading(false)
+
             API.sync_data(data, cb, header);
         }
     }
     const addPicture = () => {
         if (!task_id) {
-            Alert.alert("Error", "Firstly Save the task then upload documents")
+            Alert.alert("Firstly Save the task then upload documents")
         }
         else {
             const options = {
                 title: 'Select Photo',
-                // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
                 storageOptions: {
                     skipBackup: true,
                     path: 'images',
@@ -223,7 +211,6 @@ const NewTask = (props) => {
                 "api_key": globals.API_KEY,
 
             };
-            console.log("data", data)
             API.postDocument(data, cb, header);
         } else {
             // getEndPoint()
@@ -242,7 +229,7 @@ const NewTask = (props) => {
     }
     const addDocument = async () => {
         if (!task_id) {
-            Alert.alert("Error", "Firstly Save the Task then upload documents")
+            Alert.alert("Firstly Save the Task then upload documents")
         }
         else {
             DocumentPicker.pick({
@@ -251,7 +238,6 @@ const NewTask = (props) => {
                 .then(res => {
                     console.log('res', res, res.uri)
                     RNFS.readFile(res.uri, "base64").then(result => {
-                        console.log(result, '123')
                         uploadDoc(res.name, res.uri, result, "Doc1 ", " ")
                         setTimeout(() => { setdocument("Doc1") }, 3000)
                     })
@@ -273,9 +259,8 @@ const NewTask = (props) => {
                     setloading(false)
                     AsyncStorage.removeItem('userAuthDetails');
                     AsyncStorage.removeItem('token');
-                    AsyncStorage.removeItem('userName');
+                    // AsyncStorage.removeItem('userName');
                     props.navigation.navigate('LogIn')
-
                 },
                 error: (err) => {
                     setloading(false)
@@ -296,7 +281,7 @@ const NewTask = (props) => {
             };
             API.signOut(data, cb, header);
         } else {
-            // getEndPoint()
+
         }
 
     }
@@ -339,7 +324,6 @@ const NewTask = (props) => {
                             leftIcon={images.location}
                             onChangeText={value => {
                                 setaddress(value), onEdit()
-                                // emailValid: validation('email', value)
                             }}
                         />
                         <_InputText
@@ -351,24 +335,19 @@ const NewTask = (props) => {
                         <_PairButton
                             icon1={images.camera}
                             icon2={images.document}
-                            icon1Style={{ height: 35, width: 35 }}
+                            icon1Style={styles.pairButtonIcon}
                             txtStyle1={{ color: "red" }}
                             callback1={() => { addPicture() }}
                             callback2={() => { addDocument() }}
-                            style={{ borderTopWidth: 0, paddingVertical: 2 }}
+                            style={styles.pairButton}
                         />
-                        <View style={{ paddingVertical: 3, paddingHorizontal: 15 }}>
-                            {/* <Image source={picture} style={{ width: 50, height: 50, marginTop: 10 }} /> */}
-                            {/* {picture ? <Text style={{ fontSize: 15 }}>{picture}</Text> : null}
-                            {document ? <Text style={{ fontSize: 15 }}>{document}</Text> : null} */}
+                        <View style={styles.uploadDocWrapper}>
                             <FlatList
                                 data={uploadedImg}
                                 renderItem={({ item, index }) =>
                                     <Text style={styles.text}>{helpers.getLocale(localize, "newTask", "image_name")}{index + 1}</Text>}
-                                // keyExtractor={_keyExtractor}
                                 keyExtractor={(item, index) => index.toString()}
                                 removeClippedSubviews={Platform.OS == "android" ? true : false}
-
                             />
                             <FlatList
                                 data={uploadedDoc}
@@ -381,7 +360,6 @@ const NewTask = (props) => {
 
                     </View>
                     <View style={[styles.signUpWrapper, { borderWidth: 0 }]}>
-
                         <View style={styles.signUpView}>
                             <_PairButton
                                 btnTxt1={helpers.getLocale(localize, "task", "cancel")}

@@ -20,9 +20,9 @@ export default styles = StyleSheet.create({
     signUpWrapper: {
         flex: 1,
         borderWidth: 0,
-        paddingBottom: 30,
+        paddingBottom: 20,
         ...sty.jEnd,
-        ...sty.aCenter
+        ...sty.aCenter,
     },
     signUpView: {
         borderWidth: 0,
@@ -57,6 +57,91 @@ export default styles = StyleSheet.create({
         justifyContent: 'space-around',
         backgroundColor: '#00000040'
     },
+    infoCartWrapper: {
+        borderBottomWidth: 1.5,
+        borderColor: colors.border
+    },
+    emptyDataText: {
+        textAlign: 'center',
+        // paddingVertical: 30,
+        fontSize: 20,
+        fontFamily: "MyriadPro-Regular"
 
+    },
+    tasksListWrapper: {
+        paddingTop: 2, height: '60%'
+    },
+    CommentWrapper: {
+        paddingHorizontal: 10
+    },
+    commentRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingBottom: 10,
+    },
+    authorName: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        fontFamily: "MyriadPro-Regular"
+    },
+    commentDateWrapper: {
+        flexDirection: 'row', display: 'flex',
+    },
+    commentText: {
+        fontSize: 20, fontFamily: "MyriadPro-Regular",
+    },
+    clockImage: {
+        height: 20,
+        width: 20,
+        paddingLeft: 1,
+        marginTop: 5,
+        marginLeft: 5
+    },
+    modalWrapper: {
+        backgroundColor: '#FFFFFF',
+        height: 200,
+        width: "80%",
+        borderRadius: 10,
+        display: 'flex',
+        alignItems: 'center',
+        padding: 10
+    },
+    addMessage: {
+        marginTop: 20, borderWidth: 2, borderColor: "#969696"
+    },
+    addMessageTextWrapper: {
+        width: "85%", ...sty.jCenter, padding: 5, paddingLeft: 40
+    },
+    addMessageText: {
+        fontSize: 25, borderWidth: 0,
+        fontFamily: "MyriadPro-Regular"
+    },
+    addMessageIConWrapper: {
+        width: "15%", ...sty.jCenter, ...sty.aCenter
+    },
 
+    addMessageICon: {
+        height: 20, width: 20, paddingLeft: 0
+    },
+
+    section2Wapper: {
+        ...sty.fRow, paddingLeft: 10,
+    },
+    downArrow: {
+        height: 20, width: 20, paddingLeft: 0, marginTop: 7
+    },
+    heading: {
+        fontSize: 25, fontFamily: "MyriadPro-Regular", paddingLeft: 10, textAlign: "center",
+    },
+    documentListText: {
+        fontSize: 18, fontFamily: "MyriadPro-Regular"
+    },
+    startRateWrapper: {
+        ...sty.fRow, ...sty.aCenter, ...sty.jCenter, paddingBottom: 10, paddingTop: 10,
+        marginTop: 20
+    },
+    horizontalLine: {
+        marginTop: 1, height: 1.5, backgroundColor: colors.primaryColor
+    }
 });

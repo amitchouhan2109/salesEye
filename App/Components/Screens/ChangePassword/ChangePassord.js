@@ -111,9 +111,6 @@ const ChangePassword = (props) => {
         } else {
             // getEndPoint()
         }
-
-
-
     }
 
 
@@ -123,7 +120,12 @@ const ChangePassword = (props) => {
     const signinHandler = () => {
         console.log("signInHandler")
         // _getFavCampaign()
-        resetPassword()
+        if (currentPassword && password && confirmPassword) {
+            resetPassword()
+        }
+        else {
+            Alert.alert("Please Fill All Required Details")
+        }
     }
 
     return (
@@ -136,18 +138,19 @@ const ChangePassword = (props) => {
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "changePassword", "current_password")}
                     onChangeText={value => { setcurrentPassword(value) }}
+                    secureTextEntry
                 />
                 <_InputText
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "changePassword", "new_password")}
                     onChangeText={value => { setpassword(value) }
-                    }
+                    } secureTextEntry
                 />
                 <_InputText
                     style={styles.TextInput}
                     placeholder={helpers.getLocale(localize, "changePassword", "repeat_password")}
                     onChangeText={value => { setconfirmPassword(value) }
-                    }
+                    } secureTextEntry
                 />
             </View>
             <View style={styles.signUpWrapper}>

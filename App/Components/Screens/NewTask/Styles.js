@@ -48,6 +48,10 @@ export default styles = StyleSheet.create({
         fontWeight: "bold",
         fontFamily: fonts.fontFamily.Regular
     },
+    uploadDocWrapper: {
+        paddingVertical: 3,
+        paddingHorizontal: 15,
+    },
     text: {
         color: colors.text,
         fontSize: 15,
@@ -55,6 +59,13 @@ export default styles = StyleSheet.create({
         fontFamily: fonts.fontFamily.Regular
 
     },
+    pairButton: {
+        borderTopWidth: 0,
+        paddingVertical: 2
+    },
+    pairButtonIcon: {
+        height: 35, width: 35
+    }
 
 
 });

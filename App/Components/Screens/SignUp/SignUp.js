@@ -77,8 +77,12 @@ const SignUp = (props) => {
     }, [])
 
     const signinHandler = () => {
-        console.log("signInHandler")
-        getEndPoint()
+        if (email && userName && address) {
+            getEndPoint()
+        }
+        else {
+            Alert.alert("Please Fill  the Required Detail ")
+        }
         // signupUser()
     }
 
@@ -179,7 +183,7 @@ const SignUp = (props) => {
                         placeholder={helpers.getLocale(localize, "signIn", "phone")}
                         onChangeText={value => setphoneNo(value)}
                         value={phoneNo}
-
+                        keyboardType={'numeric'}
                     />
                     <_InputText
                         style={styles.TextInput}

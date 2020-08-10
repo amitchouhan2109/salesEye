@@ -1,31 +1,18 @@
 import React, { Component, useState, useEffect } from 'react';
 import {
     View,
-    SafeAreaView,
-    TextInput,
     Text,
     Image,
     TouchableOpacity,
-    ScrollView,
-    Platform,
-    ActivityIndicator,
-    FlatList,
-    Linking,
-    StyleSheet,
     Alert
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-// import { Input, Item } from 'native-base';
 import { globals, helpers, validators, API, } from '../../../Config';
-// import { _ErrorModal, _GradiantView, _Lang, _ListBox, _Loading, _Spacer, _Icon, _Button, _B, _Layout, _ListView, _ContentType, _InlineLoader } from '../../../../../custom';
-// import { mainLayoutHoc } from '../../../../../hoc';
 import { mainStyle, images, sty } from '../../../Theme';
 import FastImage from 'react-native-fast-image'
 import _InputText from '../../Custom/InputText/_InputText'
 import styles from "./Styles";
 import moment from 'moment';
-import { WINDOW_HEIGHT, WINDOW_WIDTH } from '../../../Config/Libs/globals';
 import MainHoc from '../../Hoc/MainHoc';
 import _Button from '../../Custom/Button/_Button';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -53,12 +40,29 @@ const Login = (props) => {
 
     const checkRemember = async () => {
         const remeber = await AsyncStorage.getItem('RemeberMe');
-        const remebervalue = JSON.parse(remeber)
-        setchecked(remebervalue)
+        if (remeber !== null) {
+            const remebervalue = JSON.parse(remeber)
+            setchecked(remebervalue)
+            console.log(remebervalue, "11")
+            if (remebervalue) {
+                const userName = await AsyncStorage.getItem("userName");
+                const password = await AsyncStorage.getItem("password");
+                console.log(userName, password, "12")
+                setuserName(userName)
+                setpassword(password)
+            }
+        }
     }
 
     const signinHandler = () => {
-        getEndPoint();
+        console.log(userName)
+        if (!userName || !password) {
+            Alert.alert("Error ", "Please Enter Valid Username  and Password ")
+        }
+        // set
+        else {
+            getEndPoint();
+        }
         // props.navigation.navigate('Tasks')
     }
 
@@ -76,15 +80,15 @@ const Login = (props) => {
 
     const logInUser = () => {
 
-        setloading(true)
 
+        // setloading(true)
         let cb = {
             success: async (res) => {
                 console.log("res :", res)
                 await AsyncStorage.setItem("userAuthDetails", JSON.stringify(res[0]));
                 await AsyncStorage.setItem("token", res[0].token);
                 await AsyncStorage.setItem("userName", userName);
-
+                await AsyncStorage.setItem("password", password);
                 dispatch(login({ res }))
                 setloading(false)
                 props.navigation.navigate('Tasks')
@@ -113,16 +117,17 @@ const Login = (props) => {
     }
 
     const getEndPoint = () => {
+
+
         let cb = {
             success: async (res) => {
-                setloading(false)
                 if (res.error === null) {
                     await AsyncStorage.setItem("baseUrl", res.result.ws_url);
                     logInUser()
                 } else {
                     Alert.alert('Error in fetch end Point', 'Authentication failed');
+                    setloading(false)
                 }
-
             },
             error: (err) => {
                 setloading(false)
@@ -138,6 +143,7 @@ const Login = (props) => {
             company_code: "app"
         };
         API.getEndPoint(data, cb, header);
+
     };
 
     return (
@@ -200,7 +206,6 @@ const Login = (props) => {
                 <View style={styles.forgetPassView}>
                     <TouchableOpacity
                         onPress={() => {
-                            // props.navigation.navigate('SignUp')
                             props.navigation.navigate('ForgetPassword')
                         }}
                         style={styles.forgetPass}>
@@ -214,9 +219,6 @@ const Login = (props) => {
                     <TouchableOpacity
                         onPress={() => {
                             props.navigation.navigate('SignUp')
-                            // props.navigation.navigate('ChangePassord')
-
-                            // checkApiBaseUrl()
                         }}
                         style={styles.signUp}>
                         <Text allowFontScaling={false} style={styles.signUpText}> {helpers.getLocale(localize, "login", "signUp")} </Text>

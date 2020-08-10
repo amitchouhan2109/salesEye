@@ -43,12 +43,6 @@ const ForgetPassword = (props) => {
     const [loading, setloading] = useState(false);
     const [userNameValid, setuserNameValid] = useState("");
 
-
-
-    // const loginData = useSelector(state => state.loginData);
-    // const dispatch = useDispatch();
-    // let companyPostRef = {}
-
     useEffect(() => {
 
         // console.log("Login useEffect")
@@ -81,43 +75,48 @@ const ForgetPassword = (props) => {
 
 
     const forgetPassword = async () => {
+        if (userName) {
 
-        setloading(true)
+            setloading(true)
 
-        const baseUrl = await AsyncStorage.getItem("baseUrl");
-        if (baseUrl && baseUrl !== undefined) {
-            let cb = {
-                success: async (res) => {
-                    console.log("success res:", res)
-                    setloading(false)
-                    Alert.alert(
-                        'Success',
-                        'Check Email For Further Instruction',
-                        [
-                            {
-                                text: 'OK', onPress: () => {
-                                    props.navigation.navigate('LogIn')
-                                }
-                            },
-                        ]
-                    );
+            const baseUrl = await AsyncStorage.getItem("baseUrl");
+            if (baseUrl && baseUrl !== undefined) {
+                let cb = {
+                    success: async (res) => {
+                        console.log("success res:", res)
+                        setloading(false)
+                        Alert.alert(
+                            'Success',
+                            'Check  Your Email',
+                            [
+                                {
+                                    text: 'OK', onPress: () => {
+                                        props.navigation.navigate('LogIn')
+                                    }
+                                },
+                            ]
+                        );
 
-                },
-                error: (err) => {
-                    setloading(false)
-                    Alert.alert('Error', " Authentication Error")
-                },
-                complete: () => { },
-            };
+                    },
+                    error: (err) => {
+                        setloading(false)
+                        Alert.alert('Error', " Authentication Error")
+                    },
+                    complete: () => { },
+                };
 
-            let header = helpers.buildHeader();
-            let data = {
-                "username": userName,
-                "api_key": globals.API_KEY
-            };
-            API.forgetPassword(data, cb, header);
-        } else {
-            getEndPoint()
+                let header = helpers.buildHeader();
+                let data = {
+                    "username": userName,
+                    "api_key": globals.API_KEY
+                };
+                API.forgetPassword(data, cb, header);
+            } else {
+                getEndPoint()
+            }
+        }
+        else {
+            Alert.alert("Error", "Username is Required")
         }
 
     }

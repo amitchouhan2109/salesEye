@@ -1,10 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import {
     View,
-    SafeAreaView,
-    TextInput,
     Text,
-    Image,
     TouchableOpacity,
     ScrollView,
     Platform,
@@ -14,11 +11,7 @@ import {
     StyleSheet, Alert
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-// import { Input, Item } from 'native-base';
 import { globals, helpers, validators, API, } from '../../../Config';
-// import { _ErrorModal, _GradiantView, _Lang, _ListBox, _Loading, _Spacer, _Icon, _Button, _B, _Layout, _ListView, _ContentType, _InlineLoader } from '../../../../../custom';
-// import { mainLayoutHoc } from '../../../../../hoc';
 import { mainStyle, images, sty, colors } from '../../../Theme';
 import FastImage from 'react-native-fast-image'
 import _InputText from '../../Custom/InputText/_InputText'
@@ -31,17 +24,10 @@ import _Header from '../../Custom/Header/_Header';
 import AsyncStorage from '@react-native-community/async-storage';
 import InfoCart from '../ContentType/InfoCart/InfoCart';
 import { setTasks } from "../../../Redux/Actions/TaskAction"
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-} from 'react-native-popup-menu';
 import { large } from '../../../Theme/FontSizes';
 import Loader from '../../Custom/Loader/Loader'
 
 const Tasks = (props) => {
-    // const campaigns = useSelector(state => state.campaigns);
     const localize = useSelector(state => state.localize);
     const dispatch = useDispatch();
     const tasks = useSelector(state => state.tasks);
@@ -49,8 +35,6 @@ const Tasks = (props) => {
     const [arrayholder, setarrayHolder] = useState([]);
     const [loading, setloading] = useState(false)
     const [TaskLoader, setTaskLoader] = useState(true)
-
-
     const [search, setsearch] = useState(false)
 
     const signoutHandler = () => {
@@ -58,7 +42,6 @@ const Tasks = (props) => {
     }
 
     const signout = async () => {
-        // props.navigation.navigate('LogIn')
         let token = await AsyncStorage.getItem('token');
         let userAuthdetails = await helpers.userAuthdetails();
         const baseUrl = await AsyncStorage.getItem("baseUrl");
@@ -68,16 +51,15 @@ const Tasks = (props) => {
                     setloading(false)
                     AsyncStorage.removeItem('userAuthDetails');
                     AsyncStorage.removeItem('token');
-                    AsyncStorage.removeItem('userName');
+                    // AsyncStorage.removeItem('userName');
+                    // AsyncStorage.removeItem('password');
                     props.navigation.navigate('LogIn')
-
                 },
                 error: (err) => {
                     setloading(false)
                     setTimeout(() => {
                         Alert.alert("Error", err.message)
                     }, 200);
-
                 },
                 complete: () => {
                     setloading(false)
@@ -108,16 +90,27 @@ const Tasks = (props) => {
     const getTasks = async () => {
         let cb = {
             success: async (res) => {
-                console.log({ res })
                 dispatch(setTasks({ res }))
                 setTaskLoader(false)
-                settask(res[0].tasks)
+                console.log({ res })
+                const TaskList = res[0].tasks
+                TaskList.sort(function (a, b) {
+                    console.log("1")
+                    return (b.id - a.id)
+
+                })
+                console.log("TaskLit", TaskList)
+                // }).sort(function (a, b) {
+                //     return (a.name - b.name);
+                // });
+                // const sorted = TaskList.reverse();
+                // console.log("sor", sorted)
+                settask(TaskList)
                 setarrayHolder(res[0].tasks)
             },
             error: (err) => {
                 setTaskLoader(false)
                 Alert.alert("Authentocation Error ")
-
             },
             complete: () => { },
         };
@@ -133,12 +126,11 @@ const Tasks = (props) => {
         API.getAllTasks(data, cb, header);
     }
 
-    const signinHandler = () => {
-    }
+
 
     const taskRender = (a) => {
         return (
-            <View style={{ borderBottomWidth: 1.5, borderColor: colors.border }}>
+            <View style={styles.infoCartWrapper}>
                 <TouchableOpacity onPress={() => props.navigation.navigate('Task', { task: a })}>
                     <InfoCart localize={localize} tasks={a} />
                 </TouchableOpacity>
@@ -155,11 +147,9 @@ const Tasks = (props) => {
         });
         if (newData.length == 0) {
             Alert.alert('search not found')
-            // this.setState({ msg: ' serach result not found' })
         }
         else {
             settask(newData)
-            // this.setState({ myOder: newData });
         }
     }
 
@@ -168,8 +158,6 @@ const Tasks = (props) => {
     return (
         <>
             {
-                // loading ? <Loader name />
-                // :
                 <View style={[mainStyle.rootView, styles.container]}>
                     <Loader
                         loading={loading} />
@@ -178,29 +166,27 @@ const Tasks = (props) => {
                         onPress={() => props.navigation.navigate('ChangePassord')}
                         onPress_signout={() => signoutHandler()}
                     />
-
-
-                    <View style={{ borderWidth: 0 }}>
+                    <View >
                         <_InputText
                             style={styles.TextInput}
                             placeholder={helpers.getLocale(localize, "tasks", "search")}
                             onChangeText={value =>
                                 setsearch(value)
                                 // searchFilterFunction(value)
-
                             }
                         />
                     </View>
-                    <View style={{ paddingTop: 2, height: '60%' }}>
+                    <View style={styles.tasksListWrapper}>
                         {TaskLoader ? <ActivityIndicator size={large} /> :
                             <>
                                 {task.length === 0 &&
-                                    <Text style={{ textAlign: 'center', paddingVertical: 30, fontSize: 20 }}> {helpers.getLocale(localize, "tasks", "empty_task")}</Text>}
+                                    <Text style={styles.emptyDataText}> {helpers.getLocale(localize, "tasks", "empty_task")}</Text>}
                                 <FlatList
                                     data={task}
                                     renderItem={taskRender}
                                     keyExtractor={_keyExtractor}
                                     removeClippedSubviews={Platform.OS == "android" ? true : false}
+                                    scrollToIndex={1}
                                 /></>}
 
                     </View>
