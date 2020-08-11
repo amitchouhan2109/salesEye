@@ -77,19 +77,17 @@ const SignUp = (props) => {
     }, [])
 
     const signinHandler = () => {
-        if (email && userName && address) {
+        if (email && userName && lastName && address && phoneNo && city) {
             getEndPoint()
         }
         else {
-            Alert.alert("Please Fill  the Required Detail ")
+            Alert.alert(helpers.getLocale(localize, "signIn", "onSubmit"))
         }
         // signupUser()
     }
 
     const signupUser = () => {
         setloading(true)
-
-
         let cb = {
             success: async (res) => {
                 console.log("success res:", res)

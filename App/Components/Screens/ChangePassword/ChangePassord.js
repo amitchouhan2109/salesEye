@@ -14,17 +14,11 @@ import {
     StyleSheet, Alert
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-// import { Input, Item } from 'native-base';ss
 import { globals, helpers, validators, API } from '../../../Config';
-// import { _ErrorModal, _GradiantView, _Lang, _ListBox, _Loading, _Spacer, _Icon, _Button, _B, _Layout, _ListView, _ContentType, _InlineLoader } from '../../../../../custom';
-// import { mainLayoutHoc } from '../../../../../hoc';
 import { mainStyle, images, sty } from '../../../Theme';
 import FastImage from 'react-native-fast-image'
 import _InputText from '../../Custom/InputText/_InputText'
 import styles from "./Styles";
-import moment from 'moment';
-import { WINDOW_HEIGHT, WINDOW_WIDTH } from '../../../Config/Libs/globals';
 import MainHoc from '../../Hoc/MainHoc';
 import _Button from '../../Custom/Button/_Button';
 import _Header from '../../Custom/Header/_Header';
@@ -36,7 +30,6 @@ import Loader from '../../Custom/Loader/Loader';
 
 
 const ChangePassword = (props) => {
-    // const campaigns = useSelector(state => state.campaigns);
     const localize = useSelector(state => state.localize);
     const [currentPassword, setcurrentPassword] = useState("");
     const [password, setpassword] = useState("");
@@ -51,15 +44,9 @@ const ChangePassword = (props) => {
     const [loading, setloading] = useState(false);
     const loginData = useSelector(state => state.loginData);
     console.log("logindata", loginData)
-    // const dispatch = useDispatch();
-    // let companyPostRef = {}
 
     useEffect(() => {
 
-        // console.log("Login useEffect")
-        // console.log("height , width ", globals.WINDOW_HEIGHT, globals.WINDOW_WIDTH)
-        // if (campaigns["favorite"] == null || campaigns["favorite"].length == 0)
-        // _getFavCampaign()
     }, [])
     const resetPassword = async () => {
         let token = await AsyncStorage.getItem('token');
@@ -76,7 +63,8 @@ const ChangePassword = (props) => {
                     setloading(false)
                     Alert.alert(
                         'Success',
-                        ' Your Password Change Successfully ',
+                        helpers.getLocale(localize, "changePassword", "onSubmitSuccess"),
+                        // ' Your password change successfully ',
                         [
                             {
                                 text: 'OK', onPress: () => {
@@ -101,12 +89,10 @@ const ChangePassword = (props) => {
             });
             console.log('header', header)
             let data = {
-                // "username": "Max ace",
                 "username": userName,
                 "password": password,
                 "api_key": globals.API_KEY
             };
-            console.log(data, "d")
             API.resetpassword(data, cb, header);
         } else {
             // getEndPoint()
@@ -117,14 +103,12 @@ const ChangePassword = (props) => {
 
 
 
-    const signinHandler = () => {
-        console.log("signInHandler")
-        // _getFavCampaign()
+    const saveHandler = () => {
         if (currentPassword && password && confirmPassword) {
             resetPassword()
         }
         else {
-            Alert.alert("Please Fill All Required Details")
+            Alert.alert(helpers.getLocale(localize, "changePassword", "onSubmit"))
         }
     }
 
@@ -157,7 +141,7 @@ const ChangePassword = (props) => {
                 <View style={styles.signUpView}>
                     <_Button
                         btnTxt={helpers.getLocale(localize, "changePassword", "save")}
-                        callback={signinHandler} />
+                        callback={saveHandler} />
                 </View>
             </View>
         </View >

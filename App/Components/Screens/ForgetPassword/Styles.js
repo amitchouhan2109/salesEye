@@ -20,7 +20,7 @@ export default styles = StyleSheet.create({
     signUpWrapper: {
         flex: 1,
         borderWidth: 0,
-        paddingBottom: 50,
+        paddingBottom: 30,
         ...sty.jEnd,
         ...sty.aCenter
     },

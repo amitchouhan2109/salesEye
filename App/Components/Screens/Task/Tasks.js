@@ -95,14 +95,9 @@ const Tasks = (props) => {
                 console.log({ res })
                 const TaskList = res[0].tasks
                 TaskList.sort(function (a, b) {
-                    console.log("1")
                     return (b.id - a.id)
 
                 })
-                console.log("TaskLit", TaskList)
-                // }).sort(function (a, b) {
-                //     return (a.name - b.name);
-                // });
                 // const sorted = TaskList.reverse();
                 // console.log("sor", sorted)
                 settask(TaskList)
@@ -170,10 +165,11 @@ const Tasks = (props) => {
                         <_InputText
                             style={styles.TextInput}
                             placeholder={helpers.getLocale(localize, "tasks", "search")}
-                            onChangeText={value =>
-                                setsearch(value)
-                                // searchFilterFunction(value)
-                            }
+                            editable={false}
+                        // onChangeText={value =>
+                        //     setsearch(value)
+                        //     // searchFilterFunction(value)
+                        // }
                         />
                     </View>
                     <View style={styles.tasksListWrapper}>

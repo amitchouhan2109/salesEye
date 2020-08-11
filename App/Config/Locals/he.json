@@ -7,7 +7,9 @@
     "rememberMe": "Remember Me",
     "signIn": "SIGN IN",
     "forgotPassword": "Forgot password?",
-    "signUp": "SIGN UP"
+    "signUp": "SIGN UP",
+    "onSubmit": "Please enter valid username and password"
+
   },
   "signIn": {
     "first_name": "Firstname",
@@ -16,19 +18,26 @@
     "phone": "Phone",
     "email": "Email",
     "address": "Address",
-    "city": "City"
+    "city": "City",
+    "onSubmit": "Please fill  all required details"
+
   },
   "forgetPassword": {
     "userName": "Username",
     "send": "SEND",
-    "forget_password": "FORGET PASSWORD"
+    "forget_password": "FORGET PASSWORD",
+    "onSubmit": "Please enter valid username",
+    "onSubmitSuccess": "Check your email"
+
   },
   "changePassword": {
     "current_password": "Current password",
     "new_password": "New password",
     "repeat_password": "Repeat password",
     "send": "SEND",
-    "change_password": "CHANGE PASSWORD"
+    "change_password": "CHANGE PASSWORD",
+    "onSubmit": "Please fill all required details ",
+    "onSubmitSuccess": "Your password  changed successfully "
   },
   "tasks": {
     "add_task": "ADD TASK",

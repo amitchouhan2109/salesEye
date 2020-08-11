@@ -57,7 +57,8 @@ const Login = (props) => {
     const signinHandler = () => {
         console.log(userName)
         if (!userName || !password) {
-            Alert.alert("Error ", "Please Enter Valid Username  and Password ")
+            Alert.alert(helpers.getLocale(localize, "login", "onSubmit"))
+            // Alert.alert("Please enter valid username and password ")
         }
         // set
         else {

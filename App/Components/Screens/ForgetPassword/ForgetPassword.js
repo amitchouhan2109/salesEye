@@ -60,7 +60,6 @@ const ForgetPassword = (props) => {
                 } else {
                     Alert.alert('Error in fetch end Point', 'Authentication failed');
                 }
-
             },
             error: (err) => { },
             complete: () => { },
@@ -87,7 +86,7 @@ const ForgetPassword = (props) => {
                         setloading(false)
                         Alert.alert(
                             'Success',
-                            'Check  Your Email',
+                            helpers.getLocale(localize, "forgetPassword", "onSubmitSuccess"),
                             [
                                 {
                                     text: 'OK', onPress: () => {
@@ -116,7 +115,7 @@ const ForgetPassword = (props) => {
             }
         }
         else {
-            Alert.alert("Error", "Username is Required")
+            Alert.alert(helpers.getLocale(localize, "forgetPassword", "onSubmit"))
         }
 
     }
