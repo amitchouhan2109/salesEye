@@ -18,6 +18,8 @@ import _Button from '../../Custom/Button/_Button';
 import AsyncStorage from '@react-native-community/async-storage';
 import { login } from '../../../Redux/Actions/LoginAction'
 import Loader from '../../Custom/Loader/Loader'
+import { validation } from '../../../Config/Libs/helpers';
+
 
 
 
@@ -56,13 +58,21 @@ const Login = (props) => {
 
     const signinHandler = () => {
         console.log(userName)
-        if (!userName || !password) {
-            Alert.alert(helpers.getLocale(localize, "login", "onSubmit"))
+        if (userName && password) {
+            const emailerr = validation("email", userName)
+            if (!emailerr) {
+                Alert.alert("You have entered an invalid email address!")
+            }
+            else {
+                getEndPoint();
+            }
             // Alert.alert("Please enter valid username and password ")
         }
+
         // set
         else {
-            getEndPoint();
+            Alert.alert(helpers.getLocale(localize, "login", "onSubmit"))
+
         }
         // props.navigation.navigate('Tasks')
     }
@@ -118,8 +128,6 @@ const Login = (props) => {
     }
 
     const getEndPoint = () => {
-
-
         let cb = {
             success: async (res) => {
                 if (res.error === null) {

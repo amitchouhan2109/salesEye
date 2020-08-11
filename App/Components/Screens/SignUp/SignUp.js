@@ -30,6 +30,8 @@ import MainHoc from '../../Hoc/MainHoc';
 import _Button from '../../Custom/Button/_Button';
 import _Header from '../../Custom/Header/_Header';
 import Loader from '../../Custom/Loader/Loader'
+import { validation } from '../../../Config/Libs/helpers';
+
 
 
 import AsyncStorage from '@react-native-community/async-storage';
@@ -78,7 +80,19 @@ const SignUp = (props) => {
 
     const signinHandler = () => {
         if (email && userName && lastName && address && phoneNo && city) {
-            getEndPoint()
+            const emailerr = validation("email", email)
+            const phoneNoerr = validation("phoneNo", phoneNo)
+
+            if (!phoneNoerr) {
+                Alert.alert("You have entered an invalid  phone-no!")
+
+            }
+            else if (!emailerr) {
+                Alert.alert("You have entered an invalid email address!")
+            }
+            else {
+                getEndPoint()
+            }
         }
         else {
             Alert.alert(helpers.getLocale(localize, "signIn", "onSubmit"))

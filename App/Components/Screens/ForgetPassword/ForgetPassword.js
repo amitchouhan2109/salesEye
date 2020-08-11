@@ -32,6 +32,7 @@ import MainHoc from '../../Hoc/MainHoc';
 import _Button from '../../Custom/Button/_Button';
 import _Header from '../../Custom/Header/_Header';
 import Loader from '../../Custom/Loader/Loader'
+import { validation } from '../../../Config/Libs/helpers';
 
 
 
@@ -75,43 +76,49 @@ const ForgetPassword = (props) => {
 
     const forgetPassword = async () => {
         if (userName) {
+            const emailerr = validation("email", userName)
+            if (!emailerr) {
+                Alert.alert("You have entered an invalid email address!")
+            }
+            else {
+                setloading(true)
+                const baseUrl = await AsyncStorage.getItem("baseUrl");
+                if (baseUrl && baseUrl !== undefined) {
+                    let cb = {
+                        success: async (res) => {
+                            console.log("success res:", res)
+                            setloading(false)
+                            Alert.alert(
+                                'Success',
+                                helpers.getLocale(localize, "forgetPassword", "onSubmitSuccess"),
+                                [
+                                    {
+                                        text: 'OK', onPress: () => {
+                                            props.navigation.navigate('LogIn')
+                                        }
+                                    },
+                                ]
+                            );
 
-            setloading(true)
+                        },
+                        error: (err) => {
+                            setloading(false)
+                            Alert.alert('Error', err.message)
+                        },
+                        complete: () => { },
+                    };
 
-            const baseUrl = await AsyncStorage.getItem("baseUrl");
-            if (baseUrl && baseUrl !== undefined) {
-                let cb = {
-                    success: async (res) => {
-                        console.log("success res:", res)
-                        setloading(false)
-                        Alert.alert(
-                            'Success',
-                            helpers.getLocale(localize, "forgetPassword", "onSubmitSuccess"),
-                            [
-                                {
-                                    text: 'OK', onPress: () => {
-                                        props.navigation.navigate('LogIn')
-                                    }
-                                },
-                            ]
-                        );
+                    let header = helpers.buildHeader();
+                    let data = {
+                        "username": userName,
+                        "api_key": globals.API_KEY
+                    };
+                    API.forgetPassword(data, cb, header);
 
-                    },
-                    error: (err) => {
-                        setloading(false)
-                        Alert.alert('Error', " Authentication Error")
-                    },
-                    complete: () => { },
-                };
-
-                let header = helpers.buildHeader();
-                let data = {
-                    "username": userName,
-                    "api_key": globals.API_KEY
-                };
-                API.forgetPassword(data, cb, header);
-            } else {
-                getEndPoint()
+                }
+                else {
+                    getEndPoint()
+                }
             }
         }
         else {

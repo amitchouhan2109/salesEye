@@ -24,10 +24,10 @@
 
   },
   "forgetPassword": {
-    "userName": "Username",
+    "userName": "Email-id",
     "send": "SEND",
     "forget_password": "FORGET PASSWORD",
-    "onSubmit": "Please enter valid username",
+    "onSubmit": "Please enter valid email-id",
     "onSubmitSuccess": "Check your email"
   },
   "changePassword": {

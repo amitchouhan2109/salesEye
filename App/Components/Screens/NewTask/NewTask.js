@@ -225,7 +225,12 @@ const NewTask = (props) => {
     }
 
     const saveButtonHandler = () => {
-        addTask()
+        if (title && address && name) {
+            addTask()
+        }
+        else {
+            Alert.alert("Please fill the required details ")
+        }
     }
     const addDocument = async () => {
         if (!task_id) {

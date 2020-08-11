@@ -370,133 +370,149 @@ export const validation = (type, text, pass) => {
 
   console.log(text, 0, pass)
 
-  const regex = /^[A-Za-z]+$/;
-  const passreg = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/
+  // const regex = /^[A-Za-z]+$/;
+  // const passreg = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/
 
 
-  const numregx = /^\d{10}$/
-  const emailPattern = /^([a-zA-Z])+([0-9a-zA-Z_\.\-])+\@+(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,5}$)$/;
-
-  if (type == 'Name') {
-    if (!text) {
-      return "user name is Required"
-      // getLocale(localize, "validation", "username_Required ") 
-    }
-
-    else if (regex.test(text)) {
-      return ' '
-    }
-    else {
-      return 'First name only contain Alphabet '
-    }
-  }
-  if (type == 'lastName') {
-    if (!text) {
-      return 'Last  Name is Required'
-    }
-    else if (regex.test(text)) {
-      return ' '
-    }
-    else {
-      return 'Last Name only contain Alphabet '
-    }
-
-
-  }
-  else if (type == 'password') {
-    if (!text) {
-      return 'Password is Required '
-    }
-    else {
-      return ' '
-    }
-    // else if (text.length < 7) {
-    //   return 'Password at least 7 digit Long'
-    // }
-
-    // else if (passreg.test(text)) {
-    //   return ' '
-    // }
-    // else {
-    //   return 'Password should be combination of (A,a,@,1) '
-    // }
-  }
-
-  else if (type == 'confirmpassword') {
-    console.log("conpass", text, "sd", pass)
+  const numregx = /^[0-9]+$/
+  // /^\d{10}$/
+  // const emailPattern = /^([a-zA-Z])+([0-9a-zA-Z_\.\-])+\@+(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,5}$)$/;
+  const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  // const emailPattern = /^[a-z][a-zA-Z0-9_.]*(\.[a-zA-Z][a-zA-Z0-9_.]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/
+  if (type == 'email') {
     if (text == " " || !text) {
-      return 'confirm Password is Required '
-    }
-    else if (pass === text) {
-      return " "
-    }
-    else {
-      return 'Password Does not  match '
-    }
-  }
-  else if (type == 'email') {
-    if (text == " " || !text) {
-      return 'UserName is Required '
-
+      return false
     }
 
     else if (emailPattern.test(text)) {
-      return " "
+      return true
     }
     else {
-      return 'UserName is Invalid'
-    }
-  }
-  else if (type == 'emailId') {
-    if (text == " " || !text) {
-      return 'Email-id is Required '
-    }
-
-    else if (emailPattern.test(text)) {
-      return " "
-    }
-    else {
-      return 'Email-id is Invalid'
+      return false
     }
   }
   else if (type == 'phoneNo') {
     if (text == " " || !text) {
-      return 'Mob no is Required '
+      return false
     }
     else if (numregx.test(text)) {
-      return ' '
+      return true
     }
     else {
-      return 'Mobile no is Invalid'
+      return false
     }
   }
 
-  else if (type == 'Address') {
-    if (!text) {
-      return 'Address is Required'
-    }
-    if (text.length < 10) {
-      return 'Address contain at least 10 charcter'
+  // if (type == 'Name') {
+  //   if (!text) {
+  //     return "user name is Required"
+  //     // getLocale(localize, "validation", "username_Required ") 
+  //   }
 
-    } else {
-      return ' '
+  //   else if (regex.test(text)) {
+  //     return ' '
+  //   }
+  //   else {
+  //     return 'First name only contain Alphabet '
+  //   }
+  // }
+  // if (type == 'lastName') {
+  //   if (!text) {
+  //     return 'Last  Name is Required'
+  //   }
+  //   else if (regex.test(text)) {
+  //     return ' '
+  //   }
+  //   else {
+  //     return 'Last Name only contain Alphabet '
+  //   }
 
 
-    }
-  }
+  // }
+  // else if (type == 'password') {
+  //   if (!text) {
+  //     return 'Password is Required '
+  //   }
+  //   else {
+  //     return ' '
+  //   }
+  //   // else if (text.length < 7) {
+  //   //   return 'Password at least 7 digit Long'
+  //   // }
 
-  else if (type == 'City') {
-    console.warn(" #####", text)
-    if (!text) {
+  //   // else if (passreg.test(text)) {
+  //   //   return ' '
+  //   // }
+  //   // else {
+  //   //   return 'Password should be combination of (A,a,@,1) '
+  //   // }
+  // }
 
-      return ' City is Required'
-    }
-    else {
-      // Alert.alert('ok')
-      return ' '
-    }
+  // else if (type == 'confirmpassword') {
+  //   console.log("conpass", text, "sd", pass)
+  //   if (text == " " || !text) {
+  //     return 'confirm Password is Required '
+  //   }
+  //   else if (pass === text) {
+  //     return " "
+  //   }
+  //   else {
+  //     return 'Password Does not  match '
+  //   }
+  // }
+  // else if (type == 'email') {
+  //   if (text == " " || !text) {
+  //     return 'UserName is Required '
 
-  }
+  //   }
+
+  //   else if (emailPattern.test(text)) {
+  //     return " "
+  //   }
+  //   else {
+  //     return 'UserName is Invalid'
+  //   }
+  // }
+  // else if (type == 'emailId') {
+  //   if (text == " " || !text) {
+  //     return 'Email-id is Required '
+  //   }
+
+  //   else if (emailPattern.test(text)) {
+  //     return " "
+  //   }
+  //   else {
+  //     return 'Email-id is Invalid'
+  //   }
+  // }
+  // 
+
+  // else if (type == 'Address') {
+  //   if (!text) {
+  //     return 'Address is Required'
+  //   }
+  //   if (text.length < 10) {
+  //     return 'Address contain at least 10 charcter'
+
+  //   } else {
+  //     return ' '
+
+
+  //   }
+  // }
+
+  // else if (type == 'City') {
+  //   console.warn(" #####", text)
+  //   if (!text) {
+
+  //     return ' City is Required'
+  //   }
+  //   else {
+  //     // Alert.alert('ok')
+  //     return ' '
+  //   }
+
+  // }
 
 
 
