@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import {
     colors,
     fonts,
@@ -14,7 +14,8 @@ export default styles = StyleSheet.create({
         borderBottomColor: colors.buttonBorder,
         borderTopColor: colors.buttonBorder,
         paddingVertical: 7.5,
-        ...sty.fRow
+        ...sty.fRow,
+        // paddingTop: Platform.OS === 'ios' ? 2 : 0
     },
     inputText: {
         fontSize: 20,

@@ -317,8 +317,6 @@ PODS:
     - React
     - SDWebImage (~> 5.0)
     - SDWebImageWebPCoder (~> 0.4.1)
-  - RNFS (2.16.6):
-    - React
   - RNGestureHandler (1.6.1):
     - React
   - RNI18n (2.0.15):
@@ -393,7 +391,6 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNFastImage (from `../node_modules/react-native-fast-image`)
-  - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNI18n (from `../node_modules/react-native-i18n`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -482,8 +479,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNFastImage:
     :path: "../node_modules/react-native-fast-image"
-  RNFS:
-    :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNI18n:
@@ -541,7 +536,6 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: db711e29e5e0500d9bd21aa0c2e397efa45302b1
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
   RNFastImage: 35ae972d6727c84ee3f5c6897e07f84d0a3445e9
-  RNFS: 2bd9eb49dc82fa9676382f0585b992c424cd59df
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNI18n: e2f7e76389fcc6e84f2c8733ea89b92502351fd8
   RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
@@ -552,6 +546,6 @@ SPEC CHECKSUMS:
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 137515c7897f3266b396de13d53aaf53dc72b3ad
+PODFILE CHECKSUM: 1a5d80f0dbd6ccef99c305af7c5b435a6e0828b7
 
 COCOAPODS: 1.8.4
