@@ -17,7 +17,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../../Custom/Loader/Loader'
 import ImagePicker from 'react-native-image-picker';
 import DocumentPicker from 'react-native-document-picker';
-import RNFS from 'react-native-fs'
+// import RNFS from 'react-native-fs'
 
 
 const NewTask = (props) => {
@@ -338,7 +338,7 @@ const NewTask = (props) => {
                             icon1Style={styles.pairButtonIcon}
                             txtStyle1={{ color: "red" }}
                             callback1={() => { addPicture() }}
-                            callback2={() => { addDocument() }}
+                            callback2={() => { }}  // { addDocument() }}
                             style={styles.pairButton}
                         />
                         <View style={styles.uploadDocWrapper}>

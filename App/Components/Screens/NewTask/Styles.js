@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import {
     colors,
     fonts,
@@ -14,11 +14,11 @@ export default styles = StyleSheet.create({
         marginHorizontal: 15
     },
     TextInput: {
-        marginTop: 20,
+        marginTop: Platform.OS === 'ios' ? 40 : 20,
         fontFamily: fonts.fontFamily.Regular
     },
     TextInput1: {
-        marginTop: 20,
+        marginTop: Platform.OS === 'ios' ? 40 : 20,
         fontFamily: fonts.fontFamily.Regular
 
     },
