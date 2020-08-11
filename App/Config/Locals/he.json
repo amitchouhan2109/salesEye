@@ -37,7 +37,8 @@
     "send": "SEND",
     "change_password": "CHANGE PASSWORD",
     "onSubmit": "Please fill all required details ",
-    "onSubmitSuccess": "Your password  changed successfully "
+    "onSubmitSuccess": "Your password  changed successfully ",
+    "passwordNotMatch": "Password and repeat password does not match "
   },
   "tasks": {
     "add_task": "ADD TASK",

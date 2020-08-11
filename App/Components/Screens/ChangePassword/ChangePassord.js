@@ -43,7 +43,6 @@ const ChangePassword = (props) => {
 
     const [loading, setloading] = useState(false);
     const loginData = useSelector(state => state.loginData);
-    console.log("logindata", loginData)
 
     useEffect(() => {
 
@@ -55,7 +54,6 @@ const ChangePassword = (props) => {
         const baseUrl = await AsyncStorage.getItem("baseUrl");
         const userName = await AsyncStorage.getItem("userName");
 
-        console.log("userName", userName)
         if (baseUrl && baseUrl !== undefined) {
             let cb = {
                 success: async (res) => {
@@ -105,7 +103,14 @@ const ChangePassword = (props) => {
 
     const saveHandler = () => {
         if (currentPassword && password && confirmPassword) {
-            resetPassword()
+            console.log(password, " matchs", confirmPassword)
+            if (password === confirmPassword) {
+                resetPassword()
+            }
+            else {
+                Alert.alert(helpers.getLocale(localize, "changePassword", "passwordNotMatch"))
+            }
+            // 
         }
         else {
             Alert.alert(helpers.getLocale(localize, "changePassword", "onSubmit"))
