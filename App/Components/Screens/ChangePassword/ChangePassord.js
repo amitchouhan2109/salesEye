@@ -98,15 +98,10 @@ const ChangePassword = (props) => {
     }
 
 
-
-
-
     const saveHandler = async () => {
-
         if (currentPassword && password && confirmPassword) {
             let aynscPassword = await AsyncStorage.getItem('password');
             if (aynscPassword === currentPassword) {
-                console.log(password, " matchs", confirmPassword)
                 if (password === confirmPassword) {
                     resetPassword()
                 }
@@ -123,19 +118,6 @@ const ChangePassword = (props) => {
             Alert.alert(helpers.getLocale(localize, "changePassword", "onSubmit"))
         }
 
-        // if (currentPassword && password && confirmPassword) {
-        //     console.log(password, " matchs", confirmPassword)
-        //     if (password === confirmPassword) {
-        //         resetPassword()
-        //     }
-        //     else {
-        //         Alert.alert(helpers.getLocale(localize, "changePassword", "passwordNotMatch"))
-        //     }
-        //     // 
-        // }
-        // else {
-        //     Alert.alert(helpers.getLocale(localize, "changePassword", "onSubmit"))
-        // }
     }
 
     return (

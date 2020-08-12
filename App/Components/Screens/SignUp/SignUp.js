@@ -150,6 +150,7 @@ const SignUp = (props) => {
                     signupUser()
 
                 } else {
+                    setloading(false)
                     Alert.alert('Error in fetch end Point', 'Authentication failed');
                 }
 
@@ -157,7 +158,9 @@ const SignUp = (props) => {
             error: (err) => {
                 setloading(false)
             },
-            complete: () => { },
+            complete: () => {
+                setloading(false)
+            },
         };
 
         let header = helpers.buildHeader({});

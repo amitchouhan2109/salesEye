@@ -49,6 +49,8 @@ const Task = (props) => {
     const [getMessage, setgetMessage] = useState([]);
     const [MsgLoader, setMsgLoader] = useState(false);
     const [loading, setloading] = useState(false);
+    const [msgemptyErr, setmsgemptyErr] = useState(false);
+
 
 
     // const [docCount, setdocCount] = useState("");
@@ -106,40 +108,51 @@ const Task = (props) => {
         }
     }
     const addCommentData = async () => {
-        setloading(true)
-        let userAuthdetails = await helpers.userAuthdetails();
-        const baseUrl = await AsyncStorage.getItem("baseUrl");
-        if (baseUrl && baseUrl !== undefined) {
-            let cb = {
-                success: async (res) => {
-                    console.log({ res })
-                    toggleModal(false)
-                    setloading(false)
-                    Alert.alert(
-                        'Success',
-                        'Message Added Successfully ',
-                    );
-                    getCommentData()
-                },
-                error: (err) => {
-                    Alert.alert("Error", err.message)
-                    toggleModal(false)
-                    setloading(false)
-                },
-                complete: () => { },
-            };
-            let header = helpers.buildHeader();
-            let data = {
-                "user_id": userAuthdetails.user_id,
-                "token": userAuthdetails.token,
-                "task_comment": message,
-                "task_id": task.item.id,
-                "task_type": task.item.task_type,
-                "api_key": globals.API_KEY,
-            };
-            API.addCommentData(data, cb, header);
-        } else {
-            // getEndPoint()
+        console.log(message, "message")
+        if (message) {
+            setloading(true)
+            let userAuthdetails = await helpers.userAuthdetails();
+            const baseUrl = await AsyncStorage.getItem("baseUrl");
+            if (baseUrl && baseUrl !== undefined) {
+                let cb = {
+                    success: async (res) => {
+                        console.log({ res })
+                        toggleModal(false)
+                        setloading(false)
+                        Alert.alert(
+                            'Success',
+                            'Message Added Successfully ',
+                        );
+                        setmessage("")
+                        getCommentData()
+                    },
+                    error: (err) => {
+                        Alert.alert("Error", err.message)
+                        toggleModal(false)
+                        setloading(false)
+                    },
+                    complete: () => { },
+                };
+                let header = helpers.buildHeader();
+                let data = {
+                    "user_id": userAuthdetails.user_id,
+                    "token": userAuthdetails.token,
+                    "task_comment": message,
+                    "task_id": task.item.id,
+                    "task_type": task.item.task_type,
+                    "api_key": globals.API_KEY,
+                };
+                API.addCommentData(data, cb, header);
+            }
+
+            else {
+                // getEndPoint()
+            }
+        }
+        else {
+            console.log("messahe is required")
+            setmsgemptyErr(true)
+            Alert.alert("Message is required")
         }
     }
     const signout = async () => {

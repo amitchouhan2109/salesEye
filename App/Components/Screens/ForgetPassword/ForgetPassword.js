@@ -17,11 +17,7 @@ import {
 import { connect, useSelector, useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import { bindActionCreators } from 'redux';
-// import { Input, Item } from 'native-base';
 import { globals, helpers, validators, API, } from '../../../Config';
-// import { _ErrorModal, _GradiantView, _Lang, _ListBox, _Loading, _Spacer, _Icon, _Button, _B, _Layout, _ListView, _ContentType, _InlineLoader } from '../../../../../custom';
-// import { mainLayoutHoc } from '../../../../../hoc';
 import { mainStyle, images, sty } from '../../../Theme';
 import FastImage from 'react-native-fast-image'
 import _InputText from '../../Custom/InputText/_InputText'
@@ -59,11 +55,18 @@ const ForgetPassword = (props) => {
                     await AsyncStorage.setItem("baseUrl", res.result.ws_url);
                     forgetPawword()
                 } else {
+                    setloading(false)
                     Alert.alert('Error in fetch end Point', 'Authentication failed');
                 }
             },
-            error: (err) => { },
-            complete: () => { },
+            error: (err) => {
+                setloading(false)
+
+            },
+            complete: () => {
+                setloading(false)
+
+            },
         };
 
         let header = helpers.buildHeader({});

@@ -47,11 +47,9 @@ const Login = (props) => {
         if (remeber !== null) {
             const remebervalue = JSON.parse(remeber)
             setchecked(remebervalue)
-            console.log(remebervalue, "11")
             if (remebervalue) {
                 const userName = await AsyncStorage.getItem("userName");
                 const password = await AsyncStorage.getItem("password");
-                console.log(userName, password, "12")
                 setuserName(userName)
                 setpassword(password)
             }
@@ -59,7 +57,6 @@ const Login = (props) => {
     }
 
     const signinHandler = () => {
-        console.log(userName)
         if (userName && password) {
             const emailerr = validation("email", userName)
             if (!emailerr) {
@@ -90,9 +87,6 @@ const Login = (props) => {
     }
 
     const logInUser = () => {
-
-
-        // setloading(true)
         let cb = {
             success: async (res) => {
                 console.log("res :", res)
@@ -102,9 +96,6 @@ const Login = (props) => {
                 await AsyncStorage.setItem("password", password);
                 dispatch(login({ res }))
                 setloading(false)
-                console.log("12");
-                // props.navigation.navigate('Tasks')
-
 
                 props.navigation.dispatch(
                     CommonActions.reset({
@@ -117,13 +108,15 @@ const Login = (props) => {
 
             },
             error: (err) => {
+                console.log({ err })
                 setloading(false)
-
-                setTimeout(() => {
+                if (err.type === 'AUTHORIZATION' || err.message === 'Not logged in / Wrong password or username / Token expired') {
                     Alert.alert("Wrong username or password")
+                }
+                else {
+                    Alert.alert(err.message)
+                }
 
-                    // Alert.alert("Error", err.message)
-                }, 200);
             },
             complete: () => {
                 setloading(false)

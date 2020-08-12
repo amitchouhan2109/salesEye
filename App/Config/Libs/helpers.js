@@ -378,6 +378,8 @@ export const validation = (type, text, pass) => {
   // /^\d{10}$/
   // const emailPattern = /^([a-zA-Z])+([0-9a-zA-Z_\.\-])+\@+(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,5}$)$/;
   const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+  // /^ [_a - z0 - 9 -] + (\.[_a-z0 - 9 -]+)*@[a - z0 - 9 -]+(\.[a - z0 - 9 -] +)* (\.[a - z]{ 2, 4 }) $ /;s
   // const emailPattern = /^[a-z][a-zA-Z0-9_.]*(\.[a-zA-Z][a-zA-Z0-9_.]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/
   if (type == 'email') {
     if (text == " " || !text) {

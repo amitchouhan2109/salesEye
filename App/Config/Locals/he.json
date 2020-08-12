@@ -8,7 +8,9 @@
     "signIn": "SIGN IN",
     "forgotPassword": "Forgot password?",
     "signUp": "SIGN UP",
-    "onSubmit": "Please enter valid username and password"
+    "onSubmit": "Please enter valid username and password",
+    "validation_err": "You have entered an invalid username/email-id! "
+
 
   },
   "signIn": {
@@ -90,7 +92,11 @@
     "cancel": "CANCEL",
     "save": "SAVE",
     "document_name": " Doc",
-    "image_name": "Photo"
+    "image_name": "Photo",
+    "task_save": " Your task save successfully",
+    "taskid_not_availabel": "Firstly save the task then upload documents",
+    "upload_success": "Documents uploaded successfully",
+    "validation_err": "Please fill the required details"
   },
   "validation": {
     "username_Required ": " User Name is Required"

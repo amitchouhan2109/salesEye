@@ -85,7 +85,7 @@ const NewTask = (props) => {
                     setTimeout(
                         () => {
                             setloading(false),
-                                Alert.alert('Success', ' Your task save successfully ');
+                                Alert.alert(helpers.getLocale(localize, "newTask", "task_save"));
 
                         }, 2000
                     )
@@ -97,7 +97,10 @@ const NewTask = (props) => {
                     setloading(false)
                     Alert.alert("error", err.message)
                 },
-                complete: () => { },
+                complete: () => {
+                    setloading(false)
+
+                },
             };
             let header = helpers.buildHeader();
             console.log('header', header)
@@ -131,7 +134,8 @@ const NewTask = (props) => {
     }
     const addPicture = () => {
         if (!task_id) {
-            Alert.alert("Firstly Save the task then upload documents")
+            Alert.alert(helpers.getLocale(localize, "newTask", "taskid_not_availabel"))
+
         }
         else {
             const options = {
@@ -151,9 +155,7 @@ const NewTask = (props) => {
                 } else if (response.customButton) {
                     console.log('User tapped custom button: ', response.customButton);
                 } else {
-                    // const file = response.fileName
-                    // const source = { uri: response.uri };
-                    setTimeout(() => { setpicture("Photo1") }, 3000)
+                    // setTimeout(() => { setpicture("Photo1") }, 3000)
                     console.log('picker resp', response)
                     uploadDoc(response.fileName, response.uri, base64Value, " ", "Photo1")
                 }
@@ -170,7 +172,7 @@ const NewTask = (props) => {
                     console.log({ res })
                     Alert.alert(
                         'Success',
-                        ' Document Uploaded Successfully ',
+                        ' Document uploaded successfully ',
                         [
                             {
                                 text: 'OK', onPress: () => {
@@ -199,7 +201,7 @@ const NewTask = (props) => {
                 },
                 error: (err) => {
                     setloading(false)
-                    Alert.alert("Error", " Something Went Wrong While Uploading Document")
+                    Alert.alert("Error", " Something went wrong while uploading document")
                 },
                 complete: () => { },
             };
@@ -231,12 +233,13 @@ const NewTask = (props) => {
             addTask()
         }
         else {
-            Alert.alert("Please fill the required details ")
+            Alert.alert(helpers.getLocale(localize, "newTask", "validation_err"))
+
         }
     }
     const addDocument = async () => {
         if (!task_id) {
-            Alert.alert("Firstly Save the Task then upload documents")
+            Alert.alert(helpers.getLocale(localize, "newTask", "taskid_not_availabel"))
         }
         else {
             DocumentPicker.pick({
@@ -249,7 +252,6 @@ const NewTask = (props) => {
                         setTimeout(() => { setdocument("Doc1") }, 3000)
                     })
 
-                    console.log("b", b)
                 })
                 .catch(error => {
                     console.log(error)
@@ -353,7 +355,7 @@ const NewTask = (props) => {
                             icon1Style={styles.pairButtonIcon}
                             txtStyle1={{ color: "red" }}
                             callback1={() => { addPicture() }}
-                            callback2={() => { }}  // { addDocument() }}
+                            callback2={() => { addDocument() }}
                             style={styles.pairButton}
                         />
                         <View style={styles.uploadDocWrapper}>
