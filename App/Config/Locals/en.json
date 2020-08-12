@@ -8,7 +8,8 @@
     "signIn": "SIGN IN",
     "forgotPassword": "Forgot password?",
     "signUp": "SIGN UP",
-    "onSubmit": "Please enter valid username/email-id and password"
+    "onSubmit": "Please enter valid username/email-id and password",
+    "validation_err": "You have entered an invalid username/email-id! "
   },
   "signIn": {
     "first_name": "Firstname",

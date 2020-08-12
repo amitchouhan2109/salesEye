@@ -90,8 +90,6 @@ const NewTask = (props) => {
                         }, 2000
                     )
                     settask_id(res.record_id)
-
-
                 },
                 error: (err) => {
                     setloading(false)
