@@ -150,8 +150,6 @@ const Task = (props) => {
             }
         }
         else {
-            console.log("messahe is required")
-            setmsgemptyErr(true)
             Alert.alert("Message is required")
         }
     }
@@ -388,7 +386,6 @@ const Task = (props) => {
 
                 </View>
 
-                {/* <View style={[styles.signUpWrapper]}> */}
                 <View style={styles.startRateWrapper}>
                     {/* <FastImage style={styles.starImgStyle} source={images.emptyStar} resizeMode={"contain"} /> */}
                     <StarRating

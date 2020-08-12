@@ -61,14 +61,7 @@ const SignUp = (props) => {
 
 
 
-    // const [loading, setloading] = useState(false);
 
-
-
-
-    // const loginData = useSelector(state => state.loginData);
-    // const dispatch = useDispatch();
-    // let companyPostRef = {}
 
     useEffect(() => {
 

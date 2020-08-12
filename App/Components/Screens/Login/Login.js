@@ -89,7 +89,6 @@ const Login = (props) => {
     const logInUser = () => {
         let cb = {
             success: async (res) => {
-                console.log("res :", res)
                 await AsyncStorage.setItem("userAuthDetails", JSON.stringify(res[0]));
                 await AsyncStorage.setItem("token", res[0].token);
                 await AsyncStorage.setItem("userName", userName);
@@ -108,7 +107,6 @@ const Login = (props) => {
 
             },
             error: (err) => {
-                console.log({ err })
                 setloading(false)
                 if (err.type === 'AUTHORIZATION' || err.message === 'Not logged in / Wrong password or username / Token expired') {
                     Alert.alert("Wrong username or password")

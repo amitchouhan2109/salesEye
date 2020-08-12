@@ -62,7 +62,6 @@ const ChangePassword = (props) => {
                     Alert.alert(
                         'Success',
                         helpers.getLocale(localize, "changePassword", "onSubmitSuccess"),
-                        // ' Your password change successfully ',
                         [
                             {
                                 text: 'OK', onPress: () => {
@@ -79,13 +78,14 @@ const ChangePassword = (props) => {
                     Alert.alert("Error", err.message)
 
                 },
-                complete: () => { },
+                complete: () => {
+                    setloading(false)
+                },
             };
 
             let header = helpers.buildHeader({
                 Authorization: token
             });
-            console.log('header', header)
             let data = {
                 "username": userName,
                 "password": password,
@@ -112,7 +112,6 @@ const ChangePassword = (props) => {
             else {
                 Alert.alert(helpers.getLocale(localize, "changePassword", "currentPasswordNotMatched"))
             }
-            //
         }
         else {
             Alert.alert(helpers.getLocale(localize, "changePassword", "onSubmit"))

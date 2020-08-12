@@ -1,22 +1,10 @@
 import React, { Component, useState, useEffect } from 'react';
 import {
     View,
-    SafeAreaView,
-    TextInput,
-    Text,
-    Image,
-    TouchableOpacity,
-    ScrollView,
-    Platform,
-    ActivityIndicator,
-    FlatList,
-    Linking,
-    StyleSheet,
     Alert
 } from 'react-native';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
-
 import { globals, helpers, validators, API, } from '../../../Config';
 import { mainStyle, images, sty } from '../../../Theme';
 import FastImage from 'react-native-fast-image'
@@ -33,7 +21,6 @@ import { validation } from '../../../Config/Libs/helpers';
 
 
 const ForgetPassword = (props) => {
-    // const campaigns = useSelector(state => state.campaigns);
     const localize = useSelector(state => state.localize);
     const [userName, setuserName] = useState("");
     const [checked, setchecked] = useState(false);
@@ -61,11 +48,10 @@ const ForgetPassword = (props) => {
             },
             error: (err) => {
                 setloading(false)
-
+                Alert.alert(err.message);
             },
             complete: () => {
                 setloading(false)
-
             },
         };
 
@@ -106,9 +92,12 @@ const ForgetPassword = (props) => {
                         },
                         error: (err) => {
                             setloading(false)
-                            Alert.alert('Error', err.message)
+                            Alert.alert(err.message)
                         },
-                        complete: () => { },
+                        complete: () => {
+                            setloading(false)
+
+                        },
                     };
 
                     let header = helpers.buildHeader();

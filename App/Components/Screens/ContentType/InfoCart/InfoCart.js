@@ -52,26 +52,6 @@ const InfoCart = (props) => {
 
 
 
-    // useEffect(() => {
-    //     // console.log("infocart useEffect")
-    //     const Tasks = props.tasks.item
-
-
-    //     // if (props.tasks !== undefined) {
-    //     //     console.log("infocart useEffect", props.tasks.res[0].tasks)
-    //     //     // const TaskData = props.tasks.res[0].tasks
-    //     const date = Tasks.start_date
-    //     const Date = date.split(' ')[0]
-    //     const name = Tasks.object.split(',')[0]
-    //     setstatus(Tasks.status)
-    //     settaskno(Tasks.id)
-    //     setuserName(name)
-    //     setaddress(Tasks.address)
-    //     settitle(Tasks.task_type)
-    //     settaskDate(Date)
-    //     // }
-    // }, [])
-
     const signinHandler = () => {
         console.log("signInHandler")
     }
