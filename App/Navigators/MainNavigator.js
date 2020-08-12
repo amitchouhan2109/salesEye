@@ -23,7 +23,9 @@ function MainNavigator() {
                     options={{ headerLeft: () => null }}
                 />
                 <StackNavigator.Screen name="SignUp" component={SignUp} />
-                <StackNavigator.Screen name="LogIn" component={LoginIn} />
+                <StackNavigator.Screen name="LogIn" component={LoginIn}
+                    options={{ headerLeft: () => null }}
+                />
                 <StackNavigator.Screen name="ChangePassord" component={ChangePassord} />
                 <StackNavigator.Screen name="ForgetPassword" component={ForgetPassword} />
                 <StackNavigator.Screen name="Task" component={Task} />

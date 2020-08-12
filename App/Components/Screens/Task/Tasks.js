@@ -26,6 +26,8 @@ import InfoCart from '../ContentType/InfoCart/InfoCart';
 import { setTasks } from "../../../Redux/Actions/TaskAction"
 import { large } from '../../../Theme/FontSizes';
 import Loader from '../../Custom/Loader/Loader'
+import { StackActions, CommonActions } from "@react-navigation/native";
+
 
 const Tasks = (props) => {
     const localize = useSelector(state => state.localize);
@@ -51,9 +53,17 @@ const Tasks = (props) => {
                     setloading(false)
                     AsyncStorage.removeItem('userAuthDetails');
                     AsyncStorage.removeItem('token');
+                    props.navigation.dispatch(
+                        CommonActions.reset({
+                            index: 0,
+                            routes: [
+                                { name: 'LogIn' },
+                            ],
+                        })
+                    );
                     // AsyncStorage.removeItem('userName');
                     // AsyncStorage.removeItem('password');
-                    props.navigation.navigate('LogIn')
+                    // props.navigation.navigate('LogIn')
                 },
                 error: (err) => {
                     setloading(false)
@@ -105,8 +115,23 @@ const Tasks = (props) => {
             },
             error: (err) => {
                 setTaskLoader(false)
-                Alert.alert("Authentocation Error ")
+                if (err.type === 'AUTHORIZATION' || err.message === 'Not logged in / Wrong password or username / Token expired') {
+
+                    Alert.alert(" Error ", err.message,
+                        [
+                            {
+                                text: 'OK', onPress: () => {
+                                    // signout()
+                                    props.navigation.navigate('LogIn')
+                                }
+                            },
+                        ])
+                }
+                else {
+                    Alert.alert(err.message)
+                }
             },
+
             complete: () => { },
         };
 

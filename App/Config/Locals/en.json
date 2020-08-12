@@ -1,14 +1,14 @@
 {
   "login": {
     "customer_portal": "CUSTOMER PORTAL",
-    "userName": "Username",
+    "userName": "Username/Email-id",
     "password": "Password",
     "customerId": "Customer ID",
     "rememberMe": "Remember Me",
     "signIn": "SIGN IN",
     "forgotPassword": "Forgot password?",
     "signUp": "SIGN UP",
-    "onSubmit": "Please enter valid username and password"
+    "onSubmit": "Please enter valid username/email-id and password"
   },
   "signIn": {
     "first_name": "Firstname",
@@ -21,13 +21,12 @@
     "signUp": "SIGN UP",
     "signIn": "SIGN IN",
     "onSubmit": "Please fill  all required details"
-
   },
   "forgetPassword": {
-    "userName": "Email-id",
+    "userName": "Username/Email-id",
     "send": "SEND",
     "forget_password": "FORGET PASSWORD",
-    "onSubmit": "Please enter valid email-id",
+    "onSubmit": "Please enter valid username/email-id",
     "onSubmitSuccess": "Check your email"
   },
   "changePassword": {
@@ -38,8 +37,8 @@
     "change_password": "CHANGE PASSWORD",
     "onSubmit": "Please fill all required details ",
     "onSubmitSuccess": "Your password  changed successfully ",
-    "passwordNotMatch": "Password and repeat password does not match "
-
+    "passwordNotMatch": "Password and repeat password does not match ",
+    "currentPasswordNotMatched": "Please enter correct current password"
   },
   "tasks": {
     "add_task": "ADD TASK",
@@ -55,7 +54,6 @@
     "status": "Status",
     "task_date": "Task date",
     "empty_task": " Task are  not available"
-
   },
   "task": {
     "task": "TASK",
@@ -79,7 +77,6 @@
     "empty_message": " Messages are  not available",
     "empty_document": "Documents are  not available",
     "document_name": "Doc"
-
   },
   "newTask": {
     "new_task": "NEW TASK",
@@ -95,8 +92,5 @@
   "validation": {
     "username_Required ": " User Name is Required"
   },
-  "infoPopUp": {
-
-  }
-
+  "infoPopUp": {}
 }

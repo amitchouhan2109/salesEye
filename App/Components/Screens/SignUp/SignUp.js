@@ -101,12 +101,12 @@ const SignUp = (props) => {
     }
 
     const signupUser = () => {
-        setloading(true)
+        // setloading(true)
         let cb = {
             success: async (res) => {
                 console.log("success res:", res)
                 setloading(false)
-                Alert.alert(" Success", "Registerd Successfully!",
+                Alert.alert("Success", "Registerd Successfully!",
                     [
                         {
                             text: 'OK', onPress: () => {
@@ -141,6 +141,7 @@ const SignUp = (props) => {
     }
 
     const getEndPoint = () => {
+        setloading(true)
         let cb = {
             success: async (res) => {
                 console.log("success res:", res)
@@ -153,7 +154,9 @@ const SignUp = (props) => {
                 }
 
             },
-            error: (err) => { },
+            error: (err) => {
+                setloading(false)
+            },
             complete: () => { },
         };
 

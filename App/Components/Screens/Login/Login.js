@@ -19,6 +19,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { login } from '../../../Redux/Actions/LoginAction'
 import Loader from '../../Custom/Loader/Loader'
 import { validation } from '../../../Config/Libs/helpers';
+import { StackActions, CommonActions } from "@react-navigation/native";
+import { NavigationActions } from '@react-navigation/compat';
 
 
 
@@ -61,12 +63,11 @@ const Login = (props) => {
         if (userName && password) {
             const emailerr = validation("email", userName)
             if (!emailerr) {
-                Alert.alert("You have entered an invalid email address!")
+                Alert.alert("You have entered an invalid username/email-id! ")
             }
             else {
                 getEndPoint();
             }
-            // Alert.alert("Please enter valid username and password ")
         }
 
         // set
@@ -74,7 +75,6 @@ const Login = (props) => {
             Alert.alert(helpers.getLocale(localize, "login", "onSubmit"))
 
         }
-        // props.navigation.navigate('Tasks')
     }
 
     const checkApiBaseUrl = async () => {
@@ -102,14 +102,28 @@ const Login = (props) => {
                 await AsyncStorage.setItem("password", password);
                 dispatch(login({ res }))
                 setloading(false)
-                props.navigation.navigate('Tasks')
+                console.log("12");
+                // props.navigation.navigate('Tasks')
+
+
+                props.navigation.dispatch(
+                    CommonActions.reset({
+                        index: 0,
+                        routes: [
+                            { name: 'Tasks' },
+                        ],
+                    })
+                );
 
             },
             error: (err) => {
                 setloading(false)
+
                 setTimeout(() => {
-                    Alert.alert("Error", err.message)
-                }, 400);
+                    Alert.alert("Wrong username or password")
+
+                    // Alert.alert("Error", err.message)
+                }, 200);
             },
             complete: () => {
                 setloading(false)

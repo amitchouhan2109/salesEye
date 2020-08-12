@@ -31,7 +31,7 @@ const SYNC_EVALUTION_DATA = { type: "POST", url: URL + "sync_evaluation_data" };
 
 export const API = {
 
-  getEndPoint: (data, cb,) => request(data, cb, END_POINT, {}, "", false),
+  getEndPoint: (data, cb, ) => request(data, cb, END_POINT, {}, "", false),
   registerUser: async (data, cb) => request(data, cb, REGISTER_USER),
   loginUser: async (data, cb, header) => request(data, cb, LOGIN_USER, header),
   getAllTasks: async (data, cb, header) => request(data, cb, GET_TASKS, header),
@@ -103,8 +103,10 @@ async function request(requestData, cb, featureURL, secureRequest, urlData = '',
     !live ? console.log({ error }) : null;
     if (cb.complete) cb.complete();
     if (error.response) {
-      if (error.response.data.message === 'Invalid credentials' || error.response.data.error === 'Error: Invalid credentials') {
-        logout();
+      if (error.response.data.type === 'AUTHORIZATION' || error.response.data.message === 'Not logged in / Wrong password or username / Token expired') {
+        // logout();
+        // message: "Not logged in / Wrong password or username / Token expired"
+        // type: "AUTHORIZATION"
       }
       cb.error(error.response.data);
     }

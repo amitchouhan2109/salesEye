@@ -30,6 +30,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import StarRating from 'react-native-star-rating';
 import { startClock } from 'react-native-reanimated';
 import Loader from '../../Custom/Loader/Loader'
+import { StackActions, CommonActions } from "@react-navigation/native";
+
 
 
 
@@ -151,7 +153,15 @@ const Task = (props) => {
                     AsyncStorage.removeItem('userAuthDetails');
                     AsyncStorage.removeItem('token');
                     // AsyncStorage.removeItem('userName');
-                    props.navigation.navigate('LogIn')
+                    // props.navigation.navigate('LogIn')
+                    props.navigation.dispatch(
+                        CommonActions.reset({
+                            index: 0,
+                            routes: [
+                                { name: 'LogIn' },
+                            ],
+                        })
+                    );
                 },
                 error: (err) => {
                     setloading(false)

@@ -17,6 +17,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../../Custom/Loader/Loader'
 import ImagePicker from 'react-native-image-picker';
 import DocumentPicker from 'react-native-document-picker';
+import { StackActions, CommonActions } from "@react-navigation/native";
+
 // import RNFS from 'react-native-fs'
 
 
@@ -83,7 +85,7 @@ const NewTask = (props) => {
                     setTimeout(
                         () => {
                             setloading(false),
-                                Alert.alert('Success', ' Your Task Save Successfully ');
+                                Alert.alert('Success', ' Your task save successfully ');
 
                         }, 2000
                     )
@@ -265,7 +267,15 @@ const NewTask = (props) => {
                     AsyncStorage.removeItem('userAuthDetails');
                     AsyncStorage.removeItem('token');
                     // AsyncStorage.removeItem('userName');
-                    props.navigation.navigate('LogIn')
+                    // props.navigation.navigate('LogIn')
+                    props.navigation.dispatch(
+                        CommonActions.reset({
+                            index: 0,
+                            routes: [
+                                { name: 'LogIn' },
+                            ],
+                        })
+                    );
                 },
                 error: (err) => {
                     setloading(false)

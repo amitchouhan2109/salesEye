@@ -45,11 +45,12 @@ function AppNavigator() {
       {/* <StackNavigator.Navigator initialRouteName={intialRout} screenOptions={{ headerShown: false }}> */}
       <StackNavigator.Navigator initialRouteName={'LogIn'} screenOptions={{ headerShown: false }}
       >
-        <StackNavigator.Screen name="LogIn" component={LoginIn}
-          // navigationOption={{ headerLeft: null }}
-          options={{ headerLeft: () => null }}
-        />
+
         <StackNavigator.Screen name="Tasks" component={Tasks}
+          navigationOption={{ headerLeft: null }}
+        // options={{ headerLeft: () => null }}
+        />
+        <StackNavigator.Screen name="LogIn" component={LoginIn}
           // navigationOption={{ headerLeft: null }}
           options={{ headerLeft: () => null }}
         />
