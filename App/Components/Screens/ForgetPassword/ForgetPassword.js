@@ -67,7 +67,7 @@ const ForgetPassword = (props) => {
         if (userName) {
             const emailerr = validation("email", userName)
             if (!emailerr) {
-                Alert.alert("You have entered an invalid username/email-id!")
+                Alert.alert(helpers.getLocale(localize, "forgetPassword", "validation_err"))
             }
             else {
                 setloading(true)

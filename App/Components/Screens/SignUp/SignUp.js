@@ -150,6 +150,7 @@ const SignUp = (props) => {
             },
             error: (err) => {
                 setloading(false)
+                Alert.alert("Error", err.message)
             },
             complete: () => {
                 setloading(false)

@@ -28,7 +28,8 @@
     "send": "SEND",
     "forget_password": "FORGET PASSWORD",
     "onSubmit": "Please enter valid username/email-id",
-    "onSubmitSuccess": "Check your email"
+    "onSubmitSuccess": "Check your email",
+    "validation_err": "You have entered an invalid username/email-id!"
   },
   "changePassword": {
     "current_password": "Current password",
@@ -37,7 +38,7 @@
     "save": "SAVE",
     "change_password": "CHANGE PASSWORD",
     "onSubmit": "Please fill all required details ",
-    "onSubmitSuccess": "Your password  changed successfully ",
+    "onSubmitSuccess": "Your password  changed successfully",
     "passwordNotMatch": "Password and repeat password does not match ",
     "currentPasswordNotMatched": "Please enter correct current password"
   },
@@ -54,7 +55,7 @@
     "title": "Title",
     "status": "Status",
     "task_date": "Task date",
-    "empty_task": " Task are  not available"
+    "empty_task": " Task are not available"
   },
   "task": {
     "task": "TASK",

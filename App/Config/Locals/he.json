@@ -10,8 +10,6 @@
     "signUp": "SIGN UP",
     "onSubmit": "Please enter valid username and password",
     "validation_err": "You have entered an invalid username/email-id! "
-
-
   },
   "signIn": {
     "first_name": "Firstname",
@@ -22,15 +20,14 @@
     "address": "Address",
     "city": "City",
     "onSubmit": "Please fill  all required details"
-
   },
   "forgetPassword": {
     "userName": "Username/Email-id",
     "send": "SEND",
     "forget_password": "FORGET PASSWORD",
     "onSubmit": "Please enter valid  username/email-id",
-    "onSubmitSuccess": "Check your email"
-
+    "onSubmitSuccess": "Check your email",
+    "validation_err": "You have entered an invalid username/email-id!"
   },
   "changePassword": {
     "current_password": "Current password",
@@ -80,8 +77,6 @@
     "empty_message": "Messages are  not available",
     "empty_document": "Documents are  not available",
     "document_name": " Doc"
-
-
   },
   "newTask": {
     "new_task": "NEW TASK",

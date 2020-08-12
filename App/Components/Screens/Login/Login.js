@@ -60,7 +60,7 @@ const Login = (props) => {
         if (userName && password) {
             const emailerr = validation("email", userName)
             if (!emailerr) {
-                Alert.alert("You have entered an invalid username/email-id! ")
+                Alert.alert(helpers.getLocale(localize, "login", "validation_err"))
             }
             else {
                 getEndPoint();

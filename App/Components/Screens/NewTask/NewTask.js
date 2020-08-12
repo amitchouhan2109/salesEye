@@ -18,8 +18,7 @@ import Loader from '../../Custom/Loader/Loader'
 import ImagePicker from 'react-native-image-picker';
 import DocumentPicker from 'react-native-document-picker';
 import { StackActions, CommonActions } from "@react-navigation/native";
-
-// import RNFS from 'react-native-fs'
+import RNFS from 'react-native-fs'
 
 
 const NewTask = (props) => {
@@ -145,7 +144,6 @@ const NewTask = (props) => {
             };
             ImagePicker.showImagePicker(options, (response) => {
                 const base64Value = response.data;
-                console.log(base64Value, "123")
                 if (response.didCancel) {
                     console.log('User cancelled image picker');
                 } else if (response.error) {
@@ -170,7 +168,8 @@ const NewTask = (props) => {
                     console.log({ res })
                     Alert.alert(
                         'Success',
-                        ' Document uploaded successfully ',
+                        // ' Document uploaded successfully ',
+                        helpers.getLocale(localize, "newTask", "upload_success"),
                         [
                             {
                                 text: 'OK', onPress: () => {
