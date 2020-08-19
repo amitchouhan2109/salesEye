@@ -1,4 +1,4 @@
-rootProject.name = 'SalesEyes'
+rootProject.name = 'Taskerium'
 include ':react-native-fs'
 project(':react-native-fs').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fs/android')
 include ':react-native-document-picker'

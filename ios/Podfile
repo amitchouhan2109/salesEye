@@ -44,8 +44,8 @@ def flipper_post_install(installer)
   end
 end
 
-target 'SalesEyes' do
-  # Pods for SalesEyes
+target 'Taskerium' do
+  # Pods for Taskerium
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -85,7 +85,7 @@ target 'SalesEyes' do
 
   pod 'react-native-document-picker', :path => '../node_modules/react-native-document-picker'
 
-  target 'SalesEyesTests' do
+  target 'TaskeriumTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -102,10 +102,10 @@ target 'SalesEyes' do
   end
 end
 
-target 'SalesEyes-tvOS' do
-  # Pods for SalesEyes-tvOS
+target 'Taskerium-tvOS' do
+  # Pods for Taskerium-tvOS
 
-  target 'SalesEyes-tvOSTests' do
+  target 'Taskerium-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

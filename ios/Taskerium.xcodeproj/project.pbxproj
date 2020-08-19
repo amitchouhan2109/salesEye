@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* SalesEyesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SalesEyesTests.m */; };
+		00E356F31AD99517003FC87E /* TaskeriumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TaskeriumTests.m */; };
 		00FC1018880A43DB8D63A3D7 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 259169F7808E40C6803273C8 /* Octicons.ttf */; };
 		0B7D1BC9ED604810B1804956 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6F8364AE08648F19224384C /* Feather.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -16,20 +16,20 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		14CEC6BE21764EAAAFF75D2A /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF701D4122AF46D48274DF7E /* EvilIcons.ttf */; };
 		1C38B2FB013747A9A3FA0C79 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F9E010357F14ED28342114C /* Fontisto.ttf */; };
-		2B6F9E50FA238D855DF8889B /* libPods-SalesEyes-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7877AE7852518754B2664B02 /* libPods-SalesEyes-tvOS.a */; };
+		2B6F9E50FA238D855DF8889B /* libPods-Taskerium-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7877AE7852518754B2664B02 /* libPods-Taskerium-tvOS.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* SalesEyesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SalesEyesTests.m */; };
+		2DCD954D1E0B4F2C00145EB5 /* TaskeriumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TaskeriumTests.m */; };
 		4A4E8633AAE9446AA6F8E281 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B0BE5F28E147441F8EB26B99 /* MaterialCommunityIcons.ttf */; };
 		52F9DB76F2354D2C93F4DC4C /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7519EB3E9617451D9ABA6943 /* MaterialIcons.ttf */; };
 		6DDFBA7DC1FE4D949ED79DA0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C81E7947B074C47B6F0354E /* FontAwesome.ttf */; };
 		6E4D6712D6DC4878AB524133 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BFD38D208DB84025ACB8585E /* Zocial.ttf */; };
-		73DBF487ECDD0BB9FF32A10F /* libPods-SalesEyes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D176F3C8BB5124A5075F8DA3 /* libPods-SalesEyes.a */; };
+		73DBF487ECDD0BB9FF32A10F /* libPods-Taskerium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D176F3C8BB5124A5075F8DA3 /* libPods-Taskerium.a */; };
 		84E0370627ED4CB7B137BD95 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C23CE8D5818C479EB4E69318 /* Ionicons.ttf */; };
-		893FE4E4F72E9A489AC505F0 /* libPods-SalesEyes-SalesEyesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4042D345EDEAD455E61FFE63 /* libPods-SalesEyes-SalesEyesTests.a */; };
+		893FE4E4F72E9A489AC505F0 /* libPods-Taskerium-TaskeriumTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4042D345EDEAD455E61FFE63 /* libPods-Taskerium-TaskeriumTests.a */; };
 		89AA02AD63E24D46AB37FD44 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B924874F75A45478A738FF8 /* FontAwesome5_Regular.ttf */; };
-		C0C7EC86288434906AC80798 /* libPods-SalesEyes-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A2C40F796408314A2EF879 /* libPods-SalesEyes-tvOSTests.a */; };
+		C0C7EC86288434906AC80798 /* libPods-Taskerium-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A2C40F796408314A2EF879 /* libPods-Taskerium-tvOSTests.a */; };
 		C18E9C490EA64E7F87551694 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A8D19ABAB2F47E09B5DEDF6 /* AntDesign.ttf */; };
 		E1E425F8C9584FAC8F7F89CC /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FC99CF52C04414F900DBCFF /* Entypo.ttf */; };
 		E91A58DE24C852B6001904AC /* MyriadPro-BoldCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = E91A58D024C852B5001904AC /* MyriadPro-BoldCond.otf */; };
@@ -58,57 +58,57 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = SalesEyes;
+			remoteInfo = Taskerium;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "SalesEyes-tvOS";
+			remoteInfo = "Taskerium-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* SalesEyesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalesEyesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* TaskeriumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskeriumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* SalesEyesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SalesEyesTests.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* TaskeriumTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskeriumTests.m; sourceTree = "<group>"; };
 		0B0B6589E5E94BE7BF1A0D6C /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		0C0CED00D641441087B66041 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* SalesEyes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalesEyes.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SalesEyes/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SalesEyes/AppDelegate.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Taskerium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taskerium.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Taskerium/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Taskerium/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SalesEyes/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SalesEyes/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SalesEyes/main.m; sourceTree = "<group>"; };
-		17A2C40F796408314A2EF879 /* libPods-SalesEyes-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SalesEyes-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Taskerium/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Taskerium/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Taskerium/main.m; sourceTree = "<group>"; };
+		17A2C40F796408314A2EF879 /* libPods-Taskerium-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Taskerium-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17F8CBB81F3C46D7BEC2F61F /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		259169F7808E40C6803273C8 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* SalesEyes-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SalesEyes-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* SalesEyes-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SalesEyes-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		38B058154B5B46EEB6764B7A /* Pods-SalesEyes-SalesEyesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEyes-SalesEyesTests.debug.xcconfig"; path = "Target Support Files/Pods-SalesEyes-SalesEyesTests/Pods-SalesEyes-SalesEyesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* Taskerium-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Taskerium-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* Taskerium-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Taskerium-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		38B058154B5B46EEB6764B7A /* Pods-Taskerium-TaskeriumTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taskerium-TaskeriumTests.debug.xcconfig"; path = "Target Support Files/Pods-Taskerium-TaskeriumTests/Pods-Taskerium-TaskeriumTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3A8D19ABAB2F47E09B5DEDF6 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		3C81E7947B074C47B6F0354E /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		3E8CC37449D739C5375AF3E5 /* Pods-SalesEyes-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEyes-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-SalesEyes-tvOSTests/Pods-SalesEyes-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		4042D345EDEAD455E61FFE63 /* libPods-SalesEyes-SalesEyesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SalesEyes-SalesEyesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E8CC37449D739C5375AF3E5 /* Pods-Taskerium-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taskerium-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Taskerium-tvOSTests/Pods-Taskerium-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		4042D345EDEAD455E61FFE63 /* libPods-Taskerium-TaskeriumTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Taskerium-TaskeriumTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B924874F75A45478A738FF8 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
-		5C46BE6A15088DDC43F58902 /* Pods-SalesEyes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEyes.release.xcconfig"; path = "Target Support Files/Pods-SalesEyes/Pods-SalesEyes.release.xcconfig"; sourceTree = "<group>"; };
+		5C46BE6A15088DDC43F58902 /* Pods-Taskerium.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taskerium.release.xcconfig"; path = "Target Support Files/Pods-Taskerium/Pods-Taskerium.release.xcconfig"; sourceTree = "<group>"; };
 		6FC99CF52C04414F900DBCFF /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		700FC0B282D31776DA8B7315 /* Pods-SalesEyes-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEyes-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-SalesEyes-tvOS/Pods-SalesEyes-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		700FC0B282D31776DA8B7315 /* Pods-Taskerium-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taskerium-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Taskerium-tvOS/Pods-Taskerium-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7519EB3E9617451D9ABA6943 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		76550FF42123FB85533F04F7 /* Pods-SalesEyes-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEyes-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-SalesEyes-tvOSTests/Pods-SalesEyes-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		7877AE7852518754B2664B02 /* libPods-SalesEyes-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SalesEyes-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76550FF42123FB85533F04F7 /* Pods-Taskerium-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taskerium-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Taskerium-tvOSTests/Pods-Taskerium-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7877AE7852518754B2664B02 /* libPods-Taskerium-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Taskerium-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F9E010357F14ED28342114C /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
-		92E9297EE549A4D6E1AC85C6 /* Pods-SalesEyes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEyes.debug.xcconfig"; path = "Target Support Files/Pods-SalesEyes/Pods-SalesEyes.debug.xcconfig"; sourceTree = "<group>"; };
+		92E9297EE549A4D6E1AC85C6 /* Pods-Taskerium.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taskerium.debug.xcconfig"; path = "Target Support Files/Pods-Taskerium/Pods-Taskerium.debug.xcconfig"; sourceTree = "<group>"; };
 		B0BE5F28E147441F8EB26B99 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		B4E7C9A621FF4A69B0408CCC /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		BFD38D208DB84025ACB8585E /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		C23CE8D5818C479EB4E69318 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		D176F3C8BB5124A5075F8DA3 /* libPods-SalesEyes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SalesEyes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D176F3C8BB5124A5075F8DA3 /* libPods-Taskerium.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Taskerium.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6F8364AE08648F19224384C /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		E794912AD7C1C55B79EA9A04 /* Pods-SalesEyes-SalesEyesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEyes-SalesEyesTests.release.xcconfig"; path = "Target Support Files/Pods-SalesEyes-SalesEyesTests/Pods-SalesEyes-SalesEyesTests.release.xcconfig"; sourceTree = "<group>"; };
+		E794912AD7C1C55B79EA9A04 /* Pods-Taskerium-TaskeriumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taskerium-TaskeriumTests.release.xcconfig"; path = "Target Support Files/Pods-Taskerium-TaskeriumTests/Pods-Taskerium-TaskeriumTests.release.xcconfig"; sourceTree = "<group>"; };
 		E91A58D024C852B5001904AC /* MyriadPro-BoldCond.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MyriadPro-BoldCond.otf"; path = "../../../../../../Downloads/Taskerium 2/Fontas_Myriad_pro/MyriadPro-BoldCond.otf"; sourceTree = "<group>"; };
 		E91A58D124C852B5001904AC /* MyriadPro-Cond.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MyriadPro-Cond.otf"; path = "../../../../../../Downloads/Taskerium 2/Fontas_Myriad_pro/MyriadPro-Cond.otf"; sourceTree = "<group>"; };
 		E91A58D224C852B5001904AC /* MyriadPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MyriadPro-Regular.otf"; path = "../../../../../../Downloads/Taskerium 2/Fontas_Myriad_pro/MyriadPro-Regular.otf"; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 		E91A58DD24C852B6001904AC /* MyriadPro-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MyriadPro-Semibold.otf"; path = "../../../../../../Downloads/Taskerium 2/Fontas_Myriad_pro/MyriadPro-Semibold.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F89CBDB52BEACF1E15085935 /* Pods-SalesEyes-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesEyes-tvOS.release.xcconfig"; path = "Target Support Files/Pods-SalesEyes-tvOS/Pods-SalesEyes-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		F89CBDB52BEACF1E15085935 /* Pods-Taskerium-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taskerium-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Taskerium-tvOS/Pods-Taskerium-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		FF701D4122AF46D48274DF7E /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,7 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				893FE4E4F72E9A489AC505F0 /* libPods-SalesEyes-SalesEyesTests.a in Frameworks */,
+				893FE4E4F72E9A489AC505F0 /* libPods-Taskerium-TaskeriumTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73DBF487ECDD0BB9FF32A10F /* libPods-SalesEyes.a in Frameworks */,
+				73DBF487ECDD0BB9FF32A10F /* libPods-Taskerium.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B6F9E50FA238D855DF8889B /* libPods-SalesEyes-tvOS.a in Frameworks */,
+				2B6F9E50FA238D855DF8889B /* libPods-Taskerium-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,20 +158,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0C7EC86288434906AC80798 /* libPods-SalesEyes-tvOSTests.a in Frameworks */,
+				C0C7EC86288434906AC80798 /* libPods-Taskerium-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* SalesEyesTests */ = {
+		00E356EF1AD99517003FC87E /* TaskeriumTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* SalesEyesTests.m */,
+				00E356F21AD99517003FC87E /* TaskeriumTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = SalesEyesTests;
+			path = TaskeriumTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -185,19 +185,19 @@
 		08862735EE83B9C5D944E0A5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				92E9297EE549A4D6E1AC85C6 /* Pods-SalesEyes.debug.xcconfig */,
-				5C46BE6A15088DDC43F58902 /* Pods-SalesEyes.release.xcconfig */,
-				38B058154B5B46EEB6764B7A /* Pods-SalesEyes-SalesEyesTests.debug.xcconfig */,
-				E794912AD7C1C55B79EA9A04 /* Pods-SalesEyes-SalesEyesTests.release.xcconfig */,
-				700FC0B282D31776DA8B7315 /* Pods-SalesEyes-tvOS.debug.xcconfig */,
-				F89CBDB52BEACF1E15085935 /* Pods-SalesEyes-tvOS.release.xcconfig */,
-				76550FF42123FB85533F04F7 /* Pods-SalesEyes-tvOSTests.debug.xcconfig */,
-				3E8CC37449D739C5375AF3E5 /* Pods-SalesEyes-tvOSTests.release.xcconfig */,
+				92E9297EE549A4D6E1AC85C6 /* Pods-Taskerium.debug.xcconfig */,
+				5C46BE6A15088DDC43F58902 /* Pods-Taskerium.release.xcconfig */,
+				38B058154B5B46EEB6764B7A /* Pods-Taskerium-TaskeriumTests.debug.xcconfig */,
+				E794912AD7C1C55B79EA9A04 /* Pods-Taskerium-TaskeriumTests.release.xcconfig */,
+				700FC0B282D31776DA8B7315 /* Pods-Taskerium-tvOS.debug.xcconfig */,
+				F89CBDB52BEACF1E15085935 /* Pods-Taskerium-tvOS.release.xcconfig */,
+				76550FF42123FB85533F04F7 /* Pods-Taskerium-tvOSTests.debug.xcconfig */,
+				3E8CC37449D739C5375AF3E5 /* Pods-Taskerium-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* SalesEyes */ = {
+		13B07FAE1A68108700A75B9A /* Taskerium */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -208,7 +208,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = SalesEyes;
+			name = Taskerium;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -216,10 +216,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				D176F3C8BB5124A5075F8DA3 /* libPods-SalesEyes.a */,
-				4042D345EDEAD455E61FFE63 /* libPods-SalesEyes-SalesEyesTests.a */,
-				7877AE7852518754B2664B02 /* libPods-SalesEyes-tvOS.a */,
-				17A2C40F796408314A2EF879 /* libPods-SalesEyes-tvOSTests.a */,
+				D176F3C8BB5124A5075F8DA3 /* libPods-Taskerium.a */,
+				4042D345EDEAD455E61FFE63 /* libPods-Taskerium-TaskeriumTests.a */,
+				7877AE7852518754B2664B02 /* libPods-Taskerium-tvOS.a */,
+				17A2C40F796408314A2EF879 /* libPods-Taskerium-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -235,9 +235,9 @@
 			isa = PBXGroup;
 			children = (
 				E91A58CF24C85237001904AC /* Fonts */,
-				13B07FAE1A68108700A75B9A /* SalesEyes */,
+				13B07FAE1A68108700A75B9A /* Taskerium */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* SalesEyesTests */,
+				00E356EF1AD99517003FC87E /* TaskeriumTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				08862735EE83B9C5D944E0A5 /* Pods */,
@@ -251,10 +251,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* SalesEyes.app */,
-				00E356EE1AD99517003FC87E /* SalesEyesTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* SalesEyes-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* SalesEyes-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* Taskerium.app */,
+				00E356EE1AD99517003FC87E /* TaskeriumTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* Taskerium-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* Taskerium-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -306,9 +306,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* SalesEyesTests */ = {
+		00E356ED1AD99517003FC87E /* TaskeriumTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SalesEyesTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "TaskeriumTests" */;
 			buildPhases = (
 				A848A4BBCA1EA76E245B4F91 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -321,14 +321,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = SalesEyesTests;
-			productName = SalesEyesTests;
-			productReference = 00E356EE1AD99517003FC87E /* SalesEyesTests.xctest */;
+			name = TaskeriumTests;
+			productName = TaskeriumTests;
+			productReference = 00E356EE1AD99517003FC87E /* TaskeriumTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* SalesEyes */ = {
+		13B07F861A680F5B00A75B9A /* Taskerium */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SalesEyes" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Taskerium" */;
 			buildPhases = (
 				711378943265FCDF00963CD6 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -342,14 +342,14 @@
 			);
 			dependencies = (
 			);
-			name = SalesEyes;
-			productName = SalesEyes;
-			productReference = 13B07F961A680F5B00A75B9A /* SalesEyes.app */;
+			name = Taskerium;
+			productName = Taskerium;
+			productReference = 13B07F961A680F5B00A75B9A /* Taskerium.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* SalesEyes-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* Taskerium-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SalesEyes-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Taskerium-tvOS" */;
 			buildPhases = (
 				06F85ABF3C0CB6BD3F51D6B6 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -362,14 +362,14 @@
 			);
 			dependencies = (
 			);
-			name = "SalesEyes-tvOS";
-			productName = "SalesEyes-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* SalesEyes-tvOS.app */;
+			name = "Taskerium-tvOS";
+			productName = "Taskerium-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* Taskerium-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* SalesEyes-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* Taskerium-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SalesEyes-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Taskerium-tvOSTests" */;
 			buildPhases = (
 				EE5A4E226A0CDD432EF28670 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -381,9 +381,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "SalesEyes-tvOSTests";
-			productName = "SalesEyes-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* SalesEyes-tvOSTests.xctest */;
+			name = "Taskerium-tvOSTests";
+			productName = "Taskerium-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* Taskerium-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -412,7 +412,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "SalesEyes" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Taskerium" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -425,10 +425,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* SalesEyes */,
-				00E356ED1AD99517003FC87E /* SalesEyesTests */,
-				2D02E47A1E0B4A5D006451C7 /* SalesEyes-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* SalesEyes-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* Taskerium */,
+				00E356ED1AD99517003FC87E /* TaskeriumTests */,
+				2D02E47A1E0B4A5D006451C7 /* Taskerium-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* Taskerium-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -527,7 +527,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SalesEyes-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Taskerium-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -540,7 +540,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SalesEyes-SalesEyesTests/Pods-SalesEyes-SalesEyesTests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Taskerium-TaskeriumTests/Pods-Taskerium-TaskeriumTests-resources.sh",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
@@ -579,7 +579,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SalesEyes-SalesEyesTests/Pods-SalesEyes-SalesEyesTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Taskerium-TaskeriumTests/Pods-Taskerium-TaskeriumTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
@@ -611,7 +611,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SalesEyes-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Taskerium-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -633,7 +633,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SalesEyes-SalesEyesTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Taskerium-TaskeriumTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -646,7 +646,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SalesEyes/Pods-SalesEyes-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Taskerium/Pods-Taskerium-resources.sh",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
@@ -685,7 +685,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SalesEyes/Pods-SalesEyes-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Taskerium/Pods-Taskerium-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EE5A4E226A0CDD432EF28670 /* [CP] Check Pods Manifest.lock */ = {
@@ -703,7 +703,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SalesEyes-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Taskerium-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -755,7 +755,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* SalesEyesTests.m in Sources */,
+				00E356F31AD99517003FC87E /* TaskeriumTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,7 +781,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* SalesEyesTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* TaskeriumTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,12 +790,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* SalesEyes */;
+			target = 13B07F861A680F5B00A75B9A /* Taskerium */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* SalesEyes-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* Taskerium-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -807,7 +807,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = SalesEyes;
+			path = Taskerium;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -815,14 +815,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38B058154B5B46EEB6764B7A /* Pods-SalesEyes-SalesEyesTests.debug.xcconfig */;
+			baseConfigurationReference = 38B058154B5B46EEB6764B7A /* Pods-Taskerium-TaskeriumTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SalesEyesTests/Info.plist;
+				INFOPLIST_FILE = TaskeriumTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -832,17 +832,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SalesEyes.app/SalesEyes";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Taskerium.app/Taskerium";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E794912AD7C1C55B79EA9A04 /* Pods-SalesEyes-SalesEyesTests.release.xcconfig */;
+			baseConfigurationReference = E794912AD7C1C55B79EA9A04 /* Pods-Taskerium-TaskeriumTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = SalesEyesTests/Info.plist;
+				INFOPLIST_FILE = TaskeriumTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -852,13 +852,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SalesEyes.app/SalesEyes";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Taskerium.app/Taskerium";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92E9297EE549A4D6E1AC85C6 /* Pods-SalesEyes.debug.xcconfig */;
+			baseConfigurationReference = 92E9297EE549A4D6E1AC85C6 /* Pods-Taskerium.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -868,7 +868,7 @@
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
-				INFOPLIST_FILE = SalesEyes/Info.plist;
+				INFOPLIST_FILE = Taskerium/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaAsyncSocket\"",
@@ -926,7 +926,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = SalesEyes;
+				PRODUCT_NAME = Taskerium;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -935,12 +935,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5C46BE6A15088DDC43F58902 /* Pods-SalesEyes.release.xcconfig */;
+			baseConfigurationReference = 5C46BE6A15088DDC43F58902 /* Pods-Taskerium.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = SalesEyes/Info.plist;
+				INFOPLIST_FILE = Taskerium/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaAsyncSocket\"",
@@ -991,7 +991,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = SalesEyes;
+				PRODUCT_NAME = Taskerium;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -999,7 +999,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 700FC0B282D31776DA8B7315 /* Pods-SalesEyes-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 700FC0B282D31776DA8B7315 /* Pods-Taskerium-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1010,14 +1010,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SalesEyes-tvOS/Info.plist";
+				INFOPLIST_FILE = "Taskerium-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SalesEyes-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Taskerium-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1027,7 +1027,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F89CBDB52BEACF1E15085935 /* Pods-SalesEyes-tvOS.release.xcconfig */;
+			baseConfigurationReference = F89CBDB52BEACF1E15085935 /* Pods-Taskerium-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1038,14 +1038,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SalesEyes-tvOS/Info.plist";
+				INFOPLIST_FILE = "Taskerium-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SalesEyes-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Taskerium-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1055,7 +1055,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 76550FF42123FB85533F04F7 /* Pods-SalesEyes-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 76550FF42123FB85533F04F7 /* Pods-Taskerium-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1065,24 +1065,24 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SalesEyes-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "Taskerium-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SalesEyes-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Taskerium-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SalesEyes-tvOS.app/SalesEyes-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Taskerium-tvOS.app/Taskerium-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E8CC37449D739C5375AF3E5 /* Pods-SalesEyes-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 3E8CC37449D739C5375AF3E5 /* Pods-Taskerium-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1092,17 +1092,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "SalesEyes-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "Taskerium-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.SalesEyes-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Taskerium-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SalesEyes-tvOS.app/SalesEyes-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Taskerium-tvOS.app/Taskerium-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -1223,7 +1223,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SalesEyesTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "TaskeriumTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -1232,7 +1232,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SalesEyes" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Taskerium" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -1241,7 +1241,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SalesEyes-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Taskerium-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -1250,7 +1250,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "SalesEyes-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Taskerium-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -1259,7 +1259,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "SalesEyes" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Taskerium" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
